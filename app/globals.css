@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #0b1f3a;
+  --navy-2: #122b4f;
+  --navbar-navy: #0b0f1e;
+  --white: #ffffff;
+  --grey-light: #f3f5f8;
+  --grey: #8994a6;
+  --black: #0a0a0a;
+  --gold: #c9a227;
+  --gold-soft: rgba(201, 162, 39, 0.12);
+  --ease: cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--navy);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Reusable pattern for reveal-on-scroll (used by useReveal hook) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Toggle switch (cookie preferences) */
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 25px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: rgba(11, 31, 58, 0.15);
+  cursor: pointer;
+  transition: background 0.25s var(--ease);
+  border: none;
+  padding: 0;
+}
+.toggle::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--white);
+  transition: transform 0.25s var(--ease);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.toggle.on {
+  background: var(--navy);
+}
+.toggle.on::before {
+  transform: translateX(19px);
+}
+.toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Custom select chevron (dark modals) */
+select.dark-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none'><path d='M6 9l6 6 6-6' stroke='%23C9A227' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}

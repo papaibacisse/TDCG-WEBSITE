@@ -11,7 +11,7 @@ export default function ROISimulator() {
   const gridRef = useReveal();
 
   const [budget, setBudget] = useState("");
-  const [secteur, setSecteur] = useState(SECTORS[0].name);
+  const [secteur, setSecteur] = useState<string>(SECTORS[0].name);
   const [secteurAutre, setSecteurAutre] = useState("");
   const [clients, setClients] = useState("");
   const [revenue, setRevenue] = useState("");

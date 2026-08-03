@@ -13,9 +13,9 @@ export default function DevisModal() {
   const { activeModal, closeModal, openModal } = useModal();
   const isOpen = activeModal === "devis";
 
-  const [secteur, setSecteur] = useState(SECTORS[0].name);
-  const [budget, setBudget] = useState(BUDGET_OPTIONS[0]);
-  const [multiplier, setMultiplier] = useState(COMPANY_SIZE_OPTIONS[0].value);
+  const [secteur, setSecteur] = useState<string>(SECTORS[0].name);
+  const [budget, setBudget] = useState<string>(BUDGET_OPTIONS[0]);
+  const [multiplier, setMultiplier] = useState<string>(COMPANY_SIZE_OPTIONS[0].value);
   const [selectedObjectifs, setSelectedObjectifs] = useState<string[]>([]);
 
   function toggleObjectif(name: string) {

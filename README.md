@@ -119,3 +119,4 @@ Pensez à renseigner les variables d'environnement de `.env.example` dans les r�
 - Fenêtres modales : piège du focus, fermeture au clavier (Échap), attributs `role="dialog"` / `aria-modal`.
 - Interrupteurs de préférence cookies : `role="switch"`, `aria-checked`.
 - Contrastes et tailles de police alignés sur les recommandations WCAG AA.
+

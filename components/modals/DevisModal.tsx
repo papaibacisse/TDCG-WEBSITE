@@ -3,7 +3,7 @@
 import { FormEvent, useMemo, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
-import { SITE, SECTORS, EXPERTISE_DOMAINS, BUDGET_OPTIONS, COMPANY_SIZE_OPTIONS } from "@/lib/constants";
+import { SECTORS, EXPERTISE_DOMAINS, BUDGET_OPTIONS, COMPANY_SIZE_OPTIONS } from "@/lib/constants";
 
 function formatFcfa(n: number) {
   return Math.round(n).toLocaleString("fr-FR").replace(/\u202f|,/g, " ") + " FCFA";
@@ -17,6 +17,7 @@ export default function DevisModal() {
   const [budget, setBudget] = useState<string>(BUDGET_OPTIONS[0]);
   const [multiplier, setMultiplier] = useState<string>(COMPANY_SIZE_OPTIONS[0].value);
   const [selectedObjectifs, setSelectedObjectifs] = useState<string[]>([]);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   function toggleObjectif(name: string) {
     setSelectedObjectifs((prev) => (prev.includes(name) ? prev.filter((x) => x !== name) : [...prev, name]));
@@ -32,13 +33,37 @@ export default function DevisModal() {
     return { low: total * 0.85, high: total * 1.15 };
   }, [selectedObjectifs, multiplier]);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const form = e.currentTarget;
+    const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement).value;
     const tailleLabel = COMPANY_SIZE_OPTIONS.find((o) => o.value === multiplier)?.label ?? "";
     const objectifs = selectedObjectifs.join(", ") || "Non précisé";
     const estimateText = estimate ? `${formatFcfa(estimate.low)} — ${formatFcfa(estimate.high)}` : "Non calculée";
-    const body = `Secteur : ${secteur}%0ABudget indiqué : ${budget}%0ATaille de l'entreprise : ${tailleLabel}%0AObjectifs : ${objectifs}%0AEstimation calculée : ${estimateText}`;
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent("Demande de devis - TDCG")}&body=${body}`;
+
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/devis", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prenom: get("prenom"),
+          nomfamille: get("nomfamille"),
+          email: get("email"),
+          secteur,
+          budget,
+          tailleLabel,
+          objectifs,
+          estimateText,
+        }),
+      });
+      if (!res.ok) throw new Error("send_failed");
+      setStatus("success");
+      form.reset();
+      setSelectedObjectifs([]);
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -63,6 +88,21 @@ export default function DevisModal() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <div className="grid grid-cols-2 gap-4">
+          <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
+            Prénom*
+            <input name="prenom" required placeholder="Kingsley" className={inputClass} />
+          </label>
+          <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
+            Nom*
+            <input name="nomfamille" required placeholder="Cisse" className={inputClass} />
+          </label>
+        </div>
+        <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
+          Email professionnel*
+          <input name="email" type="email" required placeholder="Kingsley@votre-entreprise.sn" className={inputClass} />
+        </label>
+
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
           Quel est votre secteur ?
           <select value={secteur} onChange={(e) => setSecteur(e.target.value)} className={inputClass + " dark-select"}>
@@ -128,10 +168,21 @@ export default function DevisModal() {
 
         <button
           type="submit"
-          className="w-full justify-center bg-gold hover:bg-gold-hover text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
+          disabled={status === "loading"}
+          className="w-full justify-center bg-gold hover:bg-gold-hover disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
         >
-          Recevoir mon devis détaillé
+          {status === "loading" ? "Envoi en cours..." : "Recevoir mon devis détaillé"}
         </button>
+        {status === "success" && (
+          <p className="text-[13.5px] text-green-400 text-center font-medium">
+            Merci ! Votre demande a bien été envoyée, nous revenons vers vous rapidement.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-[13.5px] text-red-400 text-center font-medium">
+            Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@terangadigitalconsultinggroup.com.
+          </p>
+        )}
         <p className="text-[12.5px] text-white/45 text-center">
           En soumettant, vous acceptez notre{" "}
           <button type="button" onClick={() => openModal("privacy")} className="underline underline-offset-2 text-white/75 hover:text-gold">

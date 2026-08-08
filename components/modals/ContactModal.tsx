@@ -3,7 +3,6 @@
 import { FormEvent, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
-import { SITE } from "@/lib/constants";
 
 const SERVICES = [
   "Audit digital",
@@ -18,12 +17,13 @@ export default function ContactModal() {
   const { activeModal, closeModal, openModal } = useModal();
   const isOpen = activeModal === "contact";
   const [selected, setSelected] = useState<string[]>([]);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   function toggleService(s: string) {
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
   }
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const nom = (form.elements.namedItem("nom") as HTMLInputElement).value;
@@ -31,10 +31,21 @@ export default function ContactModal() {
     const entreprise = (form.elements.namedItem("entreprise") as HTMLInputElement).value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
     const services = selected.join(", ") || "Non précisé";
-    const body = `Nom : ${nom}%0AEmail : ${email}%0AEntreprise : ${entreprise}%0AServices souhaités : ${services}%0A%0AMessage :%0A${message}`;
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-      "Nouvelle demande depuis le site TDCG"
-    )}&body=${body}`;
+
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nom, email, entreprise, services, message }),
+      });
+      if (!res.ok) throw new Error("send_failed");
+      setStatus("success");
+      form.reset();
+      setSelected([]);
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -126,10 +137,21 @@ export default function ContactModal() {
 
           <button
             type="submit"
-            className="w-full justify-center bg-gold hover:bg-gold-hover text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
+            disabled={status === "loading"}
+            className="w-full justify-center bg-gold hover:bg-gold-hover disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
           >
-            Envoyer mon message
+            {status === "loading" ? "Envoi en cours..." : "Envoyer mon message"}
           </button>
+          {status === "success" && (
+            <p className="text-[13.5px] text-green-400 text-center font-medium">
+              Merci ! Votre message a bien été envoyé, nous revenons vers vous sous 24h ouvrées.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-[13.5px] text-red-400 text-center font-medium">
+              Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@terangadigitalconsultinggroup.com.
+            </p>
+          )}
           <p className="text-[12.5px] text-white/45 text-center">
             En soumettant, vous acceptez notre{" "}
             <button

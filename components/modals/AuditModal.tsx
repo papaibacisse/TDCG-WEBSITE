@@ -1,27 +1,41 @@
 "use client";
 
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
-import { SITE } from "@/lib/constants";
 
 export default function AuditModal() {
   const { activeModal, closeModal, openModal } = useModal();
   const isOpen = activeModal === "audit";
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const get = (name: string) => (form.elements.namedItem(name) as HTMLInputElement | HTMLSelectElement).value;
     const tailleSelect = form.elements.namedItem("taille") as HTMLSelectElement;
     const tailleLabel = tailleSelect.options[tailleSelect.selectedIndex]?.text ?? "";
 
-    const body = `Prénom : ${get("prenom")}%0ANom : ${get("nomfamille")}%0AEmail : ${get(
-      "email"
-    )}%0AEntreprise : ${get("entreprise")}%0ASite web : ${get("url")}%0ATaille de l'entreprise : ${tailleLabel}`;
-    window.location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(
-      "Demande d'audit digital - TDCG"
-    )}&body=${body}`;
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/audit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prenom: get("prenom"),
+          nomfamille: get("nomfamille"),
+          email: get("email"),
+          entreprise: get("entreprise"),
+          url: get("url"),
+          tailleLabel,
+        }),
+      });
+      if (!res.ok) throw new Error("send_failed");
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -78,10 +92,21 @@ export default function AuditModal() {
 
         <button
           type="submit"
-          className="w-full justify-center bg-gold hover:bg-gold-hover text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
+          disabled={status === "loading"}
+          className="w-full justify-center bg-gold hover:bg-gold-hover disabled:opacity-60 disabled:cursor-not-allowed text-black font-semibold text-[14.5px] rounded-full py-4 mt-1 transition-colors"
         >
-          Recevoir mon audit
+          {status === "loading" ? "Envoi en cours..." : "Recevoir mon audit"}
         </button>
+        {status === "success" && (
+          <p className="text-[13.5px] text-green-400 text-center font-medium">
+            Merci ! Votre demande a bien été envoyée, nous revenons vers vous rapidement.
+          </p>
+        )}
+        {status === "error" && (
+          <p className="text-[13.5px] text-red-400 text-center font-medium">
+            Une erreur est survenue. Réessayez ou écrivez-nous directement à contact@terangadigitalconsultinggroup.com.
+          </p>
+        )}
         <p className="text-[12.5px] text-white/45 text-center">
           En soumettant, vous acceptez notre{" "}
           <button

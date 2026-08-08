@@ -3,11 +3,14 @@
 import { FormEvent, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
+import { useAutoCloseOnSuccess } from "@/lib/useAutoCloseOnSuccess";
 
 export default function AuditModal() {
   const { activeModal, closeModal, openModal } = useModal();
   const isOpen = activeModal === "audit";
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useAutoCloseOnSuccess(status, isOpen, closeModal, setStatus);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();

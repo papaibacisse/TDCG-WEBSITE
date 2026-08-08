@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
+import { useAutoCloseOnSuccess } from "@/lib/useAutoCloseOnSuccess";
 
 const SERVICES = [
   "Audit digital",
@@ -18,6 +19,8 @@ export default function ContactModal() {
   const isOpen = activeModal === "contact";
   const [selected, setSelected] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useAutoCloseOnSuccess(status, isOpen, closeModal, setStatus);
 
   function toggleService(s: string) {
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));

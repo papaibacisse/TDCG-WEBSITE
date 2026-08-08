@@ -4,6 +4,7 @@ import { FormEvent, useMemo, useState } from "react";
 import Modal from "./Modal";
 import { useModal } from "@/lib/ModalContext";
 import { SECTORS, EXPERTISE_DOMAINS, BUDGET_OPTIONS, COMPANY_SIZE_OPTIONS } from "@/lib/constants";
+import { useAutoCloseOnSuccess } from "@/lib/useAutoCloseOnSuccess";
 
 function formatFcfa(n: number) {
   return Math.round(n).toLocaleString("fr-FR").replace(/\u202f|,/g, " ") + " FCFA";
@@ -18,6 +19,8 @@ export default function DevisModal() {
   const [multiplier, setMultiplier] = useState<string>(COMPANY_SIZE_OPTIONS[0].value);
   const [selectedObjectifs, setSelectedObjectifs] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  useAutoCloseOnSuccess(status, isOpen, closeModal, setStatus);
 
   function toggleObjectif(name: string) {
     setSelectedObjectifs((prev) => (prev.includes(name) ? prev.filter((x) => x !== name) : [...prev, name]));

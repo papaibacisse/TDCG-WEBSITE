@@ -29,7 +29,7 @@ export default function MentionsLegalesModal() {
         <Section title="Éditeur du site">
           Le site {SITE.domain} est édité par Teranga Digital Consulting Group (TDCG).
           <br />
-          Forme juridique : <em className="text-navy/60">[à compléter]</em>
+          Forme juridique : Société Unipersonnelle à Responsabilité Limitée (SUARL)
           <br />
           Numéro RCCM : <em className="text-navy/60">[à compléter]</em>
           <br />

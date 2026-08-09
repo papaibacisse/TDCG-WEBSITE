@@ -20,12 +20,23 @@ export default function ROISimulator() {
   function calculate() {
     const budgetNum = Number(budget) || 0;
     const revenueNum = Number(revenue) || 0;
+    const clientsNum = Number(clients) || 0;
     const baseline = ROI_SECTOR_BASELINE[secteur] ?? 22;
+
+    // Intensité marketing : part du budget annuel dans le chiffre d'affaires,
+    // plafonnée à 20% pour éviter les valeurs aberrantes, puis pondérée.
     const annualBudget = budgetNum * 12;
-    const ratio = revenueNum > 0 ? annualBudget / revenueNum : 0;
-    const budgetBonus = Math.min(15, ratio * 300);
-    const raw = Math.round(baseline + budgetBonus);
-    setPercent(Math.max(15, Math.min(45, raw)));
+    const intensityPct = revenueNum > 0 ? Math.min(20, (annualBudget / revenueNum) * 100) : 0;
+    const budgetBonus = intensityPct * 0.6; // jusqu'à +12 pts
+
+    // Base clients : moins il y a de clients existants, plus la marge de
+    // croissance en % est grande (échelle logarithmique pour rester lisse).
+    const clientBonus = clientsNum > 0
+      ? Math.max(-5, Math.min(8, 8 - Math.log10(clientsNum + 1) * 3))
+      : 8; // pas de données clients => on suppose un fort potentiel de départ
+
+    const raw = Math.round(baseline + budgetBonus + clientBonus);
+    setPercent(Math.max(12, Math.min(58, raw)));
   }
 
   return (
@@ -128,8 +139,9 @@ export default function ROISimulator() {
                 de prospects supplémentaires.
               </p>
               <p className="text-[12.5px] text-white/40 mt-4">
-                Estimation indicative basée sur votre secteur et l&apos;intensité de votre budget marketing par
-                rapport à votre chiffre d&apos;affaires. À affiner avec un consultant.
+                Estimation indicative basée sur votre secteur, l&apos;intensité de votre budget marketing par
+                rapport à votre chiffre d&apos;affaires, et votre base clients actuelle. À affiner avec un
+                consultant.
               </p>
               <button
                 onClick={() => openModal("contact")}

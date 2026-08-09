@@ -8,8 +8,8 @@ export const SITE = {
   tagline: "Transformer vos idées en résultats.",
   domain: "terangadigitalconsultinggroup.com",
   email: "contact@terangadigitalconsultinggroup.com",
-  phones: ["+221 77 255 44 22", "+221 76 183 53 79"],
-  whatsapp: ["221772554422", "221761835379"],
+  phones: ["+221 77 255 44 22"],
+  whatsapp: ["221772554422"],
   address: "Thiokhna, Avenue El Hadji Samba Khary Cisse, 31009, Louga, Sénégal",
 };
 

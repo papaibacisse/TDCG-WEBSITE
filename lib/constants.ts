@@ -117,6 +117,10 @@ export const FAQ_ITEMS = [
     a: "Un audit standard dure entre 2 et 4 semaines selon la taille de votre organisation et le périmètre analysé.",
   },
   {
+    q: "Quels sont vos tarifs ?",
+    a: "Nos tarifs varient selon la taille du projet et de votre structure. Contactez-nous pour un devis personnalisé sous 48h.",
+  },
+  {
     q: "Travaillez-vous avec les institutions publiques ?",
     a: "Oui, nous accompagnons régulièrement des administrations publiques dans leurs projets de digitalisation et de modernisation des services.",
   },

@@ -2,7 +2,7 @@
 
 import { createContext, useCallback, useContext, useState, ReactNode } from "react";
 
-export type ModalName = "contact" | "audit" | "devis" | "cgu" | "privacy" | null;
+export type ModalName = "contact" | "audit" | "devis" | "cgu" | "privacy" | "mentions-legales" | null;
 
 interface ModalContextValue {
   activeModal: ModalName;

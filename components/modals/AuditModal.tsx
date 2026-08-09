@@ -31,6 +31,7 @@ export default function AuditModal() {
           entreprise: get("entreprise"),
           url: get("url"),
           tailleLabel,
+          website: get("website"),
         }),
       });
       if (!res.ok) throw new Error("send_failed");
@@ -60,6 +61,14 @@ export default function AuditModal() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden"
+        />
         <div className="grid grid-cols-2 gap-4">
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Prénom*

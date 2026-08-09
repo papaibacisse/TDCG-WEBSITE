@@ -77,7 +77,7 @@ export default function ExpertiseSphere() {
   const ActiveIcon = activeIndex !== null ? ICONS[activeIndex] : null;
 
   return (
-    <section className="bg-grey-light py-[120px]">
+    <section id="expertise" className="bg-grey-light py-[120px] scroll-mt-24">
       <div className="max-w-[1240px] mx-auto px-8">
         <div className="max-w-[640px] mb-16">
           <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-gold mb-4">

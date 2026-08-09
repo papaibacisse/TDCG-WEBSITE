@@ -56,7 +56,7 @@ export default function Footer() {
           <div>
             <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Légal</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-sm text-white/55 hover:text-gold transition-colors">Mentions légales</a></li>
+              <li><button onClick={() => openModal("mentions-legales")} className="text-sm text-white/55 hover:text-gold transition-colors">Mentions légales</button></li>
               <li><button onClick={() => openModal("privacy")} className="text-sm text-white/55 hover:text-gold transition-colors">Politique de confidentialité</button></li>
               <li><button onClick={openSettings} className="text-sm text-white/55 hover:text-gold transition-colors">Cookies</button></li>
               <li><button onClick={() => openModal("cgu")} className="text-sm text-white/55 hover:text-gold transition-colors">CGU</button></li>

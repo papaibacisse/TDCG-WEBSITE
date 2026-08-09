@@ -8,7 +8,7 @@ export default function CaseStudies() {
   const gridRef = useReveal();
 
   return (
-    <section id="etudes" className="bg-grey-light py-[120px]">
+    <section id="etudes" className="bg-grey-light py-[120px] scroll-mt-24">
       <div className="max-w-[1240px] mx-auto px-8">
         <div ref={headRef} className="reveal max-w-[640px] mb-16">
           <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-gold mb-4">

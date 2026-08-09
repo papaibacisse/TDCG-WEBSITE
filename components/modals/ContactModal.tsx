@@ -33,6 +33,7 @@ export default function ContactModal() {
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const entreprise = (form.elements.namedItem("entreprise") as HTMLInputElement).value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
+    const website = (form.elements.namedItem("website") as HTMLInputElement).value;
     const services = selected.join(", ") || "Non précisé";
 
     setStatus("loading");
@@ -40,7 +41,7 @@ export default function ContactModal() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nom, email, entreprise, services, message }),
+        body: JSON.stringify({ nom, email, entreprise, services, message, website }),
       });
       if (!res.ok) throw new Error("send_failed");
       setStatus("success");
@@ -74,6 +75,14 @@ export default function ContactModal() {
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white/[0.03] border-l border-white/10 p-11 flex flex-col gap-5">
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden"
+          />
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Nom complet*
             <input

@@ -18,7 +18,7 @@ export default function Sectors() {
   const headRef = useReveal();
 
   return (
-    <section id="secteurs" className="py-[120px]">
+    <section id="secteurs" className="py-[120px] scroll-mt-24">
       <div className="max-w-[1240px] mx-auto px-8">
         <div ref={headRef} className="reveal max-w-[640px] mb-16">
           <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-gold mb-4">

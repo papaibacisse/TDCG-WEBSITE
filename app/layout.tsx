@@ -10,6 +10,7 @@ import AuditModal from "@/components/modals/AuditModal";
 import DevisModal from "@/components/modals/DevisModal";
 import CguModal from "@/components/modals/CguModal";
 import PrivacyModal from "@/components/modals/PrivacyModal";
+import MentionsLegalesModal from "@/components/modals/MentionsLegalesModal";
 import CookieConsent from "@/components/CookieConsent";
 import FloatingButtons from "@/components/FloatingButtons";
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <DevisModal />
             <CguModal />
             <PrivacyModal />
+            <MentionsLegalesModal />
             <CookieConsent />
             <FloatingButtons />
           </CookieConsentProvider>

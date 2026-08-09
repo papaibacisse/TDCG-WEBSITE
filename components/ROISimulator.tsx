@@ -40,7 +40,7 @@ export default function ROISimulator() {
   }
 
   return (
-    <section id="roi-simulateur" className="bg-navy py-[120px] relative overflow-hidden">
+    <section id="roi-simulateur" className="bg-navy py-[120px] relative overflow-hidden scroll-mt-24">
       <svg className="absolute inset-0 opacity-25 pointer-events-none" viewBox="0 0 1240 700" preserveAspectRatio="xMidYMid slice">
         <g stroke="#C9A227" strokeWidth={1} fill="none" opacity={0.6}>
           <path d="M900 700 C 880 560, 950 480, 920 380 C 900 320, 960 260, 940 180" />

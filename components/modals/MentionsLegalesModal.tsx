@@ -37,7 +37,7 @@ export default function MentionsLegalesModal() {
           <br />
           Siège social : {SITE.address}
           <br />
-          Directeur de la publication : <em className="text-navy/60">[à compléter]</em>
+          Chargé de la publication : Teranga Digital Consulting Group (TDCG)
           <br />
           Email : <strong className="text-navy">{SITE.email}</strong>
           <br />

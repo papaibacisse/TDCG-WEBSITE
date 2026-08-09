@@ -103,7 +103,7 @@ export default function DevisModal() {
         <div className="grid grid-cols-2 gap-4">
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Prénom*
-            <input name="prenom" required placeholder="Kingsley" className={inputClass} />
+            <input name="prenom" required placeholder="Papa Iba" className={inputClass} />
           </label>
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Nom*
@@ -112,7 +112,7 @@ export default function DevisModal() {
         </div>
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
           Email professionnel*
-          <input name="email" type="email" required placeholder="Kingsley@votre-entreprise.sn" className={inputClass} />
+          <input name="email" type="email" required placeholder="papaiba@votre-entreprise.sn" className={inputClass} />
         </label>
 
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">

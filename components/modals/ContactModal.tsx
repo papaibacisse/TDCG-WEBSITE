@@ -89,7 +89,7 @@ export default function ContactModal() {
               name="nom"
               type="text"
               required
-              placeholder="Kingsley Cisse"
+              placeholder="Papa Iba Cisse"
               className="bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/35 text-[14.5px] focus:outline-none focus:border-gold focus:bg-white/[0.08]"
             />
           </label>
@@ -99,7 +99,7 @@ export default function ContactModal() {
               name="email"
               type="email"
               required
-              placeholder="Kingsley@votre-entreprise.sn"
+              placeholder="papaiba@votre-entreprise.sn"
               className="bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/35 text-[14.5px] focus:outline-none focus:border-gold focus:bg-white/[0.08]"
             />
           </label>

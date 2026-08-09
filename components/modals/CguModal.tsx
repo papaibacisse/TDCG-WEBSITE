@@ -68,15 +68,7 @@ export default function CguModal() {
           comme constitutive d&apos;une contrefaçon.
         </Article>
 
-        <Article n={6} title="Limitations de responsabilité">
-          TDCG ne pourra être tenu responsable des dommages directs ou indirects causés au matériel de
-          l&apos;utilisateur lors de l&apos;accès au site, ni du contenu des sites tiers accessibles via des liens
-          hypertextes présents sur le site. Un espace de contact est mis à disposition des utilisateurs ; TDCG se
-          réserve le droit de supprimer tout contenu contrevenant à la législation applicable, notamment en matière
-          de protection des données.
-        </Article>
-
-        <Article n={7} title="Cookies">
+        <Article n={6} title="Cookies">
           La navigation sur le site est susceptible de provoquer l&apos;installation de cookies sur
           l&apos;ordinateur de l&apos;utilisateur, destinés à faciliter la navigation et à mesurer la fréquentation
           du site. Le refus d&apos;installation d&apos;un cookie peut entraîner l&apos;impossibilité d&apos;accéder à
@@ -84,7 +76,7 @@ export default function CguModal() {
           navigateur.
         </Article>
 
-        <Article n={8} title="Protection des données personnelles">
+        <Article n={7} title="Protection des données personnelles">
           Les données collectées via les formulaires sont utilisées pour répondre aux demandes, établir des devis et
           assurer le suivi commercial. L&apos;utilisateur dispose d&apos;un droit d&apos;accès, de rectification,
           d&apos;effacement, d&apos;opposition, de limitation et de portabilité, conformément à la loi n° 2008-12 du
@@ -92,7 +84,7 @@ export default function CguModal() {
           adressée à : <strong className="text-navy">{SITE.email}</strong>.
         </Article>
 
-        <Article n={9} title="Principales lois concernées">
+        <Article n={8} title="Principales lois concernées">
           Loi n° 2008-08 du 25 janvier 2008 sur les transactions électroniques.
           <br />
           Loi n° 2008-12 du 25 janvier 2008 portant sur la protection des données à caractère personnel.
@@ -100,7 +92,7 @@ export default function CguModal() {
           Ainsi que les dispositions applicables du Code des Obligations Civiles et Commerciales du Sénégal.
         </Article>
 
-        <Article n={10} title="Lexique">
+        <Article n={9} title="Lexique">
           <strong className="text-navy">Utilisateur</strong> : internaute se connectant et utilisant le site
           susnommé.
           <br />
@@ -109,12 +101,12 @@ export default function CguModal() {
           elles s&apos;appliquent, au sens de la loi n° 2008-12 du 25 janvier 2008.
         </Article>
 
-        <Article n={11} title="Droit applicable et juridiction compétente">
+        <Article n={10} title="Droit applicable et juridiction compétente">
           Les présentes CGU sont régies par le droit sénégalais. Tout différend relève de la compétence des
           juridictions sénégalaises compétentes.
         </Article>
 
-        <Article n={12} title="Contact">
+        <Article n={11} title="Contact">
           Teranga Digital Consulting Group (TDCG)
           <br />
           Site web : {SITE.domain}

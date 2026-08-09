@@ -35,12 +35,11 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div id="footer-contact" className="scroll-mt-28">
             <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Contact</h4>
             <ul className="space-y-3">
               <li><a href={`mailto:${SITE.email}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.email}</a></li>
               <li><a href={`tel:${SITE.phones[0].replace(/\s/g, "")}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.phones[0]}</a></li>
-              <li><a href={`tel:${SITE.phones[1].replace(/\s/g, "")}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.phones[1]}</a></li>
               <li>
                 <a
                   href={`https://maps.google.com/?q=${encodeURIComponent(SITE.address)}`}

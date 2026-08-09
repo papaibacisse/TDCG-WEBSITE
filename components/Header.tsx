@@ -12,7 +12,7 @@ const NAV_LINKS = [
   { href: "#etudes", label: "Études de cas" },
   { href: "#faq", label: "FAQ" },
   { href: "#roi-simulateur", label: "Simulateur de ROI marketing" },
-  { href: "#footer-contact", label: "Contact" },
+  { href: "#contact-canaux", label: "Contact" },
 ];
 
 export default function Header() {

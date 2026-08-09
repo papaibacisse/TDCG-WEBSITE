@@ -10,6 +10,7 @@ import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
 import ROISimulator from "@/components/ROISimulator";
 import CtaFinal from "@/components/CtaFinal";
+import ContactChannels from "@/components/ContactChannels";
 import Footer from "@/components/Footer";
 
 export default function HomePage() {
@@ -28,6 +29,7 @@ export default function HomePage() {
         <Faq />
         <ROISimulator />
         <CtaFinal />
+        <ContactChannels />
       </main>
       <Footer />
     </>

@@ -1,12 +1,15 @@
 "use client";
 
 import { useCookieConsent } from "@/lib/CookieConsentContext";
-import { SITE } from "@/lib/constants";
+
+// Coordonnées GPS précises du siège (15,61914° N, 16,22597° O)
+const LATITUDE = 15.61914;
+const LONGITUDE = -16.22597;
 
 export default function MapEmbed() {
   const { consent, openSettings } = useCookieConsent();
   const mapsAllowed = consent?.marketing || consent?.analytics;
-  const query = encodeURIComponent(SITE.address);
+  const coords = `${LATITUDE},${LONGITUDE}`;
 
   if (!mapsAllowed) {
     return (
@@ -20,7 +23,7 @@ export default function MapEmbed() {
         </button>{" "}
         ou{" "}
         <a
-          href={`https://maps.google.com/?q=${query}`}
+          href={`https://maps.google.com/?q=${coords}`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-gold underline underline-offset-2 hover:text-gold-hover"
@@ -35,7 +38,7 @@ export default function MapEmbed() {
   return (
     <iframe
       title="Localisation de TDCG"
-      src={`https://www.google.com/maps?q=${query}&output=embed`}
+      src={`https://www.google.com/maps?q=${coords}&z=15&output=embed`}
       className="w-full h-[220px] rounded-md border border-white/10 grayscale-[30%]"
       loading="lazy"
       referrerPolicy="no-referrer-when-downgrade"

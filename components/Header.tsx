@@ -61,6 +61,7 @@ export default function Header() {
           className="md:hidden ml-auto flex items-center justify-center gap-1 bg-white/[0.06] border border-gold/30 rounded-full w-16 h-10"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label="Menu"
+          aria-expanded={mobileOpen}
         >
           <Menu size={20} className="text-gold" />
         </button>

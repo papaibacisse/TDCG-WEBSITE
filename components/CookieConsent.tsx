@@ -5,53 +5,68 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ShieldCheck, BarChart3, Megaphone, Sparkles, X } from "lucide-react";
 import { useCookieConsent } from "@/lib/CookieConsentContext";
 import { useModal } from "@/lib/ModalContext";
+import { CookieConsent as Consent, readConsent, writeConsent } from "@/lib/cookieConsentStorage";
 
-const STORAGE_KEY = "tdcg_cookie_consent";
-const COOKIE_TTL_DAYS = 395; // ~13 months
-
-interface Consent {
-  essential: true;
-  analytics: boolean;
-  marketing: boolean;
-  personalization: boolean;
-  timestamp: number;
-}
-
-function readConsent(): Consent | null {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as Consent;
-    const ageDays = (Date.now() - parsed.timestamp) / 86_400_000;
-    if (ageDays > COOKIE_TTL_DAYS) return null;
-    return parsed;
-  } catch {
-    return null;
-  }
-}
-
-function writeConsent(consent: Omit<Consent, "timestamp">) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...consent, timestamp: Date.now() }));
-  } catch {
-    // storage unavailable — consent simply won't persist
-  }
-}
-
-// Placeholder loaders — wire in real tracking IDs from env vars when ready.
+/**
+ * Injecte réellement les scripts tiers correspondants, uniquement si :
+ * 1. l'utilisateur a donné son consentement pour la catégorie concernée, ET
+ * 2. un identifiant réel a été configuré côté Vercel (variables NEXT_PUBLIC_*).
+ * Tant qu'aucun identifiant n'est renseigné, rien ne se charge — conforme à
+ * ce qu'annonce la Politique de confidentialité.
+ */
 function loadConditionalScripts(consent: Consent) {
+  if (typeof window === "undefined") return;
+
   if (consent.analytics) {
-    // e.g. inject Google Analytics / GTM using NEXT_PUBLIC_GA_MEASUREMENT_ID
-    console.info("[TDCG cookies] Analytics scripts would load here (consent granted).");
+    const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+    if (gaId && !document.getElementById("ga4-loader")) {
+      const loader = document.createElement("script");
+      loader.id = "ga4-loader";
+      loader.async = true;
+      loader.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+      document.head.appendChild(loader);
+
+      const inline = document.createElement("script");
+      inline.id = "ga4-inline";
+      inline.innerHTML = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{anonymize_ip:true});`;
+      document.head.appendChild(inline);
+    }
+
+    const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+    if (gtmId && !document.getElementById("gtm-inline")) {
+      const inline = document.createElement("script");
+      inline.id = "gtm-inline";
+      inline.innerHTML = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtmId}');`;
+      document.head.appendChild(inline);
+    }
   }
+
   if (consent.marketing) {
-    // e.g. inject Meta Pixel / LinkedIn Insight using their NEXT_PUBLIC_* ids
-    console.info("[TDCG cookies] Marketing scripts would load here (consent granted).");
+    const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+    if (pixelId && !document.getElementById("meta-pixel-inline")) {
+      const inline = document.createElement("script");
+      inline.id = "meta-pixel-inline";
+      inline.innerHTML = `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${pixelId}');fbq('track','PageView');`;
+      document.head.appendChild(inline);
+    }
+
+    const linkedinId = process.env.NEXT_PUBLIC_LINKEDIN_PARTNER_ID;
+    if (linkedinId && !document.getElementById("linkedin-insight-inline")) {
+      const inline = document.createElement("script");
+      inline.id = "linkedin-insight-inline";
+      inline.innerHTML = `_linkedin_partner_id="${linkedinId}";window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(_linkedin_partner_id);`;
+      document.head.appendChild(inline);
+
+      const loader = document.createElement("script");
+      loader.id = "linkedin-insight-loader";
+      loader.innerHTML = `(function(l){if(!l){window.lintrk=function(a,b){window.lintrk.q.push([a,b])};window.lintrk.q=[]}var s=document.getElementsByTagName("script")[0];var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src="https://snap.licdn.com/li.lms-analytics/insight.min.js";s.parentNode.insertBefore(b,s);})(window.lintrk);`;
+      document.head.appendChild(loader);
+    }
   }
 }
 
 export default function CookieConsent() {
-  const { settingsOpen, openSettings, closeSettings } = useCookieConsent();
+  const { settingsOpen, openSettings, closeSettings, refreshConsent } = useCookieConsent();
   const { openModal } = useModal();
   const [bannerVisible, setBannerVisible] = useState(false);
   const [toggles, setToggles] = useState({ analytics: false, marketing: false, personalization: false });
@@ -74,6 +89,7 @@ export default function CookieConsent() {
   function saveConsent(consent: Omit<Consent, "timestamp">) {
     writeConsent(consent);
     loadConditionalScripts({ ...consent, timestamp: Date.now() });
+    refreshConsent();
     setBannerVisible(false);
     closeSettings();
   }

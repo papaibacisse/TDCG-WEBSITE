@@ -82,7 +82,16 @@ export default function PrivacyModal() {
         </Section>
 
         <Section n={10} title="Services tiers">
-          Google Analytics, Google Tag Manager, Google Maps, Meta Pixel, LinkedIn Insight Tag, WhatsApp, YouTube.
+          <strong className="text-navy">Google Maps</strong> : affichage de notre localisation dans le pied de page
+          (soumis au consentement « analytique » ou « marketing »).
+          <br />
+          <strong className="text-navy">Google Analytics / Google Tag Manager, Meta Pixel, LinkedIn Insight Tag</strong> :
+          uniquement activés si vous donnez votre consentement via le bandeau cookies, et si ces outils sont
+          effectivement configurés de notre côté. Tant qu&apos;aucun de ces outils n&apos;est activement configuré,
+          aucun script correspondant n&apos;est chargé, même en cas de consentement.
+          <br />
+          <strong className="text-navy">WhatsApp</strong> : simple lien vers l&apos;application, ne dépose aucun
+          cookie tant que vous n&apos;avez pas cliqué dessus pour nous contacter.
         </Section>
 
         <Section n={11} title="Transfert des données">

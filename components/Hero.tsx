@@ -5,8 +5,8 @@ import { useCountUp } from "@/lib/useCountUp";
 
 export default function Hero() {
   const { openModal } = useModal();
-  const orgs = useCountUp(40, "+");
-  const satisfaction = useCountUp(96, "%");
+  const responseTime = useCountUp(48, "h");
+  const tailored = useCountUp(100, "%");
 
   return (
     <section className="relative overflow-hidden bg-navy text-white pt-[190px] pb-[140px]">
@@ -49,20 +49,20 @@ export default function Hero() {
 
         <div className="flex flex-col border-l border-white/15 pl-10">
           <div className="py-[18px] border-b border-white/10">
-            <div ref={orgs.ref as any} className="font-display text-[34px] font-semibold">
-              <span className="text-gold">{orgs.value}</span>
+            <div ref={responseTime.ref as any} className="font-display text-[34px] font-semibold">
+              <span className="text-gold">{responseTime.value}</span>
             </div>
-            <div className="text-[13px] text-white/55 mt-0.5">Organisations accompagnées</div>
+            <div className="text-[13px] text-white/55 mt-0.5">Délai de première réponse</div>
           </div>
           <div className="py-[18px] border-b border-white/10">
             <div className="font-display text-[34px] font-semibold"><span className="text-gold">12</span> secteurs</div>
             <div className="text-[13px] text-white/55 mt-0.5">D&apos;expertise couverts</div>
           </div>
           <div className="py-[18px]">
-            <div ref={satisfaction.ref as any} className="font-display text-[34px] font-semibold">
-              <span className="text-gold">{satisfaction.value}</span>
+            <div ref={tailored.ref as any} className="font-display text-[34px] font-semibold">
+              <span className="text-gold">{tailored.value}</span>
             </div>
-            <div className="text-[13px] text-white/55 mt-0.5">Taux de satisfaction client</div>
+            <div className="text-[13px] text-white/55 mt-0.5">Accompagnement sur-mesure</div>
           </div>
         </div>
       </div>

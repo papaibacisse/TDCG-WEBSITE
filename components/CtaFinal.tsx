@@ -8,7 +8,7 @@ export default function CtaFinal() {
   const ref = useReveal();
 
   return (
-    <section id="contact" className="bg-navy text-white text-center py-[120px] relative overflow-hidden">
+    <section className="bg-navy text-white text-center py-[120px] relative overflow-hidden">
       <div ref={ref} className="reveal max-w-[1240px] mx-auto px-8">
         <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-gold mb-4 justify-center w-full">
           <span className="w-6 h-px bg-gold" /> Passons à l&apos;action

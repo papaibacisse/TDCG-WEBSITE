@@ -3,6 +3,7 @@
 import { useModal } from "@/lib/ModalContext";
 import { useCookieConsent } from "@/lib/CookieConsentContext";
 import { SITE } from "@/lib/constants";
+import MapEmbed from "./MapEmbed";
 
 const SERVICES_LINKS = ["Audit digital", "Stratégie marketing", "Digitalisation", "Conseil stratégique"];
 
@@ -51,6 +52,9 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
+            <div className="mt-4">
+              <MapEmbed />
+            </div>
           </div>
 
           <div>

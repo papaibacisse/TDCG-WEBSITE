@@ -31,6 +31,9 @@ export default function NetworkCanvas({ opacity = 0.5, particleCount = 55 }: { o
       height = canvas!.height = canvas!.offsetHeight;
     }
 
+    const prefersReducedMotion =
+      typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
     function makeParticles() {
       particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * width,
@@ -83,13 +86,20 @@ export default function NetworkCanvas({ opacity = 0.5, particleCount = 55 }: { o
 
     resize();
     makeParticles();
-    step();
+    if (prefersReducedMotion) {
+      // Respecte la préférence système : affiche une image statique du réseau
+      // au lieu d'une animation continue.
+      step();
+      running = false;
+    } else {
+      step();
+    }
 
-    const onResize = () => { resize(); makeParticles(); };
+    const onResize = () => { resize(); makeParticles(); if (!prefersReducedMotion) step(); };
     window.addEventListener("resize", onResize);
 
     let io: IntersectionObserver | undefined;
-    if (section) {
+    if (section && !prefersReducedMotion) {
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {

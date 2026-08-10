@@ -17,6 +17,7 @@ export default function Testimonials() {
           <h2 className="font-display text-[clamp(30px,3.4vw,44px)] text-navy leading-tight">
             La confiance de nos partenaires.
           </h2>
+          <p className="mt-4 text-grey text-[16.5px]">Témoignages représentatifs des retours de nos clients.</p>
         </div>
 
         <div ref={gridRef} className="reveal grid md:grid-cols-3 gap-7">

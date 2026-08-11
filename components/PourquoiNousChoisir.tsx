@@ -36,9 +36,9 @@ export default function PourquoiNousChoisir() {
   const ribbonRef = useReveal();
   const ctaRef = useReveal();
 
-  const orgs = useCountUp(40, "+");
+  const responseTime = useCountUp(48, "h");
   const sectors = useCountUp(12, "");
-  const satisfaction = useCountUp(96, "%");
+  const tailored = useCountUp(100, "%");
 
   return (
     <section id="pourquoi" className="relative overflow-hidden bg-navy py-[140px]">
@@ -61,16 +61,16 @@ export default function PourquoiNousChoisir() {
         {/* Counters */}
         <div ref={countersRef} className="reveal flex flex-col md:flex-row border-y border-white/[0.12] mb-24">
           <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-white/[0.12] last:border-0">
-            <div ref={orgs.ref as any} className="font-display text-[38px] font-semibold text-gold">{orgs.value}</div>
-            <div className="text-[13px] text-white/55 mt-1.5">Organisations accompagnées</div>
+            <div ref={responseTime.ref as any} className="font-display text-[38px] font-semibold text-gold">{responseTime.value}</div>
+            <div className="text-[13px] text-white/55 mt-1.5">Délai de première réponse</div>
           </div>
           <div className="flex-1 p-8 border-b md:border-b-0 md:border-r border-white/[0.12] last:border-0">
             <div ref={sectors.ref as any} className="font-display text-[38px] font-semibold text-gold">{sectors.value} secteurs</div>
             <div className="text-[13px] text-white/55 mt-1.5">D&apos;expertise couverts</div>
           </div>
           <div className="flex-1 p-8">
-            <div ref={satisfaction.ref as any} className="font-display text-[38px] font-semibold text-gold">{satisfaction.value}</div>
-            <div className="text-[13px] text-white/55 mt-1.5">Taux de satisfaction client</div>
+            <div ref={tailored.ref as any} className="font-display text-[38px] font-semibold text-gold">{tailored.value}</div>
+            <div className="text-[13px] text-white/55 mt-1.5">Accompagnement sur-mesure</div>
           </div>
         </div>
 

@@ -8,7 +8,11 @@ import { useEffect, useRef, useState } from "react";
  */
 export function useCountUp(target: number, suffix = "", duration = 1600) {
   const ref = useRef<HTMLElement | null>(null);
-  const [value, setValue] = useState(`0${suffix}`);
+  // Valeur initiale = la valeur finale, pour que le contenu soit correct
+  // même sans JavaScript (SEO, lecteurs d'écran, robots d'indexation).
+  // L'animation "depuis 0" ne démarre qu'une fois le JS chargé et la
+  // section visible à l'écran.
+  const [value, setValue] = useState(`${target}${suffix}`);
   const hasRun = useRef(false);
 
   useEffect(() => {
@@ -20,6 +24,7 @@ export function useCountUp(target: number, suffix = "", duration = 1600) {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasRun.current) {
             hasRun.current = true;
+            setValue(`0${suffix}`);
             const start = performance.now();
             const step = (now: number) => {
               const progress = Math.min((now - start) / duration, 1);

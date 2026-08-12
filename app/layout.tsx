@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Teranga Digital Consulting Group — Transformer vos idées en résultats",
   description:
-    "TDCG accompagne entreprises, institutions et startups d'Afrique de l'Ouest dans leur transformation digitale, leur stratégie et leur croissance.",
+    "TDCG accompagne entreprises, institutions publiques et startups d'Afrique de l'Ouest dans leur transformation digitale, leur pilotage stratégique et leur développement.",
   openGraph: {
     title: "Teranga Digital Consulting Group",
     description: "Transformer vos idées en résultats.",

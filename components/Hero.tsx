@@ -27,9 +27,9 @@ export default function Hero() {
             Transformer vos <em className="italic text-gold font-medium">idées</em> en résultats.
           </h1>
           <p className="mt-6 text-lg text-white/70 max-w-[480px]">
-            Teranga Digital Consulting Group accompagne entreprises, institutions et startups dans leur transformation
-            digitale, leur stratégie et leur croissance — avec l&apos;exigence d&apos;un cabinet international et
-            l&apos;ancrage d&apos;un partenaire local.
+            Teranga Digital Consulting Group accompagne entreprises, institutions publiques et startups dans leur
+            transformation digitale, leur pilotage stratégique et leur développement — avec la rigueur
+            méthodologique d&apos;un cabinet international et la proximité d&apos;un partenaire ancré localement.
           </p>
           <div className="flex gap-4 flex-wrap mt-10">
             <button

@@ -53,6 +53,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/logo-tdcg.png",
   },
+  verification: {
+    google: "RWNo-dNoq0kDDAAGBS0YanqZ8-Uy7T1YnVKBKM0dK-g",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

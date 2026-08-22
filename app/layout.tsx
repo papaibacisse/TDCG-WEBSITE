@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { ModalProvider } from "@/lib/ModalContext";
 import { CookieConsentProvider } from "@/lib/CookieConsentContext";
+import { ExpertiseProvider } from "@/lib/ExpertiseContext";
 
 import ContactModal from "@/components/modals/ContactModal";
 import AuditModal from "@/components/modals/AuditModal";
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="font-body antialiased">
         <ModalProvider>
+          <ExpertiseProvider>
           <CookieConsentProvider>
             {children}
 
@@ -76,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <CookieConsent />
             <FloatingButtons />
           </CookieConsentProvider>
+          </ExpertiseProvider>
         </ModalProvider>
       </body>
     </html>

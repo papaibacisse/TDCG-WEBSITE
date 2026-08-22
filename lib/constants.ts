@@ -187,3 +187,13 @@ export const TESTIMONIALS = [
     role: "Fondateur, startup fintech",
   },
 ];
+
+/** Génère un slug d'ancrage cohérent pour les noms de secteurs */
+export function sectorSlug(name: string): string {
+  return "sector-" + name
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}

@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { useModal } from "@/lib/ModalContext";
 import { useReveal } from "@/lib/useReveal";
-import { SECTORS } from "@/lib/constants";
+import { SECTORS, sectorSlug } from "@/lib/constants";
 
 const ICONS = [
   Landmark, LineChart, GraduationCap, HeartPulse, Sprout, ShoppingBag,
@@ -44,7 +44,7 @@ export default function Sectors() {
           {SECTORS.map((sector, i) => {
             const Icon = ICONS[i];
             return (
-              <SectorCard key={sector.name} icon={Icon} name={sector.name} description={sector.description} onDiscover={() => openModal("contact")} />
+              <SectorCard key={sector.name} id={sectorSlug(sector.name)} icon={Icon} name={sector.name} description={sector.description} onDiscover={() => openModal("contact")} />
             );
           })}
         </div>
@@ -54,11 +54,13 @@ export default function Sectors() {
 }
 
 function SectorCard({
+  id,
   icon: Icon,
   name,
   description,
   onDiscover,
 }: {
+  id: string;
   icon: typeof Landmark;
   name: string;
   description: string;
@@ -68,12 +70,14 @@ function SectorCard({
 
   return (
     <div
+      id={id}
       ref={ref}
       className="
         reveal group relative flex flex-col gap-3.5 overflow-hidden rounded-xl border border-navy/10 bg-white
         p-[34px_28px] transition-all duration-[400ms] ease-premium
         hover:-translate-y-2 hover:shadow-card hover:border-gold/40
         max-md:min-w-[260px] max-md:shrink-0 max-md:snap-start
+        scroll-mt-28
       "
     >
       <span className="absolute top-0 left-0 right-0 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-gold to-[#e6c766] transition-transform duration-[450ms] ease-premium group-hover:scale-x-100" />

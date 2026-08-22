@@ -6,17 +6,26 @@ import {
 } from "lucide-react";
 import { useModal } from "@/lib/ModalContext";
 import { useReveal } from "@/lib/useReveal";
+import { useExpertise } from "@/lib/ExpertiseContext";
 import { EXPERTISE_DOMAINS } from "@/lib/constants";
 
 const ICONS = [BarChart3, Cpu, MessageSquare, RefreshCw, Compass, Users, Settings, Database, Search, Megaphone];
 
 export default function ExpertiseSphere() {
   const { openModal } = useModal();
+  const { pendingIndex, clearPending } = useExpertise();
   const wrapRef = useReveal();
   const stageRef = useRef<HTMLDivElement>(null);
   const nodeRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const rotationRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  // Réagir à l'ouverture d'une expertise depuis le menu navbar
+  useEffect(() => {
+    if (pendingIndex === null) return;
+    setActiveIndex(pendingIndex);
+    clearPending();
+  }, [pendingIndex, clearPending]);
 
   const total = EXPERTISE_DOMAINS.length;
 

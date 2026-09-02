@@ -64,7 +64,7 @@ function ExpertiseMegaMenu({
 
   return (
     <div
-      className="absolute top-full left-1/2 -translate-x-1/2 w-[min(1160px,96vw)] mt-0 z-[1100]"
+      className="absolute top-full left-0 right-0 mt-0 z-[1100] px-8"
       onMouseLeave={onClose}
     >
       {/* Petit pont invisible pour éviter la fermeture entre le bouton et le panel */}
@@ -243,7 +243,7 @@ export default function Header() {
           {/* Expertises → Mega-menu */}
           <li
             ref={expertiseRef}
-            className="relative"
+            className="static"
             onMouseEnter={openMega}
             onMouseLeave={closeMega}
           >

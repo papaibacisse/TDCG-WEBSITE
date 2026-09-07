@@ -2,22 +2,36 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  BarChart3, Cpu, MessageSquare, RefreshCw, Compass, Users, Settings, Database, Search, Megaphone, X,
+  Compass, Cpu, TrendingUp, Database, Briefcase, ChevronRight, X, ArrowRight,
 } from "lucide-react";
 import { useModal } from "@/lib/ModalContext";
 import { useReveal } from "@/lib/useReveal";
 import { useExpertise } from "@/lib/ExpertiseContext";
 import { EXPERTISE_DOMAINS } from "@/lib/constants";
 
-const ICONS = [BarChart3, Cpu, MessageSquare, RefreshCw, Compass, Users, Settings, Database, Search, Megaphone];
+// 5 icônes, une par pôle d'expertise
+const ICONS = [Compass, Cpu, TrendingUp, Database, Briefcase];
+
+// Couleurs d'accent subtiles par pôle
+const ACCENTS = [
+  "from-[#D4AF5A]/12 to-transparent",
+  "from-[#6AB5FF]/10 to-transparent",
+  "from-[#6AFFB4]/10 to-transparent",
+  "from-[#B56AFF]/10 to-transparent",
+  "from-[#FF9A6A]/10 to-transparent",
+];
+const ICON_COLORS = [
+  "text-[#D4AF5A]",
+  "text-[#6AB5FF]",
+  "text-[#6AFFB4]",
+  "text-[#B56AFF]",
+  "text-[#FF9A6A]",
+];
 
 export default function ExpertiseSphere() {
   const { openModal } = useModal();
   const { pendingIndex, clearPending } = useExpertise();
   const wrapRef = useReveal();
-  const stageRef = useRef<HTMLDivElement>(null);
-  const nodeRefs = useRef<(HTMLButtonElement | null)[]>([]);
-  const rotationRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   // Réagir à l'ouverture d'une expertise depuis le menu navbar
@@ -27,131 +41,152 @@ export default function ExpertiseSphere() {
     clearPending();
   }, [pendingIndex, clearPending]);
 
-  const total = EXPERTISE_DOMAINS.length;
-
-  function render() {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const w = stage.clientWidth;
-    const h = stage.clientHeight;
-    const cx = w / 2;
-    const cy = h / 2;
-    const rx = w * 0.4;
-    const ry = h * 0.34;
-
-    nodeRefs.current.forEach((node, i) => {
-      if (!node) return;
-      const base = (360 / total) * i;
-      const angleDeg = base + rotationRef.current;
-      const angle = (angleDeg * Math.PI) / 180;
-      const x = cx + rx * Math.cos(angle);
-      const y = cy + ry * Math.sin(angle);
-      const depth = (Math.sin(angle) + 1) / 2;
-      const scale = 0.6 + depth * 0.55;
-      const opacity = 0.38 + depth * 0.62;
-      node.style.left = `${x}px`;
-      node.style.top = `${y}px`;
-      node.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)})`;
-      node.style.opacity = opacity.toFixed(2);
-      node.style.zIndex = String(Math.round(depth * 100) + 1);
-    });
-  }
-
-  useEffect(() => {
-    render();
-    window.addEventListener("resize", render);
-    return () => window.removeEventListener("resize", render);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function focusNode(i: number) {
-    const base = (360 / total) * i;
-    const target = 90 - base;
-    const current = rotationRef.current % 360;
-    const diff = ((target - current + 540) % 360) - 180;
-    rotationRef.current += diff;
-    render();
-  }
-
-  function handleNodeClick(i: number) {
-    if (activeIndex === i) {
-      setActiveIndex(null);
-      return;
-    }
-    setActiveIndex(i);
-    focusNode(i);
-  }
-
   const active = activeIndex !== null ? EXPERTISE_DOMAINS[activeIndex] : null;
-  const ActiveIcon = activeIndex !== null ? ICONS[activeIndex] : null;
 
   return (
-    <section id="expertise" className="bg-grey-light py-[120px] scroll-mt-24">
+    <section id="expertise" className="bg-[#0B0F1E] py-[120px] scroll-mt-24 relative overflow-hidden">
+      {/* Fond géométrique subtil */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: "radial-gradient(circle at 20% 50%, #D4AF5A 0%, transparent 45%), radial-gradient(circle at 80% 20%, #6AB5FF 0%, transparent 40%)",
+        }}
+      />
+
       <div className="max-w-[1240px] mx-auto px-8">
-        <div className="max-w-[640px] mb-16">
-          <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-gold mb-4">
-            <span className="w-6 h-px bg-gold" /> Nos expertises
+        {/* Header */}
+        <div className="max-w-[720px] mb-16">
+          <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-[#D4AF5A] mb-4">
+            <span className="w-6 h-px bg-[#D4AF5A]" /> Nos expertises
           </div>
-          <h2 className="font-display text-[clamp(30px,3.4vw,44px)] text-navy leading-tight">
-            Un écosystème d&apos;expertises, une seule ambition.
+          <h2 className="font-display text-[clamp(30px,3.4vw,48px)] text-white leading-tight">
+            Cinq pôles d&apos;expertise.<br />
+            <span className="text-[#D4AF5A]">Une ambition commune.</span>
           </h2>
-          <p className="mt-4 text-grey text-[16.5px]">
-            Dix domaines interconnectés autour d&apos;une même méthode. Cliquez sur une expertise pour l&apos;explorer.
+          <p className="mt-4 text-white/55 text-[16.5px] leading-relaxed">
+            Chaque pôle est conçu pour répondre à un enjeu stratégique précis.
+            Cliquez sur un domaine pour découvrir les services et démarrer votre projet.
           </p>
         </div>
 
-        <div ref={wrapRef} className="reveal">
-          <div ref={stageRef} className="relative w-full h-[520px] md:h-[560px]">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120px] h-[120px] rounded-full bg-navy flex items-center justify-center font-display font-bold text-gold text-lg shadow-card z-10">
-              TDCG
-            </div>
+        {/* Grille des 5 expertises */}
+        <div ref={wrapRef} className="reveal grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4">
+          {EXPERTISE_DOMAINS.map((domain, i) => {
+            const Icon = ICONS[i];
+            const isActive = activeIndex === i;
 
-            {EXPERTISE_DOMAINS.map((domain, i) => {
-              const Icon = ICONS[i];
-              return (
-                <button
-                  key={domain.name}
-                  ref={(el) => { nodeRefs.current[i] = el; }}
-                  type="button"
-                  onClick={() => handleNodeClick(i)}
-                  className={
-                    "absolute top-0 left-0 w-[104px] h-[104px] rounded-full bg-white flex flex-col items-center justify-center gap-1.5 shadow-[0_14px_30px_-12px_rgba(11,31,58,0.22)] transition-[left,top,transform,opacity,box-shadow,border-color] duration-[800ms] ease-premium border " +
-                    (activeIndex === i ? "border-gold ring-2 ring-gold/40" : "border-navy/10")
-                  }
-                >
-                  <Icon size={22} className="text-navy" />
-                  <span className="text-[11px] font-semibold text-navy text-center px-2 leading-tight">{domain.name}</span>
-                </button>
-              );
-            })}
+            return (
+              <button
+                key={domain.name}
+                type="button"
+                onClick={() => setActiveIndex(isActive ? null : i)}
+                className={
+                  "group relative flex flex-col text-left p-6 rounded-xl border transition-all duration-300 " +
+                  (isActive
+                    ? "bg-[#131B2E] border-[#D4AF5A]/60 shadow-[0_0_30px_rgba(212,175,90,0.12)]"
+                    : "bg-[#0F1526] border-white/[0.07] hover:border-white/20 hover:bg-[#131B2E]")
+                }
+              >
+                {/* Gradient accent en haut à droite */}
+                <div className={`absolute top-0 right-0 w-28 h-28 rounded-xl bg-gradient-to-bl ${ACCENTS[i]} pointer-events-none`} />
 
-            {active && ActiveIcon && (
-              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                <div className="pointer-events-auto bg-white rounded-2xl shadow-modal p-8 max-w-[320px] text-center relative">
+                {/* Numéro */}
+                <span className="font-mono text-[11px] tracking-[2.5px] text-white/30 mb-3">{domain.num}</span>
+
+                {/* Icône */}
+                <div className={`w-10 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center mb-4 transition-colors group-hover:bg-white/10 ${isActive ? "bg-white/10" : ""}`}>
+                  <Icon size={20} className={ICON_COLORS[i]} />
+                </div>
+
+                {/* Titre */}
+                <h3 className="text-[15px] font-semibold text-white leading-snug mb-3">{domain.name}</h3>
+
+                {/* Sous-items (top 3 visibles, reste masqué) */}
+                <ul className="flex flex-col gap-1 mt-auto">
+                  {domain.items.slice(0, 3).map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-[12px] text-white/40 group-hover:text-white/60 transition-colors">
+                      <ChevronRight size={10} className={`shrink-0 ${ICON_COLORS[i]}`} />
+                      {item}
+                    </li>
+                  ))}
+                  {domain.items.length > 3 && (
+                    <li className="text-[11px] text-white/30 mt-1">
+                      +{domain.items.length - 3} autres
+                    </li>
+                  )}
+                </ul>
+
+                {/* Indicateur actif */}
+                <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-px transition-all duration-300 ${isActive ? "w-full bg-gradient-to-r from-transparent via-[#D4AF5A]/60 to-transparent" : "w-0"}`} />
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Panel détail de l'expertise active */}
+        {active && (
+          <div className="mt-6 bg-[#0F1526] border border-[#D4AF5A]/20 rounded-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF5A]/40 to-transparent" />
+            <div className="p-8 md:p-10 grid md:grid-cols-[1fr_auto] gap-8 items-start">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  {(() => {
+                    const Icon = ICONS[EXPERTISE_DOMAINS.indexOf(active)];
+                    const i = EXPERTISE_DOMAINS.indexOf(active);
+                    return (
+                      <div className={`w-10 h-10 rounded-lg bg-white/[0.06] flex items-center justify-center`}>
+                        <Icon size={20} className={ICON_COLORS[i]} />
+                      </div>
+                    );
+                  })()}
+                  <div>
+                    <span className="font-mono text-[11px] tracking-[2.5px] text-white/30 block">{active.num}</span>
+                    <h3 className="font-display text-[22px] text-white">{active.name}</h3>
+                  </div>
                   <button
                     onClick={() => setActiveIndex(null)}
                     aria-label="Fermer"
-                    className="absolute top-3 right-3 w-7 h-7 rounded-full flex items-center justify-center hover:bg-grey-light"
+                    className="ml-auto w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
                   >
-                    <X size={14} className="text-navy" />
-                  </button>
-                  <div className="w-11 h-11 rounded-[10px] bg-gold-soft flex items-center justify-center mx-auto mb-4">
-                    <ActiveIcon size={20} className="text-gold" />
-                  </div>
-                  <h3 className="font-display text-lg text-navy mb-2">{active.name}</h3>
-                  <p className="text-[13.5px] text-grey leading-relaxed mb-5">{active.description}</p>
-                  <button
-                    onClick={() => openModal("contact")}
-                    className="w-full justify-center bg-navy text-white font-semibold text-sm rounded-full py-3"
-                  >
-                    Discuter de ce sujet
+                    <X size={14} className="text-white/60" />
                   </button>
                 </div>
+
+                <p className="text-white/65 text-[15.5px] leading-relaxed mb-6 max-w-[620px]">
+                  {active.description}
+                </p>
+
+                {/* Tous les sous-items */}
+                <div className="flex flex-wrap gap-2">
+                  {active.items.map((item) => (
+                    <span
+                      key={item}
+                      className="text-[12.5px] text-white/60 bg-white/[0.05] border border-white/[0.08] rounded-full px-3.5 py-1.5"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
-            )}
+
+              {/* CTA */}
+              <div className="flex flex-col gap-3 md:min-w-[200px]">
+                <button
+                  onClick={() => openModal(active.cta.action)}
+                  className="flex items-center justify-center gap-2 bg-[#D4AF5A] hover:bg-[#E0BB3F] text-black font-semibold text-[14px] rounded-full px-6 py-3.5 transition-colors whitespace-nowrap"
+                >
+                  {active.cta.label}
+                  <ArrowRight size={15} />
+                </button>
+                <button
+                  onClick={() => openModal("contact")}
+                  className="flex items-center justify-center gap-2 text-white/70 hover:text-white border border-white/15 hover:border-white/30 text-[14px] rounded-full px-6 py-3.5 transition-colors whitespace-nowrap"
+                >
+                  En savoir plus
+                </button>
+              </div>
+            </div>
           </div>
-          <p className="text-center text-sm text-grey mt-6">✦ Cliquez sur une expertise pour l&apos;explorer</p>
-        </div>
+        )}
       </div>
     </section>
   );

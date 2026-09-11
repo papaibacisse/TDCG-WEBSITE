@@ -21,31 +21,31 @@ const EXPERTISES = [
   {
     num: "01",
     title: "Transformation digitale",
-    anchor: "#expertise",
+    anchor: "/expertises/strategie-digitale-transformation",
     items: ["Digitalisation des processus", "Stratégie digitale", "Audit de maturité", "Roadmap digitale"],
   },
   {
     num: "02",
     title: "IA & Automatisation",
-    anchor: "#expertise",
+    anchor: "/expertises/ia-automatisation",
     items: ["Audit IA", "Automatisation des processus", "Assistants IA", "Copilotes IA", "Formation & adoption IA"],
   },
   {
     num: "03",
     title: "Marketing & Growth",
-    anchor: "#expertise",
+    anchor: "/expertises/marketing-croissance-digitale",
     items: ["Stratégie marketing", "Acquisition", "SEO", "Social Media", "Performance marketing"],
   },
   {
     num: "04",
     title: "Data, CRM & CX",
-    anchor: "#expertise",
+    anchor: "/expertises/data-crm-experience-client",
     items: ["CRM", "KPI & tableaux de bord", "Data & analyse", "Parcours client", "Fidélisation"],
   },
   {
     num: "05",
     title: "Conseil & Performance",
-    anchor: "#expertise",
+    anchor: "/expertises/conseil-business-technologie",
     items: ["Conseil stratégique", "Organisation & optimisation", "Pilotage", "Gestion de projets"],
   },
 ];

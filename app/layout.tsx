@@ -40,12 +40,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://terangadigitalcons
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Teranga Digital Consulting Group — Transformer vos idées en résultats",
+  title: "Teranga Digital Consulting Group — Cabinet de conseil en transformation digitale et IA en Afrique",
   description:
     "TDCG accompagne entreprises, institutions publiques et startups d'Afrique de l'Ouest dans leur transformation digitale, leur pilotage stratégique et leur développement.",
   openGraph: {
     title: "Teranga Digital Consulting Group",
-    description: "Transformer vos idées en résultats.",
+    description: "Le premier cabinet africain de conseil en transformation digitale et IA pour les entreprises d'Afrique de l'Ouest.",
     url: SITE_URL,
     siteName: "TDCG",
     locale: "fr_SN",

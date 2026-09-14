@@ -24,7 +24,7 @@ export default function Hero() {
       <div className="relative z-[2] max-w-[1240px] mx-auto px-8 grid md:grid-cols-[1.15fr_.85fr] gap-16 items-end">
         <div>
           <h1 className="font-display font-semibold text-[clamp(40px,5.2vw,68px)] leading-[1.05] max-w-[640px]">
-            Transformer vos <em className="italic text-gold font-medium">idées</em> en résultats.
+            Le premier cabinet africain<br />de conseil en <em className="italic text-gold font-medium">transformation digitale</em> et IA.
           </h1>
           <p className="mt-6 text-lg text-white/70 max-w-[480px]">
             Teranga Digital Consulting Group accompagne entreprises, institutions publiques et startups dans leur

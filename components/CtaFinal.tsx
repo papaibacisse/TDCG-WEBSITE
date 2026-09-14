@@ -14,7 +14,7 @@ export default function CtaFinal() {
           <span className="w-6 h-px bg-gold" /> Passons à l&apos;action
         </div>
         <h2 className="font-display text-[clamp(32px,4vw,48px)] max-w-[680px] mx-auto mb-6 text-white leading-tight">
-          Prêt à transformer vos idées en résultats ?
+          Prêt à transformer votre organisation avec TDCG ?
         </h2>
         <p className="text-white/65 max-w-[520px] mx-auto mb-10 text-[16.5px]">
           Échangez gratuitement avec un consultant TDCG et recevez une première analyse de vos enjeux sous 48h.

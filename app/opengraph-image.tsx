@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Teranga Digital Consulting Group — Transformer vos idées en résultats";
+export const alt = "Teranga Digital Consulting Group — Cabinet de conseil en transformation digitale et IA en Afrique";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -48,7 +48,7 @@ export default function OpengraphImage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ color: "#C9A227", fontSize: 24, fontWeight: 700, letterSpacing: 2 }}>TDCG</span>
-            <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 14 }}>Des idées aux résultats</span>
+            <span style={{ color: "rgba(255,255,255,0.55)", fontSize: 14 }}>Conseil Digital &amp; IA en Afrique de l&apos;Ouest</span>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function OpengraphImage() {
             fontFamily: "serif",
           }}
         >
-          Transformer vos idées en résultats.
+          Le premier cabinet africain de conseil en transformation digitale et IA pour les entreprises d'Afrique de l'Ouest.
         </div>
 
         <div

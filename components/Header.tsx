@@ -233,7 +233,7 @@ export default function Header() {
           <span className="w-px self-stretch bg-gold/40" />
           <span className="flex flex-col leading-tight">
             <span className="text-gold tracking-wider">TDCG</span>
-            <span className="font-body font-normal text-[11px] text-white/65">Des idées aux résultats</span>
+            <span className="font-body font-normal text-[11px] text-white/65">Conseil Digital & IA en Afrique</span>
           </span>
         </a>
 

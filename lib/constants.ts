@@ -5,7 +5,7 @@
 export const SITE = {
   name: "Teranga Digital Consulting Group",
   shortName: "TDCG",
-  tagline: "Transformer vos idées en résultats.",
+  tagline: "Le premier cabinet africain de conseil en transformation digitale et IA.",
   domain: "terangadigitalconsultinggroup.com",
   email: "contact@terangadigitalconsultinggroup.com",
   phones: ["+221 77 255 44 22"],

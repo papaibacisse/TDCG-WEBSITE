@@ -10,7 +10,7 @@ import logo from "@/public/logo-tdcg.png";
 import type { ModalName } from "@/lib/ModalContext";
 
 const SIMPLE_NAV = [
-  { href: "#etudes", label: "Études de cas" },
+  { href: "/notre-approche", label: "Notre Approche" },
   { href: "#faq", label: "FAQ" },
   { href: "#roi-simulateur", label: "Simulateur de ROI" },
   { href: "#contact-canaux", label: "Contact" },

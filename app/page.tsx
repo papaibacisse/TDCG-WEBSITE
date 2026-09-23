@@ -5,8 +5,6 @@ import PourquoiNousChoisir from "@/components/PourquoiNousChoisir";
 import ExpertiseSphere from "@/components/ExpertiseSphere";
 import Methodology from "@/components/Methodology";
 import Sectors from "@/components/Sectors";
-import CaseStudies from "@/components/CaseStudies";
-import Testimonials from "@/components/Testimonials";
 import Faq from "@/components/Faq";
 import ROISimulator from "@/components/ROISimulator";
 import CtaFinal from "@/components/CtaFinal";
@@ -24,8 +22,6 @@ export default function HomePage() {
         <ExpertiseSphere />
         <Methodology />
         <Sectors />
-        <CaseStudies />
-        <Testimonials />
         <Faq />
         <ROISimulator />
         <CtaFinal />

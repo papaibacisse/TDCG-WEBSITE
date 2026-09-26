@@ -187,6 +187,129 @@ function DropdownNav({
   );
 }
 
+// ── Menu mobile accordéon ────────────────────────────────────────────────────
+function MobileMenu({
+  openModal,
+  setMobileOpen,
+  handleSectorSelect,
+}: {
+  openModal: (m: Exclude<ModalName, null>) => void;
+  setMobileOpen: (v: boolean) => void;
+  handleSectorSelect: (idx: number) => void;
+}) {
+  const [openSection, setOpenSection] = useState<"expertises" | "secteurs" | null>(null);
+
+  function toggle(section: "expertises" | "secteurs") {
+    setOpenSection((prev) => (prev === section ? null : section));
+  }
+
+  return (
+    <div className="md:hidden absolute top-full inset-x-0 bg-[#080D18] border-b border-white/10 px-6 py-4 flex flex-col max-h-[82vh] overflow-y-auto">
+
+      {/* ─ Expertises accordéon ─ */}
+      <div className="border-b border-white/[0.07]">
+        <button
+          onClick={() => toggle("expertises")}
+          className="w-full flex items-center justify-between py-4 text-left"
+        >
+          <span className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold">Expertises</span>
+          <ChevronDown
+            size={14}
+            className={`text-[#D4AF5A]/60 transition-transform duration-200 ${openSection === "expertises" ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        {openSection === "expertises" && (
+          <div className="pb-4 flex flex-col gap-4">
+            {EXPERTISES.map((exp) => (
+              <div key={exp.num}>
+                <a
+                  href={exp.anchor}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 mb-2"
+                >
+                  <span className="text-[10px] font-mono text-[#D4AF5A]/60">{exp.num}</span>
+                  <span className="text-[14px] font-semibold text-white">{exp.title}</span>
+                </a>
+                <div className="pl-5 flex flex-col gap-1.5">
+                  {exp.items.map((item) => (
+                    <a
+                      key={item}
+                      href={exp.anchor}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-[12.5px] text-white/45 hover:text-white/80 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ─ Secteurs accordéon ─ */}
+      <div className="border-b border-white/[0.07]">
+        <button
+          onClick={() => toggle("secteurs")}
+          className="w-full flex items-center justify-between py-4 text-left"
+        >
+          <span className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold">Secteurs</span>
+          <ChevronDown
+            size={14}
+            className={`text-[#D4AF5A]/60 transition-transform duration-200 ${openSection === "secteurs" ? "rotate-180" : ""}`}
+          />
+        </button>
+
+        {openSection === "secteurs" && (
+          <div className="pb-4 flex flex-col gap-0.5">
+            {SECTORS.map((s, idx) => (
+              <button
+                key={s.name}
+                onClick={() => { handleSectorSelect(idx); setMobileOpen(false); }}
+                className="w-full text-left text-white/70 font-medium py-2 text-[14px] hover:text-white transition-colors"
+              >
+                {s.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ─ Liens simples ─ */}
+      <div className="flex flex-col border-b border-white/[0.07]">
+        {SIMPLE_NAV.map((l) => (
+          <a
+            key={l.href}
+            href={l.href}
+            className="text-white/70 font-medium py-3.5 text-[14px] hover:text-white transition-colors"
+            onClick={() => setMobileOpen(false)}
+          >
+            {l.label}
+          </a>
+        ))}
+      </div>
+
+      {/* ─ CTA ─ */}
+      <div className="flex flex-col gap-2.5 pt-5 pb-2">
+        <button
+          onClick={() => { openModal("contact"); setMobileOpen(false); }}
+          className="bg-gold text-black rounded-full px-6 py-3.5 font-semibold text-[14px] text-center"
+        >
+          Nous contacter
+        </button>
+        <button
+          onClick={() => { openModal("audit"); setMobileOpen(false); }}
+          className="border border-white/20 text-white rounded-full px-6 py-3.5 font-semibold text-[14px] text-center"
+        >
+          Demander un audit
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ── Header principal ─────────────────────────────────────────────────────────
 export default function Header() {
   const { openModal } = useModal();
@@ -313,79 +436,11 @@ export default function Header() {
 
       {/* Menu mobile */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-full inset-x-0 bg-[#080D18] border-b border-white/10 px-6 py-6 flex flex-col gap-0 max-h-[82vh] overflow-y-auto">
-          {/* Expertises mobile */}
-          <div className="mb-5">
-            <p className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold mb-3">Expertises</p>
-            {EXPERTISES.map((exp, i) => (
-              <div key={exp.num} className="mb-4">
-                <a
-                  href={exp.anchor}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2 mb-1.5"
-                >
-                  <span className="text-[10px] font-mono text-[#D4AF5A]/60">{exp.num}</span>
-                  <span className="text-[14px] font-semibold text-white">{exp.title}</span>
-                </a>
-                <div className="pl-6 flex flex-col gap-1">
-                  {exp.items.map((item) => (
-                    <a
-                      key={item}
-                      href={exp.anchor}
-                      onClick={() => setMobileOpen(false)}
-                      className="text-[12.5px] text-white/50 hover:text-white/90"
-                    >
-                      {item}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="h-px bg-white/[0.07] mb-5" />
-
-          {/* Secteurs mobile */}
-          <div className="mb-5">
-            <p className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold mb-3">Secteurs</p>
-            {SECTORS.map((s, idx) => (
-              <button
-                key={s.name}
-                onClick={() => { handleSectorSelect(idx); setMobileOpen(false); }}
-                className="block w-full text-left text-white/75 font-medium py-1.5 text-[14px] hover:text-white"
-              >
-                {s.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="h-px bg-white/[0.07] mb-5" />
-
-          {SIMPLE_NAV.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-white/75 font-medium py-2 text-[14px] hover:text-white"
-              onClick={() => setMobileOpen(false)}
-            >
-              {l.label}
-            </a>
-          ))}
-
-          <button
-            onClick={() => { openModal("contact"); setMobileOpen(false); }}
-            className="mt-5 bg-gold text-black rounded-full px-6 py-3 font-semibold text-sm text-center"
-          >
-            Nous contacter
-          </button>
-
-          <button
-            onClick={() => { openModal("audit"); setMobileOpen(false); }}
-            className="mt-2 border border-white/20 text-white rounded-full px-6 py-3 font-semibold text-sm text-center"
-          >
-            Demander un audit
-          </button>
-        </div>
+        <MobileMenu
+          openModal={openModal}
+          setMobileOpen={setMobileOpen}
+          handleSectorSelect={handleSectorSelect}
+        />
       )}
     </header>
   );

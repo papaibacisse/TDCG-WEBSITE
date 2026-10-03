@@ -171,7 +171,13 @@ export default function ExpertiseSphere() {
               {/* CTA */}
               <div className="flex flex-col gap-3 md:min-w-[200px]">
                 <button
-                  onClick={() => openModal(active.cta.action)}
+                  onClick={() => {
+                    if (active.cta.label === "Simulateur ROI") {
+                      document.getElementById("roi-simulateur")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    } else {
+                      openModal(active.cta.action);
+                    }
+                  }}
                   className="flex items-center justify-center gap-2 bg-[#D4AF5A] hover:bg-[#E0BB3F] text-black font-semibold text-[14px] rounded-full px-6 py-3.5 transition-colors whitespace-nowrap"
                 >
                   {active.cta.label}

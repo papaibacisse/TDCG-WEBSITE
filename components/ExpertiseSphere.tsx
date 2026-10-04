@@ -172,8 +172,16 @@ export default function ExpertiseSphere() {
               <div className="flex flex-col gap-3 md:min-w-[200px]">
                 <button
                   onClick={() => {
-                    if (active.cta.label === "Simulateur ROI") {
-                      document.getElementById("roi-simulateur")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                    if (active.slug === "marketing-croissance-digitale") {
+                      const el = document.getElementById("roi-simulateur");
+                      if (el) {
+                        el.scrollIntoView({ behavior: "smooth", block: "start" });
+                      } else {
+                        // fallback si l'élément n'est pas encore monté
+                        setTimeout(() => {
+                          document.getElementById("roi-simulateur")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }, 100);
+                      }
                     } else {
                       openModal(active.cta.action);
                     }

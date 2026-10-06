@@ -175,12 +175,11 @@ export default function ExpertiseSphere() {
                     if (active.slug === "marketing-croissance-digitale") {
                       const el = document.getElementById("roi-simulateur");
                       if (el) {
+                        // On est sur la homepage — scroll direct
                         el.scrollIntoView({ behavior: "smooth", block: "start" });
                       } else {
-                        // fallback si l'élément n'est pas encore monté
-                        setTimeout(() => {
-                          document.getElementById("roi-simulateur")?.scrollIntoView({ behavior: "smooth", block: "start" });
-                        }, 100);
+                        // On est sur une page expertise — naviguer vers la homepage avec l'ancre
+                        window.location.href = "/#roi-simulateur";
                       }
                     } else {
                       openModal(active.cta.action);

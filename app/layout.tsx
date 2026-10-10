@@ -40,16 +40,37 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://terangadigitalcons
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Teranga Digital Consulting Group — Cabinet de conseil en transformation digitale et IA en Afrique",
+  title: "Cabinet Conseil Transformation Digitale Sénégal | TDCG",
   description:
-    "TDCG accompagne entreprises, institutions publiques et startups d'Afrique de l'Ouest dans leur transformation digitale, leur pilotage stratégique et leur développement.",
+    "TDCG, cabinet de conseil en transformation digitale et IA au Sénégal. Audit digital, stratégie, automatisation pour entreprises d'Afrique de l'Ouest. Réponse sous 48h.",
+  alternates: {
+    canonical: SITE_URL,
+    languages: {
+      "fr": SITE_URL,
+      "x-default": SITE_URL,
+    },
+  },
   openGraph: {
-    title: "Teranga Digital Consulting Group",
+    title: "TDCG — Cabinet de Conseil en Transformation Digitale & IA | Sénégal",
     description: "Le premier cabinet africain de conseil en transformation digitale et IA pour les entreprises d'Afrique de l'Ouest.",
     url: SITE_URL,
-    siteName: "TDCG",
+    siteName: "Teranga Digital Consulting Group",
     locale: "fr_SN",
     type: "website",
+    images: [
+      {
+        url: `${SITE_URL}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Teranga Digital Consulting Group — Cabinet de conseil en transformation digitale au Sénégal",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TDCG — Transformation Digitale & IA | Sénégal",
+    description: "Cabinet de conseil en transformation digitale, IA et performance business en Afrique de l'Ouest.",
+    images: [`${SITE_URL}/og-image.png`],
   },
   icons: {
     icon: "/logo-tdcg.png",
@@ -57,6 +78,17 @@ export const metadata: Metadata = {
   verification: {
     google: "RWNo-dNoq0kDDAAGBS0YanqZ8-Uy7T1YnVKBKM0dK-g",
   },
+  keywords: [
+    "transformation digitale Sénégal",
+    "cabinet conseil digital Sénégal",
+    "consultant IA Afrique de l'Ouest",
+    "audit digital Sénégal",
+    "marketing digital Dakar",
+    "automatisation processus Afrique",
+    "stratégie digitale PME Sénégal",
+    "TDCG",
+    "Teranga Digital Consulting Group",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

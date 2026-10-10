@@ -5,7 +5,13 @@ import { useCookieConsent } from "@/lib/CookieConsentContext";
 import { SITE } from "@/lib/constants";
 import MapEmbed from "./MapEmbed";
 
-const SERVICES_LINKS = ["Audit digital", "Stratégie marketing", "Digitalisation", "Conseil stratégique"];
+const SERVICES_LINKS = [
+  { label: "Audit & Transformation Digitale", href: "/expertises/strategie-digitale-transformation" },
+  { label: "IA & Automatisation", href: "/expertises/ia-automatisation" },
+  { label: "Marketing & Croissance Digitale", href: "/expertises/marketing-croissance-digitale" },
+  { label: "Data, CRM & Expérience Client", href: "/expertises/data-crm-experience-client" },
+  { label: "Conseil Business & Technologie", href: "/expertises/conseil-business-technologie" },
+];
 
 export default function Footer() {
   const { openModal } = useModal();
@@ -29,8 +35,8 @@ export default function Footer() {
             <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Services</h4>
             <ul className="space-y-3">
               {SERVICES_LINKS.map((s) => (
-                <li key={s}>
-                  <a href="#expertise" className="text-sm text-white/55 hover:text-gold transition-colors">{s}</a>
+                <li key={s.href}>
+                  <a href={s.href} className="text-sm text-white/55 hover:text-gold transition-colors">{s.label}</a>
                 </li>
               ))}
             </ul>
@@ -47,20 +53,30 @@ export default function Footer() {
 
           <div id="footer-contact" className="scroll-mt-28">
             <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Contact</h4>
-            <ul className="space-y-3">
-              <li><a href={`mailto:${SITE.email}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.email}</a></li>
-              <li><a href={`tel:${SITE.phones[0].replace(/\s/g, "")}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.phones[0]}</a></li>
-              <li>
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(SITE.address)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white/55 hover:text-gold transition-colors"
-                >
-                  {SITE.address}
-                </a>
-              </li>
-            </ul>
+            <address className="not-italic">
+              <ul className="space-y-3">
+                <li>
+                  <a href={`mailto:${SITE.email}`} className="text-sm text-white/55 hover:text-gold transition-colors">
+                    {SITE.email}
+                  </a>
+                </li>
+                <li>
+                  <a href={`tel:${SITE.phones[0].replace(/\s/g, "")}`} className="text-sm text-white/55 hover:text-gold transition-colors">
+                    {SITE.phones[0]}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href={`https://maps.google.com/?q=${encodeURIComponent(SITE.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-white/55 hover:text-gold transition-colors"
+                  >
+                    {SITE.address}
+                  </a>
+                </li>
+              </ul>
+            </address>
             <div className="mt-4">
               <MapEmbed />
             </div>

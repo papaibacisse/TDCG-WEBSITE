@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import NotreApprochePage from "./NotreApprochePage";
-
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 export const metadata: Metadata = {
   title: "Notre Approche — TDCG | Teranga Digital Consulting Group",
   description: "Découvrez la méthodologie TDCG : un processus rigoureux en 5 étapes pour accompagner les entreprises d'Afrique de l'Ouest dans leur transformation digitale et leur développement.",
@@ -12,5 +12,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <NotreApprochePage />;
+  return (
+  <>
+    <BreadcrumbJsonLd items={[
+      { name: "Accueil", url: "https://terangadigitalconsultinggroup.com" },
+      { name: "Notre Approche", url: "https://terangadigitalconsultinggroup.com/notre-approche" }
+    ]} />
+    <NotreApprochePage />
+  </>
+);
 }

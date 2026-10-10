@@ -39,8 +39,12 @@ export default async function ExpertisePage({
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const expertise = EXPERTISE_DOMAINS.find((e) => e.slug === slug);
-  if (!expertise) notFound();
+  const idx = EXPERTISE_DOMAINS.findIndex((e) => e.slug === slug);
+  if (idx === -1) notFound();
+
+  const expertise = EXPERTISE_DOMAINS[idx]!;
+  const prev = EXPERTISE_DOMAINS[idx - 1] ?? null;
+  const next = EXPERTISE_DOMAINS[idx + 1] ?? null;
 
   return (
     <>
@@ -57,7 +61,7 @@ export default async function ExpertisePage({
         slug={slug}
         serviceItems={[expertise.name]}
       />
-      <ExpertisePageClient slug={slug} />
+      <ExpertisePageClient expertise={expertise} prev={prev} next={next} />
     </>
   );
 }

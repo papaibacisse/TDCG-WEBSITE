@@ -14,6 +14,8 @@ import { OrganizationJsonLd, FaqJsonLd } from "@/components/JsonLd";
 export default function HomePage() {
   return (
     <>
+      <OrganizationJsonLd />
+<FaqJsonLd />
       <Header />
       <main>
         {/* 1. Accroche — qui nous sommes, pour qui, pourquoi */}

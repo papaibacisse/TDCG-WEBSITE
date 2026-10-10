@@ -10,7 +10,7 @@ import Faq from "@/components/Faq";
 import CtaFinal from "@/components/CtaFinal";
 import ContactChannels from "@/components/ContactChannels";
 import Footer from "@/components/Footer";
-
+import { OrganizationJsonLd, FaqJsonLd } from "@/components/JsonLd";
 export default function HomePage() {
   return (
     <>

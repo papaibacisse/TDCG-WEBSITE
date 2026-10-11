@@ -15,7 +15,18 @@ export default function ROISimulator() {
   const [secteurAutre, setSecteurAutre] = useState("");
   const [clients, setClients] = useState("");
   const [revenue, setRevenue] = useState("");
-  const [percent, setPercent] = useState<number | null>(null);
+  const [result, setResult] = useState<{
+    percent: number;
+    gainFcfa: number;
+    economieFcfa: number;
+    roiNet: number;
+  } | null>(null);
+
+  function formatFcfa(n: number): string {
+    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(".0", "")} M FCFA`;
+    if (n >= 1_000) return `${Math.round(n / 1_000)} k FCFA`;
+    return `${Math.round(n)} FCFA`;
+  }
 
   function calculate() {
     const budgetNum = Number(budget) || 0;
@@ -33,10 +44,21 @@ export default function ROISimulator() {
     // croissance en % est grande (échelle logarithmique pour rester lisse).
     const clientBonus = clientsNum > 0
       ? Math.max(-5, Math.min(8, 8 - Math.log10(clientsNum + 1) * 3))
-      : 8; // pas de données clients => on suppose un fort potentiel de départ
+      : 8;
 
-    const raw = Math.round(baseline + budgetBonus + clientBonus);
-    setPercent(Math.max(12, Math.min(58, raw)));
+    const percent = Math.max(12, Math.min(58, Math.round(baseline + budgetBonus + clientBonus)));
+
+    // Gain de revenus projeté : % de croissance appliqué au CA annuel
+    const gainFcfa = revenueNum > 0 ? Math.round(revenueNum * (percent / 100)) : 0;
+
+    // Économies opérationnelles : digitalisation réduit les coûts de process
+    // (estimation conservatrice : 8–15% du budget annuel réinvesti)
+    const economieFcfa = annualBudget > 0 ? Math.round(annualBudget * 0.12) : 0;
+
+    // ROI net = (gains + économies) - investissement annuel
+    const roiNet = gainFcfa + economieFcfa - annualBudget;
+
+    setResult({ percent, gainFcfa, economieFcfa, roiNet });
   }
 
   return (
@@ -130,26 +152,79 @@ export default function ROISimulator() {
           </div>
 
           <div className="flex flex-col border-l border-white/15 pl-10 h-full justify-center">
-            <div className="py-6">
-              <p className="text-white/70 text-[15.5px] leading-relaxed">
-                En optimisant votre stratégie digitale, votre entreprise pourrait générer jusqu&apos;à{" "}
-                <span className="font-display text-gold font-semibold text-[28px] align-middle">
-                  {percent !== null ? `${percent} %` : "— %"}
-                </span>{" "}
-                de prospects supplémentaires.
-              </p>
-              <p className="text-[12.5px] text-white/40 mt-4">
-                Estimation indicative basée sur votre secteur, l&apos;intensité de votre budget marketing par
-                rapport à votre chiffre d&apos;affaires, et votre base clients actuelle. À affiner avec un
-                consultant.
-              </p>
-              <button
-                onClick={() => openModal("contact")}
-                className="mt-6 bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-white font-semibold text-[13.5px] rounded-full px-6 py-3.5 transition-colors"
-              >
-                Échanger avec un consultant
-              </button>
-            </div>
+            {result === null ? (
+              <div className="py-6">
+                <p className="text-white/35 text-[14.5px] leading-relaxed italic">
+                  Renseignez vos données et cliquez sur « Calculer » pour obtenir votre estimation personnalisée.
+                </p>
+                <div className="mt-8 flex flex-col gap-3">
+                  {[
+                    "Revenus supplémentaires projetés",
+                    "Économies opérationnelles estimées",
+                    "ROI net de votre investissement",
+                  ].map((label) => (
+                    <div key={label} className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-lg px-4 py-3">
+                      <span className="text-white/30 text-[13px]">{label}</span>
+                      <span className="text-white/20 font-mono text-[13px]">— FCFA</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="py-6">
+                <div className="mb-6">
+                  <span className="text-white/50 text-[12px] uppercase tracking-[2px] font-semibold">
+                    Potentiel de croissance
+                  </span>
+                  <div className="flex items-baseline gap-2 mt-1">
+                    <span className="font-display text-gold font-semibold text-[52px] leading-none">
+                      +{result.percent}%
+                    </span>
+                    <span className="text-white/50 text-[14px]">de prospects</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 mb-6">
+                  <div className="flex items-center justify-between bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3.5">
+                    <span className="text-white/60 text-[13px]">Revenus supplémentaires</span>
+                    <span className="text-gold font-semibold font-mono text-[14px]">
+                      {result.gainFcfa > 0 ? `+${formatFcfa(result.gainFcfa)}` : "Saisissez votre CA"}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3.5">
+                    <span className="text-white/60 text-[13px]">Économies opérationnelles</span>
+                    <span className="text-[#6AFFB4] font-semibold font-mono text-[14px]">
+                      {result.economieFcfa > 0 ? `+${formatFcfa(result.economieFcfa)}` : "Saisissez votre budget"}
+                    </span>
+                  </div>
+                  <div className={`flex items-center justify-between border rounded-lg px-4 py-3.5 ${result.roiNet >= 0 ? "bg-[#6AFFB4]/[0.06] border-[#6AFFB4]/20" : "bg-white/[0.04] border-white/[0.08]"}`}>
+                    <span className="text-white/60 text-[13px]">ROI net estimé</span>
+                    <span className={`font-semibold font-mono text-[14px] ${result.roiNet >= 0 ? "text-[#6AFFB4]" : "text-white/40"}`}>
+                      {result.gainFcfa > 0 || result.economieFcfa > 0
+                        ? `${result.roiNet >= 0 ? "+" : ""}${formatFcfa(result.roiNet)}`
+                        : "—"}
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-[11.5px] text-white/30 mb-5 leading-relaxed">
+                  Estimation indicative basée sur votre secteur, votre budget et votre CA. À affiner avec un audit TDCG.
+                </p>
+
+                <button
+                  onClick={() => openModal("audit")}
+                  className="w-full flex items-center justify-center gap-2 bg-gold hover:bg-gold-hover text-black font-semibold text-[14px] rounded-full px-6 py-3.5 transition-colors"
+                >
+                  Obtenir un audit personnalisé
+                </button>
+                <button
+                  onClick={() => openModal("contact")}
+                  className="w-full mt-2.5 flex items-center justify-center text-white/60 hover:text-white border border-white/10 hover:border-white/25 text-[13px] rounded-full px-6 py-3 transition-colors"
+                >
+                  Échanger avec un consultant
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

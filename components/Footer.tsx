@@ -40,6 +40,7 @@ export default function Footer() {
             <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Cabinet</h4>
             <ul className="space-y-3">
               <li><a href="/notre-approche" className="text-sm text-white/55 hover:text-gold transition-colors">Notre approche</a></li>
+              <li><a href="/direction" className="text-sm text-white/55 hover:text-gold transition-colors">Mot du DG</a></li>
               <li><a href="#faq" className="text-sm text-white/55 hover:text-gold transition-colors">FAQ</a></li>
               <li><a href="#roi-simulateur" className="text-sm text-white/55 hover:text-gold transition-colors">Simulateur ROI</a></li>
             </ul>

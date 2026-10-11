@@ -20,7 +20,7 @@ export default function Footer() {
               TDCG<span className="text-gold">.</span>
             </a>
             <p className="mt-[18px] text-sm max-w-[280px] text-white/50">
-              Cabinet de conseil en transformation digitale et stratégie, basé à Louga, au service des entreprises et
+              Cabinet de conseil en transformation digitale et stratégie, basé au Sénégal, au service des entreprises et
               institutions d&apos;Afrique de l&apos;Ouest.
             </p>
           </div>

@@ -4,7 +4,7 @@ import { useModal } from "@/lib/ModalContext";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const PROOF_POINTS = [
-  "Cabinet basé à Louga, actif en Afrique de l'Ouest",
+  "Cabinet basé au Sénégal, actif en Afrique de l'Ouest",
   "12 secteurs d'activité couverts",
   "Réponse sous 48h ouvrées garantie",
 ];

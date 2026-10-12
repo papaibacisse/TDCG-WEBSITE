@@ -1,35 +1,143 @@
-import type { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Quote } from "lucide-react";
-import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { ArrowRight, ChevronRight, Quote, X, Send, Mail, Phone, User } from "lucide-react";
+import { useState } from "react";
 
-export const metadata: Metadata = {
-  title: "Mot du Directeur Général — Papa Iba CISSE | TDCG",
-  description:
-    "Papa Iba CISSE, Directeur Général de Teranga Digital Consulting Group, partage sa vision de la transformation digitale en Afrique de l'Ouest et les ambitions de TDCG.",
-  openGraph: {
-    title: "Mot du Directeur Général — TDCG",
-    description:
-      "La vision de Papa Iba CISSE pour la transformation digitale des entreprises africaines.",
-    url: "https://terangadigitalconsultinggroup.com/direction",
-    images: [{ url: "/dg-photo.jpg", width: 614, height: 598, alt: "Papa Iba CISSE — DG TDCG" }],
-  },
-};
+function ContactModal({ onClose }: { onClose: () => void }) {
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://terangadigitalconsultinggroup.com";
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setLoading(true);
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) setSent(true);
+    } catch {}
+    setLoading(false);
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+      {/* Modal */}
+      <div
+        className="relative z-10 w-full max-w-lg bg-[#0B1525] border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-7 py-5 border-b border-white/[0.08]">
+          <div>
+            <h2 className="font-display text-[18px] text-white font-semibold">
+              Nous contacter
+            </h2>
+            <p className="text-white/45 text-[13px] mt-0.5">
+              Notre équipe vous répond sous 24h
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-white/60 hover:text-white transition-colors"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        {sent ? (
+          <div className="px-7 py-12 text-center">
+            <div className="w-14 h-14 rounded-full bg-[#D4AF5A]/15 flex items-center justify-center mx-auto mb-4">
+              <Send size={22} className="text-[#D4AF5A]" />
+            </div>
+            <p className="font-display text-[17px] text-white font-semibold">Message envoyé !</p>
+            <p className="text-white/50 text-[14px] mt-2">
+              Merci pour votre message. Nous vous répondrons dans les plus brefs délais.
+            </p>
+            <button
+              onClick={onClose}
+              className="mt-6 inline-flex items-center gap-2 bg-[#D4AF5A] hover:bg-[#E0BB3F] text-black font-semibold text-[14px] rounded-full px-6 py-3 transition-colors"
+            >
+              Fermer
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="px-7 py-6 space-y-4">
+            {/* Name */}
+            <div className="relative">
+              <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+              <input
+                name="name"
+                required
+                placeholder="Nom complet"
+                className="w-full bg-white/[0.05] border border-white/[0.09] rounded-xl pl-10 pr-4 py-3 text-[14px] text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF5A]/50 transition-colors"
+              />
+            </div>
+            {/* Email */}
+            <div className="relative">
+              <Mail size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+              <input
+                name="email"
+                type="email"
+                required
+                placeholder="Adresse e-mail"
+                className="w-full bg-white/[0.05] border border-white/[0.09] rounded-xl pl-10 pr-4 py-3 text-[14px] text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF5A]/50 transition-colors"
+              />
+            </div>
+            {/* Phone */}
+            <div className="relative">
+              <Phone size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/30" />
+              <input
+                name="phone"
+                type="tel"
+                placeholder="Téléphone (optionnel)"
+                className="w-full bg-white/[0.05] border border-white/[0.09] rounded-xl pl-10 pr-4 py-3 text-[14px] text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF5A]/50 transition-colors"
+              />
+            </div>
+            {/* Message */}
+            <textarea
+              name="message"
+              required
+              rows={4}
+              placeholder="Votre message…"
+              className="w-full bg-white/[0.05] border border-white/[0.09] rounded-xl px-4 py-3 text-[14px] text-white placeholder-white/30 focus:outline-none focus:border-[#D4AF5A]/50 transition-colors resize-none"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full flex items-center justify-center gap-2.5 bg-[#D4AF5A] hover:bg-[#E0BB3F] disabled:opacity-60 text-black font-semibold text-[14.5px] rounded-full py-3.5 transition-colors"
+            >
+              {loading ? "Envoi…" : "Envoyer le message"}
+              {!loading && <Send size={15} />}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function DirectionPage() {
+  const [showContact, setShowContact] = useState(false);
+
   return (
     <>
-      <BreadcrumbJsonLd
-        items={[
-          { name: "Accueil", url: SITE_URL },
-          { name: "Mot du Directeur Général", url: `${SITE_URL}/direction` },
-        ]}
-      />
 
       <main className="min-h-screen bg-[#080D18]">
         {/* HERO BAND */}
@@ -227,18 +335,20 @@ export default function DirectionPage() {
                     Découvrir nos expertises
                     <ArrowRight size={16} />
                   </Link>
-                  <Link
-                    href="/#contact"
+                  <button
+                    onClick={() => setShowContact(true)}
                     className="inline-flex items-center gap-2.5 ml-3 text-white/60 hover:text-white border border-white/15 hover:border-white/30 text-[14px] rounded-full px-7 py-3.5 transition-colors"
                   >
                     Nous contacter
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </section>
       </main>
+
+      {showContact && <ContactModal onClose={() => setShowContact(false)} />}
     </>
   );
 }

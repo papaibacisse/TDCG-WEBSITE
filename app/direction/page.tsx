@@ -134,8 +134,9 @@ export default function DirectionPage() {
                 <div className="flex items-start gap-4 mb-10 p-6 bg-[#D4AF5A]/[0.06] border border-[#D4AF5A]/20 rounded-xl">
                   <Quote size={22} className="text-[#D4AF5A] shrink-0 mt-0.5" />
                   <p className="font-display text-[18px] text-white/90 leading-relaxed italic">
-                    L&apos;Afrique n&apos;a pas besoin de copier les modèles occidentaux. Elle a besoin de
-                    construire les siens — avec rigueur, ambition et ancrage dans ses réalités.
+                    La transformation digitale est la plus grande opportunité de développement
+                    que l&apos;Afrique ait jamais connue. Notre génération a la responsabilité de
+                    la saisir — avec vision, méthode et fierté de ce que nous sommes.
                   </p>
                 </div>
 

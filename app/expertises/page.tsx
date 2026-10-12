@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { EXPERTISE_DOMAINS } from "@/lib/constants";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import ContactModalButton from "@/components/ContactModalButton";
 
 export const metadata: Metadata = {
   title: "Nos Expertises — TDCG | Teranga Digital Consulting Group",
@@ -178,13 +179,7 @@ export default function ExpertisesPage() {
                 vos priorités et construire un plan d'action adapté à votre situation.
               </p>
               <div className="flex flex-wrap gap-3 justify-center">
-                <Link
-                  href="/#contact"
-                  className="flex items-center gap-2 bg-[#D4AF5A] hover:bg-[#E0BB3F] text-black font-semibold text-[15px] rounded-full px-8 py-4 transition-colors"
-                >
-                  Prendre rendez-vous
-                  <ArrowRight size={16} />
-                </Link>
+                <ContactModalButton />
                 <Link
                   href="/#expertise"
                   className="flex items-center gap-2 text-white border border-white/20 hover:border-white/40 text-[15px] rounded-full px-8 py-4 transition-colors"

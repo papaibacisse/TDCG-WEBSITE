@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
 import { EXPERTISE_DOMAINS } from "@/lib/constants";
 import { BreadcrumbJsonLd } from "@/components/JsonLd";
 import ContactModalButton from "@/components/ContactModalButton";

@@ -193,7 +193,7 @@ export default function DirectionPage() {
             <div className="grid md:grid-cols-[380px_1fr] gap-14 lg:gap-20 items-start">
 
               {/* Left — Photo + identity card */}
-              <div className="sticky top-28">
+              <div className="md:sticky md:top-28">
                 {/* Photo */}
                 <div className="relative rounded-2xl overflow-hidden bg-[#0B1F33]">
                   <Image

@@ -3,7 +3,6 @@
 import { useModal } from "@/lib/ModalContext";
 import { useCookieConsent } from "@/lib/CookieConsentContext";
 import { SITE } from "@/lib/constants";
-import MapEmbed from "./MapEmbed";
 
 const SERVICES_LINKS = ["Audit digital", "Stratégie marketing", "Digitalisation", "Conseil stratégique"];
 
@@ -12,74 +11,90 @@ export default function Footer() {
   const { openSettings } = useCookieConsent();
 
   return (
-    <footer className="bg-ink text-white/60 pt-20 pb-8">
+    <footer className="bg-ink text-white/60 pt-12 pb-6">
       <div className="max-w-[1240px] mx-auto px-8">
-        <div className="grid gap-10 pb-[60px] border-b border-white/10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-          <div>
-            <a href="#" className="font-display font-bold text-[19px] text-white">
+        <div className="grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] gap-8 pb-10 border-b border-white/10">
+
+          {/* Brand */}
+          <div className="col-span-2 md:col-span-1">
+            <a href="/" className="font-display font-bold text-[18px] text-white">
               TDCG<span className="text-gold">.</span>
             </a>
-            <p className="mt-[18px] text-sm max-w-[280px] text-white/50">
-              Cabinet de conseil en transformation digitale et stratégie, basé au Sénégal, au service des entreprises et
-              institutions d&apos;Afrique de l&apos;Ouest.
+            <p className="mt-3 text-[13px] max-w-[260px] text-white/45 leading-relaxed">
+              Cabinet de conseil en transformation digitale et IA, basé au Sénégal, au service des entreprises d&apos;Afrique de l&apos;Ouest.
             </p>
+            <div className="mt-4 flex flex-col gap-1.5">
+              <a href={`mailto:${SITE.email}`} className="text-[12.5px] text-white/40 hover:text-gold transition-colors">
+                {SITE.email}
+              </a>
+              <a href={`tel:${SITE.phones[0]?.replace(/\s/g, "")}`} className="text-[12.5px] text-white/40 hover:text-gold transition-colors">
+                {SITE.phones[0]}
+              </a>
+            </div>
           </div>
 
+          {/* Services */}
           <div>
-            <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Services</h4>
-            <ul className="space-y-3">
+            <h4 className="text-[11px] uppercase tracking-widest text-white/70 font-semibold mb-3">Services</h4>
+            <ul className="flex flex-col gap-2">
               {SERVICES_LINKS.map((s) => (
                 <li key={s}>
-                  <a href="#expertise" className="text-sm text-white/55 hover:text-gold transition-colors">{s}</a>
+                  <a href="#expertise" className="text-[13px] text-white/50 hover:text-gold transition-colors">{s}</a>
                 </li>
               ))}
             </ul>
           </div>
 
+          {/* Cabinet */}
           <div>
-            <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Cabinet</h4>
-            <ul className="space-y-3">
-              <li><a href="/notre-approche" className="text-sm text-white/55 hover:text-gold transition-colors">Notre approche</a></li>
-              <li><a href="/direction" className="text-sm text-white/55 hover:text-gold transition-colors">Mot du DG</a></li>
-              <li><a href="#faq" className="text-sm text-white/55 hover:text-gold transition-colors">FAQ</a></li>
-              <li><a href="#roi-simulateur" className="text-sm text-white/55 hover:text-gold transition-colors">Simulateur ROI</a></li>
+            <h4 className="text-[11px] uppercase tracking-widest text-white/70 font-semibold mb-3">Cabinet</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="/notre-approche" className="text-[13px] text-white/50 hover:text-gold transition-colors">Notre approche</a></li>
+              <li><a href="/expertises" className="text-[13px] text-white/50 hover:text-gold transition-colors">Nos expertises</a></li>
+              <li><a href="/direction" className="text-[13px] text-white/50 hover:text-gold transition-colors">Mot du DG</a></li>
+              <li><a href="#faq" className="text-[13px] text-white/50 hover:text-gold transition-colors">FAQ</a></li>
             </ul>
           </div>
 
-          <div id="footer-contact" className="scroll-mt-28">
-            <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Contact</h4>
-            <ul className="space-y-3">
-              <li><a href={`mailto:${SITE.email}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.email}</a></li>
-              <li><a href={`tel:${SITE.phones[0].replace(/\s/g, "")}`} className="text-sm text-white/55 hover:text-gold transition-colors">{SITE.phones[0]}</a></li>
+          {/* Outils */}
+          <div>
+            <h4 className="text-[11px] uppercase tracking-widest text-white/70 font-semibold mb-3">Outils</h4>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#roi-simulateur" className="text-[13px] text-white/50 hover:text-gold transition-colors">Simulateur ROI</a></li>
               <li>
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(SITE.address)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white/55 hover:text-gold transition-colors"
+                <button
+                  onClick={() => openModal("audit")}
+                  className="text-[13px] text-white/50 hover:text-gold transition-colors text-left"
                 >
-                  {SITE.address}
-                </a>
+                  Demander un audit
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => openModal("contact")}
+                  className="text-[13px] text-white/50 hover:text-gold transition-colors text-left"
+                >
+                  Nous contacter
+                </button>
               </li>
             </ul>
-            <div className="mt-4">
-              <MapEmbed />
-            </div>
           </div>
 
+          {/* Légal */}
           <div>
-            <h4 className="text-[13px] uppercase tracking-wider text-white font-semibold mb-5">Légal</h4>
-            <ul className="space-y-3">
-              <li><button onClick={() => openModal("mentions-legales")} className="text-sm text-white/55 hover:text-gold transition-colors">Mentions légales</button></li>
-              <li><button onClick={() => openModal("privacy")} className="text-sm text-white/55 hover:text-gold transition-colors">Politique de confidentialité</button></li>
-              <li><button onClick={openSettings} className="text-sm text-white/55 hover:text-gold transition-colors">Cookies</button></li>
-              <li><button onClick={() => openModal("cgu")} className="text-sm text-white/55 hover:text-gold transition-colors">CGU</button></li>
+            <h4 className="text-[11px] uppercase tracking-widest text-white/70 font-semibold mb-3">Légal</h4>
+            <ul className="flex flex-col gap-2">
+              <li><button onClick={() => openModal("mentions-legales")} className="text-[13px] text-white/50 hover:text-gold transition-colors">Mentions légales</button></li>
+              <li><button onClick={() => openModal("privacy")} className="text-[13px] text-white/50 hover:text-gold transition-colors">Confidentialité</button></li>
+              <li><button onClick={openSettings} className="text-[13px] text-white/50 hover:text-gold transition-colors">Cookies</button></li>
+              <li><button onClick={() => openModal("cgu")} className="text-[13px] text-white/50 hover:text-gold transition-colors">CGU</button></li>
             </ul>
           </div>
         </div>
 
-        <div className="flex justify-between items-center pt-7 text-[13px] text-white/40 flex-wrap gap-3">
-          <span>© 2026 Teranga Digital Consulting Group. Tous droits réservés.</span>
+        <div className="flex flex-wrap justify-between items-center pt-5 gap-3 text-[12px] text-white/30">
+          <span>© 2026 Teranga Digital Consulting Group — Tous droits réservés.</span>
+          <span className="text-white/20">Louga, Sénégal</span>
         </div>
       </div>
     </footer>

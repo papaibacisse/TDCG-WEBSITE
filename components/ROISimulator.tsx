@@ -23,9 +23,15 @@ export default function ROISimulator() {
   } | null>(null);
 
   function formatFcfa(n: number): string {
-    if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(".0", "")} M FCFA`;
-    if (n >= 1_000) return `${Math.round(n / 1_000)} k FCFA`;
-    return `${Math.round(n)} FCFA`;
+    const abs = Math.abs(n);
+    const sign = n < 0 ? "−" : "+";
+    if (abs >= 1_000_000) {
+      const val = abs / 1_000_000;
+      const str = val % 1 === 0 ? val.toFixed(0) : val.toFixed(1);
+      return `${sign}${str} M FCFA`;
+    }
+    if (abs >= 1_000) return `${sign}${Math.round(abs / 1_000)} k FCFA`;
+    return `${sign}${Math.round(abs)} FCFA`;
   }
 
   function calculate() {
@@ -188,20 +194,20 @@ export default function ROISimulator() {
                   <div className="flex items-center justify-between bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3.5">
                     <span className="text-white/60 text-[13px]">Revenus supplémentaires</span>
                     <span className="text-gold font-semibold font-mono text-[14px]">
-                      {result.gainFcfa > 0 ? `+${formatFcfa(result.gainFcfa)}` : "Saisissez votre CA"}
+                      {result.gainFcfa > 0 ? formatFcfa(result.gainFcfa) : "Saisissez votre CA"}
                     </span>
                   </div>
                   <div className="flex items-center justify-between bg-white/[0.04] border border-white/[0.08] rounded-lg px-4 py-3.5">
                     <span className="text-white/60 text-[13px]">Économies opérationnelles</span>
                     <span className="text-[#6AFFB4] font-semibold font-mono text-[14px]">
-                      {result.economieFcfa > 0 ? `+${formatFcfa(result.economieFcfa)}` : "Saisissez votre budget"}
+                      {result.economieFcfa > 0 ? formatFcfa(result.economieFcfa) : "Saisissez votre budget"}
                     </span>
                   </div>
-                  <div className={`flex items-center justify-between border rounded-lg px-4 py-3.5 ${result.roiNet >= 0 ? "bg-[#6AFFB4]/[0.06] border-[#6AFFB4]/20" : "bg-white/[0.04] border-white/[0.08]"}`}>
+                  <div className={`flex items-center justify-between border rounded-lg px-4 py-3.5 ${result.roiNet >= 0 ? "bg-[#6AFFB4]/[0.06] border-[#6AFFB4]/20" : "bg-red-500/[0.06] border-red-500/20"}`}>
                     <span className="text-white/60 text-[13px]">ROI net estimé</span>
-                    <span className={`font-semibold font-mono text-[14px] ${result.roiNet >= 0 ? "text-[#6AFFB4]" : "text-white/40"}`}>
+                    <span className={`font-semibold font-mono text-[14px] ${result.roiNet >= 0 ? "text-[#6AFFB4]" : "text-red-400"}`}>
                       {result.gainFcfa > 0 || result.economieFcfa > 0
-                        ? `${result.roiNet >= 0 ? "+" : ""}${formatFcfa(result.roiNet)}`
+                        ? formatFcfa(result.roiNet)
                         : "—"}
                     </span>
                   </div>

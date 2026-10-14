@@ -1,157 +1,243 @@
 "use client";
 
 import { useModal } from "@/lib/ModalContext";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { useEffect, useRef } from "react";
 
-const PROOF_POINTS = [
-  "Cabinet basé au Sénégal, actif en Afrique de l'Ouest",
-  "12 secteurs d'activité couverts",
-  "Réponse sous 48h ouvrées garantie",
+const EXPERTISE_LINKS = [
+  { label: "Transformation Digitale",       slug: "strategie-digitale-transformation",   num: "01" },
+  { label: "IA & Automatisation",            slug: "ia-automatisation",                   num: "02" },
+  { label: "Marketing & Croissance",         slug: "marketing-croissance-digitale",       num: "03" },
+  { label: "Data, CRM & Expérience client",  slug: "data-crm-experience-client",         num: "04" },
+  { label: "Conseil Stratégique",            slug: "conseil-business-technologie",        num: "05" },
 ];
 
-const EXPERTISE_PILLS = [
-  "Transformation Digitale",
-  "IA & Automatisation",
-  "Marketing & Growth",
-  "Data & CRM",
-  "Conseil Stratégique",
+const METRICS = [
+  { value: "12",   label: "Secteurs couverts" },
+  { value: "5",    label: "Pôles d'expertise" },
+  { value: "48h",  label: "Première réponse" },
+  { value: "100%", label: "Missions sur-mesure" },
 ];
 
 export default function Hero() {
   const { openModal } = useModal();
+  const heroRef = useRef<HTMLElement>(null);
+
+  /* One-time entrance animation */
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    const items = el.querySelectorAll<HTMLElement>("[data-reveal]");
+    items.forEach((item, i) => {
+      item.style.opacity = "0";
+      item.style.transform = "translateY(18px)";
+      const delay = parseInt(item.dataset.reveal ?? "0", 10);
+      setTimeout(() => {
+        item.style.transition = "opacity 0.65s ease, transform 0.65s ease";
+        item.style.opacity = "1";
+        item.style.transform = "translateY(0)";
+      }, delay + i * 40);
+    });
+  }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#080D18] text-white pt-[160px] pb-[120px]">
+    <section
+      ref={heroRef}
+      className="relative overflow-hidden bg-[#080D18] text-white"
+      style={{ minHeight: "100svh", paddingTop: "140px", paddingBottom: "0" }}
+    >
 
-      {/* Fond géométrique premium */}
+      {/* ── Background layer ───────────────────────────── */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Gradient lumineux */}
-        <div className="absolute top-0 right-0 w-[700px] h-[700px] opacity-[0.07]"
-          style={{ background: "radial-gradient(circle at center, #D4AF5A 0%, transparent 65%)" }} />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-[0.04]"
-          style={{ background: "radial-gradient(circle at center, #6AB5FF 0%, transparent 65%)" }} />
+        {/* Soft glow top-right */}
+        <div
+          className="absolute top-[-80px] right-[-120px] w-[640px] h-[640px] rounded-full opacity-[0.055]"
+          style={{ background: "radial-gradient(circle, #D4AF5A 0%, transparent 68%)" }}
+        />
+        {/* Cool blue bottom-left counter-glow */}
+        <div
+          className="absolute bottom-[60px] left-[-100px] w-[480px] h-[480px] rounded-full opacity-[0.03]"
+          style={{ background: "radial-gradient(circle, #4B8FCC 0%, transparent 68%)" }}
+        />
 
-        {/* Grille fine */}
-        <svg className="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#D4AF5A" strokeWidth="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+        {/* Constellation SVG — abstract West-Africa network */}
+        <svg
+          className="absolute right-0 top-0 h-full w-[50%] opacity-[0.11]"
+          viewBox="0 0 600 800"
+          fill="none"
+          aria-hidden="true"
+        >
+          {/* Nodes */}
+          {[
+            [320, 120], [420, 200], [510, 160], [480, 310], [380, 370],
+            [540, 420], [300, 460], [440, 530], [510, 600], [350, 640],
+            [270, 320], [570, 280], [600, 500],
+          ].map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r={i % 3 === 0 ? 2.2 : 1.4} fill="#D4AF5A" />
+          ))}
+          {/* Connections */}
+          {[
+            [320,120, 420,200], [420,200, 510,160], [420,200, 480,310],
+            [510,160, 570,280], [480,310, 380,370], [480,310, 540,420],
+            [570,280, 540,420], [380,370, 300,460], [540,420, 440,530],
+            [440,530, 510,600], [300,460, 350,640], [440,530, 350,640],
+            [270,320, 380,370], [270,320, 300,460], [510,600, 600,500],
+          ].map(([x1,y1,x2,y2], i) => (
+            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#D4AF5A" strokeWidth="0.5" />
+          ))}
         </svg>
 
-        {/* Lignes décoratives */}
-        <svg className="absolute right-0 top-0 h-full w-[45%] opacity-[0.07]" viewBox="0 0 560 700" fill="none">
-          <path d="M500 700 C 480 560, 520 460, 490 360 C 470 290, 530 230, 510 140" stroke="#D4AF5A" strokeWidth="0.8" />
-          <path d="M500 700 C 440 600, 400 530, 420 420 C 430 360, 380 300, 400 210" stroke="#D4AF5A" strokeWidth="0.5" />
-          <path d="M500 700 C 540 570, 560 490, 540 390" stroke="#D4AF5A" strokeWidth="0.4" />
-        </svg>
+        {/* Single vertical rule — editorial spine */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/[0.025] hidden lg:block" />
       </div>
 
+      {/* ── Main content ───────────────────────────────── */}
       <div className="relative z-[2] max-w-[1240px] mx-auto px-8">
 
-        {/* Badge positionnement */}
-        <div className="inline-flex items-center gap-2.5 bg-[#D4AF5A]/10 border border-[#D4AF5A]/20 rounded-full px-4 py-2 mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF5A] animate-pulse" />
-          <span className="font-mono text-[11px] tracking-[2px] uppercase text-[#D4AF5A]">
-            Cabinet de conseil · Sénégal · Afrique de l&apos;Ouest
+        {/* Institutional signature — top line, no pill */}
+        <div data-reveal="0" className="flex items-center gap-3 mb-12">
+          <span className="w-5 h-px bg-[#D4AF5A]/60" />
+          <span className="font-mono text-[10.5px] tracking-[3px] uppercase text-[#D4AF5A]/70 select-none">
+            Cabinet de conseil&nbsp;&nbsp;·&nbsp;&nbsp;Sénégal&nbsp;&nbsp;·&nbsp;&nbsp;Afrique de l&apos;Ouest
           </span>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_380px] gap-16 items-end">
-          {/* Colonne gauche */}
-          <div>
-            <h1 className="font-display font-semibold text-[clamp(38px,5vw,66px)] leading-[1.06] max-w-[680px] mb-6">
-              Le premier cabinet africain de conseil en{" "}
-              <em className="not-italic text-[#D4AF5A]">transformation digitale</em>{" "}
-              et IA pour les entreprises d&apos;Afrique de l&apos;Ouest.
+        {/* Primary grid */}
+        <div className="grid lg:grid-cols-[1fr_auto] gap-x-20 gap-y-12 items-start">
+
+          {/* LEFT — headline + body + CTAs */}
+          <div className="max-w-[720px]">
+            {/* Editorial headline — full width, no word accent inside the line */}
+            <h1 data-reveal="80" className="font-display font-semibold leading-[1.04] mb-8"
+              style={{ fontSize: "clamp(42px, 5.6vw, 78px)" }}>
+              <span className="block text-white">Nous transformons</span>
+              <span className="block text-white">les entreprises africaines</span>
+              <span className="block" style={{ color: "#D4AF5A" }}>grâce au digital et à l&apos;IA.</span>
             </h1>
 
-            <p className="text-white/60 text-[17px] leading-relaxed max-w-[520px] mb-3">
-              Nous accompagnons les dirigeants qui veulent transformer leur organisation — avec la rigueur
-              d&apos;un cabinet international et l&apos;ancrage d&apos;un partenaire local.
+            <p data-reveal="160" className="text-white/55 leading-[1.75] mb-10 max-w-[540px]"
+              style={{ fontSize: "clamp(15px, 1.4vw, 17px)" }}>
+              Nous accompagnons les dirigeants, entreprises et institutions dans leur transformation
+              digitale, l&apos;intégration de l&apos;intelligence artificielle et l&apos;amélioration de leur performance.
+              Une expertise stratégique internationale, un accompagnement ancré dans les réalités africaines.
             </p>
 
-            {/* Proof points */}
-            <div className="flex flex-col gap-2 mb-10">
-              {PROOF_POINTS.map((p) => (
-                <div key={p} className="flex items-center gap-2.5 text-[13.5px] text-white/50">
-                  <CheckCircle2 size={14} className="text-[#D4AF5A]/70 shrink-0" />
-                  {p}
-                </div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <div className="flex flex-wrap gap-3">
+            {/* CTAs */}
+            <div data-reveal="220" className="flex flex-wrap gap-3">
               <button
                 onClick={() => openModal("audit")}
-                className="flex items-center gap-2 bg-[#D4AF5A] hover:bg-[#E0BB3F] text-black font-semibold text-[15px] rounded-full px-8 py-4 transition-colors"
+                className="hero-cta-primary group inline-flex items-center gap-2.5 font-semibold rounded-full transition-all duration-200"
+                style={{ background: "#D4AF5A", color: "#080D18", fontSize: "14.5px", padding: "14px 30px" }}
               >
-                Demander un audit gratuit
-                <ArrowRight size={16} />
+                Demander un audit stratégique
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="group-hover:translate-x-0.5 transition-transform">
+                  <path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
               <a
                 href="/notre-approche"
-                className="flex items-center gap-2 border border-white/20 hover:border-white/40 text-white font-semibold text-[15px] rounded-full px-8 py-4 transition-colors"
+                className="inline-flex items-center gap-2 font-medium rounded-full border transition-all duration-200"
+                style={{ borderColor: "rgba(255,255,255,0.18)", color: "rgba(255,255,255,0.75)", fontSize: "14.5px", padding: "14px 28px" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.4)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(255,255,255,0.18)";
+                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.75)";
+                }}
               >
-                Notre approche
+                Découvrir notre approche
               </a>
             </div>
           </div>
 
-          {/* Colonne droite — expertises pills + metrics */}
-          <div className="flex flex-col gap-6">
-            {/* Pills expertises */}
-            <div>
-              <p className="font-mono text-[10px] tracking-[2px] uppercase text-white/30 mb-3">Nos 5 pôles d&apos;expertise</p>
-              <div className="flex flex-wrap gap-2">
-                {EXPERTISE_PILLS.map((e, i) => (
-                  <a
-                    key={e}
-                    href={`/expertises/${["strategie-digitale-transformation","ia-automatisation","marketing-croissance-digitale","data-crm-experience-client","conseil-business-technologie"][i]}`}
-                    className="text-[12.5px] text-white/60 hover:text-white bg-white/[0.05] hover:bg-white/[0.09] border border-white/[0.08] hover:border-white/20 rounded-full px-3.5 py-1.5 transition-all duration-200"
+          {/* RIGHT — expertise editorial list */}
+          <div data-reveal="100" className="hidden lg:flex flex-col min-w-[260px] pt-1">
+            <p className="text-[10px] tracking-[2.5px] uppercase text-white/25 font-mono mb-5">
+              Nos pôles d&apos;intervention
+            </p>
+            <nav>
+              {EXPERTISE_LINKS.map(({ label, slug, num }) => (
+                <a
+                  key={slug}
+                  href={`/expertises/${slug}`}
+                  className="expertise-row group flex items-center gap-4 py-3.5 border-b border-white/[0.06] last:border-b-0 transition-all duration-200"
+                >
+                  <span className="font-mono text-[10px] text-white/20 group-hover:text-[#D4AF5A] transition-colors w-6 shrink-0">
+                    {num}
+                  </span>
+                  <span className="text-[13.5px] font-medium text-white/50 group-hover:text-white transition-colors">
+                    {label}
+                  </span>
+                  <svg
+                    width="12" height="10" viewBox="0 0 12 10" fill="none"
+                    className="ml-auto opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-200"
                   >
-                    {e}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Séparateur */}
-            <div className="h-px bg-white/[0.07]" />
-
-            {/* Métriques honnêtes */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-5">
-                <div className="font-display text-[30px] font-semibold text-[#D4AF5A]">12</div>
-                <div className="text-[12px] text-white/45 mt-1 leading-tight">Secteurs d&apos;activité couverts</div>
-              </div>
-              <div className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-5">
-                <div className="font-display text-[30px] font-semibold text-[#D4AF5A]">5</div>
-                <div className="text-[12px] text-white/45 mt-1 leading-tight">Pôles d&apos;expertise stratégique</div>
-              </div>
-              <div className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-5">
-                <div className="font-display text-[30px] font-semibold text-[#D4AF5A]">48h</div>
-                <div className="text-[12px] text-white/45 mt-1 leading-tight">Délai de première réponse</div>
-              </div>
-              <div className="bg-white/[0.04] border border-white/[0.07] rounded-xl p-5">
-                <div className="font-display text-[30px] font-semibold text-[#D4AF5A]">100%</div>
-                <div className="text-[12px] text-white/45 mt-1 leading-tight">Missions sur-mesure</div>
-              </div>
-            </div>
-
-            {/* Micro CTA devis */}
+                    <path d="M1 5h10M7 1l4 4-4 4" stroke="#D4AF5A" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              ))}
+            </nav>
             <button
               onClick={() => openModal("devis")}
-              className="w-full text-center text-[13px] text-white/40 hover:text-white/70 transition-colors border border-white/[0.07] rounded-xl py-3"
+              className="mt-6 text-[12px] text-white/30 hover:text-white/60 transition-colors text-left"
             >
-              Obtenir une estimation de prix →
+              Obtenir une estimation →
             </button>
           </div>
         </div>
+
+        {/* ── Metrics strip — full width, bottom of hero ── */}
+        <div
+          data-reveal="300"
+          className="mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.08]"
+        >
+          {METRICS.map(({ value, label }, i) => (
+            <div
+              key={label}
+              className={`py-7 px-2 ${i < METRICS.length - 1 ? "md:border-r border-white/[0.06]" : ""}`}
+            >
+              <div
+                className="font-display font-semibold leading-none mb-1.5"
+                style={{ fontSize: "clamp(26px, 3vw, 38px)", color: "#D4AF5A" }}
+              >
+                {value}
+              </div>
+              <div className="text-[12px] text-white/35 tracking-wide">{label}</div>
+            </div>
+          ))}
+        </div>
       </div>
+
+      {/* ── Sectors ticker ─────────────────────────────── */}
+      <div data-reveal="360" className="relative z-[2] mt-0 overflow-hidden border-t border-white/[0.05] bg-white/[0.018]">
+        <div className="max-w-[1240px] mx-auto px-8 py-3.5 flex items-center gap-8 overflow-x-auto scrollbar-none">
+          <span className="font-mono text-[9.5px] tracking-[2.5px] uppercase text-white/25 shrink-0">
+            Secteurs accompagnés
+          </span>
+          {["Agriculture", "Télécommunications", "ONG & Institutions", "Commerce & Distribution",
+            "Finance", "Santé", "Éducation", "Industrie", "Énergie"].map((s) => (
+            <span
+              key={s}
+              className="text-[12px] text-white/40 shrink-0 hover:text-[#D4AF5A] cursor-default transition-colors"
+            >
+              {s}
+            </span>
+          ))}
+          <a href="#expertise" className="shrink-0 font-mono text-[10px] text-[#D4AF5A]/60 hover:text-[#D4AF5A] transition-colors ml-2">
+            Voir les 12 secteurs →
+          </a>
+        </div>
+      </div>
+
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+        }
+        .hero-cta-primary:hover { background: #E0BB3F !important; }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+      `}</style>
     </section>
   );
 }

@@ -1,96 +1,238 @@
 "use client";
 
-import { useReveal } from "@/lib/useReveal";
-import { Globe2, Target, Users, Zap } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
 
 const DIFFERENTIATORS = [
   {
-    icon: Globe2,
-    color: "text-[#D4AF5A]",
-    bg: "bg-[#D4AF5A]/10",
+    num: "01",
+    color: "#D4AF5A",
     title: "Rigueur internationale",
-    description: "Nos méthodes s'appuient sur les standards des meilleurs cabinets mondiaux (McKinsey, BCG, Accenture) — adaptées aux réalités africaines.",
+    description:
+      "Nos méthodes s'appuient sur les standards des meilleurs cabinets mondiaux — McKinsey, BCG, Accenture — adaptées aux réalités africaines. Pas de copier-coller : une synthèse au service de votre contexte.",
   },
   {
-    icon: Target,
-    color: "text-[#6AB5FF]",
-    bg: "bg-[#6AB5FF]/10",
+    num: "02",
+    color: "#6AB5FF",
     title: "Résultats mesurables",
-    description: "Nous définissons des KPIs dès le départ. Chaque mission est pilotée par des indicateurs concrets. Pas de promesses vagues.",
+    description:
+      "Nous définissons des KPIs dès le cadrage. Chaque mission est pilotée par des indicateurs concrets. Pas de promesses vagues : un engagement chiffré sur l'impact attendu.",
   },
   {
-    icon: Users,
-    color: "text-[#6AFFB4]",
-    bg: "bg-[#6AFFB4]/10",
+    num: "03",
+    color: "#6AFFB4",
     title: "Ancrage local profond",
-    description: "Basés au Sénégal, nous comprenons les contraintes locales : réglementation, contexte culturel, dynamiques de marché. Pas un cabinet étranger.",
+    description:
+      "Basés au Sénégal, nous comprenons les contraintes locales — réglementation, culture business, dynamiques de marché. Nous ne sommes pas un cabinet étranger qui transpose une approche inadaptée.",
   },
   {
-    icon: Zap,
-    color: "text-[#FF9A6A]",
-    bg: "bg-[#FF9A6A]/10",
+    num: "04",
+    color: "#FF9A6A",
     title: "Transfert de compétences",
-    description: "Nous ne créons pas de dépendance. Nous formons vos équipes pour qu'elles deviennent autonomes. C'est notre engagement principal.",
+    description:
+      "Nous ne créons pas de dépendance. Notre objectif est de rendre vos équipes autonomes sur les outils et méthodes que nous déployons ensemble. L'indépendance de votre organisation est notre critère de succès.",
+  },
+];
+
+const TRUST_ITEMS = [
+  {
+    label: "Notre engagement",
+    text: "Un diagnostic honnête avant toute proposition commerciale.",
+  },
+  {
+    label: "Notre promesse",
+    text: "Si nous ne pouvons pas mesurer l'impact, nous le disons avant de commencer.",
+  },
+  {
+    label: "Notre différence",
+    text: "Rigueur internationale. Réalités locales. Résultats concrets.",
   },
 ];
 
 export default function PourquoiNousChoisir() {
-  const ref = useReveal();
+  const sectionRef = useRef<HTMLElement>(null);
+  const [revealed, setRevealed] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <section className="bg-[#0B0F1E] py-[100px]">
-      <div className="max-w-[1240px] mx-auto px-8">
+    <section
+      ref={sectionRef}
+      className="relative bg-[#0B0F1E] py-[110px] overflow-hidden"
+    >
+      {/* Subtle background texture — horizontal lines */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(212,175,90,0.5) 40px)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute right-0 top-0 bottom-0 w-[500px] opacity-[0.04]"
+        style={{ background: "radial-gradient(ellipse at right center, #D4AF5A 0%, transparent 65%)" }}
+      />
 
-        <div className="grid md:grid-cols-2 gap-16 items-end mb-16">
+      <div className="relative z-[2] max-w-[1240px] mx-auto px-8">
+
+        {/* Section header — asymmetric */}
+        <div
+          className="grid lg:grid-cols-[1fr_auto] gap-12 items-end mb-16 transition-all duration-700"
+          style={{
+            opacity: revealed ? 1 : 0,
+            transform: revealed ? "translateY(0)" : "translateY(20px)",
+          }}
+        >
           <div>
-            <div className="inline-flex items-center gap-2.5 font-mono text-xs uppercase tracking-wider text-[#D4AF5A] mb-4">
-              <span className="w-6 h-px bg-[#D4AF5A]" /> Pourquoi TDCG
+            <div className="flex items-center gap-3 mb-4">
+              <span className="w-6 h-px bg-[#D4AF5A]/60" />
+              <span className="font-mono text-[10.5px] tracking-[3px] uppercase text-[#D4AF5A]/70">
+                Pourquoi TDCG
+              </span>
             </div>
-            <h2 className="font-display text-[clamp(28px,3.4vw,44px)] text-white leading-tight">
+            <h2
+              className="font-display font-semibold text-white leading-tight"
+              style={{ fontSize: "clamp(28px, 3.6vw, 46px)" }}
+            >
               Ce qui nous distingue<br />
-              <span className="text-[#D4AF5A]">réellement.</span>
+              <span style={{ color: "#D4AF5A" }}>réellement.</span>
             </h2>
           </div>
-          <p className="text-white/50 text-[16px] leading-relaxed">
-            Beaucoup de cabinets proposent des services similaires. La différence TDCG tient à quatre engagements
-            non négociables que nous tenons sur chaque mission.
+          <p className="text-white/40 text-[15px] leading-relaxed max-w-[380px] lg:pb-1">
+            Beaucoup de cabinets proposent des services similaires. La différence TDCG tient à quatre engagements non négociables que nous tenons sur chaque mission.
           </p>
         </div>
 
-        <div ref={ref} className="reveal grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
-          {DIFFERENTIATORS.map((d) => {
-            const Icon = d.icon;
+        {/* Differentiators — horizontal rows */}
+        <div
+          className="space-y-0 divide-y divide-white/[0.05] mb-12"
+          style={{
+            opacity: revealed ? 1 : 0,
+            transform: revealed ? "translateY(0)" : "translateY(28px)",
+            transition: "opacity 0.7s ease 0.14s, transform 0.7s ease 0.14s",
+          }}
+        >
+          {DIFFERENTIATORS.map((d, i) => {
+            const isHovered = hoveredIndex === i;
             return (
               <div
                 key={d.title}
-                className="group bg-[#0F1526] border border-white/[0.07] hover:border-white/15 rounded-xl p-7 transition-all duration-300 hover:-translate-y-1"
+                className="group relative grid lg:grid-cols-[80px_1fr_1fr] gap-6 py-8 cursor-default transition-all duration-300"
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                style={{
+                  opacity: revealed ? 1 : 0,
+                  transition: `opacity 0.5s ease ${0.18 + i * 0.08}s, transform 0.5s ease ${0.18 + i * 0.08}s`,
+                  transform: revealed ? "translateX(0)" : "translateX(-12px)",
+                }}
               >
-                <div className={`w-11 h-11 rounded-xl ${d.bg} flex items-center justify-center mb-5`}>
-                  <Icon size={22} className={d.color} />
+                {/* Hover background */}
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-xl transition-opacity duration-300"
+                  style={{
+                    background: `linear-gradient(90deg, ${d.color}06 0%, transparent 60%)`,
+                    opacity: isHovered ? 1 : 0,
+                  }}
+                />
+
+                {/* Number + gold bar */}
+                <div className="flex items-start gap-3 relative z-[1]">
+                  <span
+                    className="w-px h-10 shrink-0 transition-all duration-300 mt-1"
+                    style={{ background: isHovered ? d.color : "rgba(255,255,255,0.08)" }}
+                  />
+                  <span
+                    className="font-mono text-[13px] tracking-[2px] font-medium transition-colors duration-300 mt-1"
+                    style={{ color: isHovered ? d.color : "rgba(255,255,255,0.25)" }}
+                  >
+                    {d.num}
+                  </span>
                 </div>
-                <h3 className="text-white font-semibold text-[16px] mb-3 leading-snug">{d.title}</h3>
-                <p className="text-white/45 text-[13.5px] leading-relaxed">{d.description}</p>
+
+                {/* Title */}
+                <div className="relative z-[1]">
+                  <h3
+                    className="font-semibold text-[17px] leading-snug transition-colors duration-300"
+                    style={{ color: isHovered ? "#fff" : "rgba(255,255,255,0.75)" }}
+                  >
+                    {d.title}
+                  </h3>
+                  {/* Animated underline */}
+                  <div
+                    className="h-px mt-2 transition-all duration-400"
+                    style={{
+                      width: isHovered ? "48px" : "0px",
+                      background: d.color,
+                    }}
+                  />
+                </div>
+
+                {/* Description */}
+                <p
+                  className="text-[14px] leading-relaxed relative z-[1] transition-colors duration-300"
+                  style={{ color: isHovered ? "rgba(255,255,255,0.60)" : "rgba(255,255,255,0.38)" }}
+                >
+                  {d.description}
+                </p>
               </div>
             );
           })}
         </div>
 
-        {/* Bande de confiance */}
-        <div className="mt-12 bg-[#0F1526] border border-white/[0.07] rounded-2xl p-8 grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/[0.07]">
-          <div className="py-4 md:py-0 md:px-8 first:pl-0 last:pr-0">
-            <div className="font-mono text-[11px] tracking-[2px] text-white/30 uppercase mb-2">Notre engagement</div>
-            <p className="text-white/70 text-[14px] leading-snug">Un diagnostic honnête avant toute proposition commerciale.</p>
-          </div>
-          <div className="py-4 md:py-0 md:px-8">
-            <div className="font-mono text-[11px] tracking-[2px] text-white/30 uppercase mb-2">Notre promesse</div>
-            <p className="text-white/70 text-[14px] leading-snug">Si nous ne pouvons pas mesurer l&apos;impact, nous le disons avant de commencer.</p>
-          </div>
-          <div className="py-4 md:py-0 md:px-8">
-            <div className="font-mono text-[11px] tracking-[2px] text-white/30 uppercase mb-2">Notre différence</div>
-            <p className="text-white/70 text-[14px] leading-snug">Rigueur internationale. Réalités locales. Résultats concrets.</p>
+        {/* Trust band */}
+        <div
+          className="rounded-2xl overflow-hidden transition-all duration-700"
+          style={{
+            background: "rgba(255,255,255,0.025)",
+            border: "1px solid rgba(255,255,255,0.07)",
+            opacity: revealed ? 1 : 0,
+            transform: revealed ? "translateY(0)" : "translateY(16px)",
+            transition: "opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s",
+          }}
+        >
+          {/* Gold accent line */}
+          <div
+            className="h-px w-full"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(212,175,90,0.4), transparent)" }}
+          />
+          <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/[0.06] px-2">
+            {TRUST_ITEMS.map((item) => (
+              <div key={item.label} className="px-8 py-7">
+                <div className="flex items-center gap-2.5 mb-2.5">
+                  <span className="w-3 h-px bg-[#D4AF5A]/50" />
+                  <span className="font-mono text-[9.5px] tracking-[2.5px] uppercase text-[#D4AF5A]/60">
+                    {item.label}
+                  </span>
+                </div>
+                <p className="text-white/65 text-[13.5px] leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
+
       </div>
+
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          [style*="transition"] { transition: none !important; }
+        }
+      `}</style>
     </section>
   );
 }

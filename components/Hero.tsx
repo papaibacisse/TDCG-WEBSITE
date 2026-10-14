@@ -209,27 +209,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Sectors ticker ─────────────────────────────── */}
-      <div data-reveal="360" className="relative z-[2] mt-0 overflow-hidden border-t border-white/[0.05] bg-white/[0.018]">
-        <div className="max-w-[1240px] mx-auto px-8 py-3.5 flex items-center gap-8 overflow-x-auto scrollbar-none">
-          <span className="font-mono text-[9.5px] tracking-[2.5px] uppercase text-white/25 shrink-0">
-            Secteurs accompagnés
-          </span>
-          {["Agriculture", "Télécommunications", "ONG & Institutions", "Commerce & Distribution",
-            "Finance", "Santé", "Éducation", "Industrie", "Énergie"].map((s) => (
-            <span
-              key={s}
-              className="text-[12px] text-white/40 shrink-0 hover:text-[#D4AF5A] cursor-default transition-colors"
-            >
-              {s}
-            </span>
-          ))}
-          <a href="#expertise" className="shrink-0 font-mono text-[10px] text-[#D4AF5A]/60 hover:text-[#D4AF5A] transition-colors ml-2">
-            Voir les 12 secteurs →
-          </a>
-        </div>
-      </div>
-
       <style>{`
         @media (prefers-reduced-motion: reduce) {
           [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }

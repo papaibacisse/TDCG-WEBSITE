@@ -94,7 +94,7 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-between items-center pt-5 gap-3 text-[12px] text-white/30">
           <span>© 2026 Teranga Digital Consulting Group — Tous droits réservés.</span>
-          <span className="text-white/20">Louga, Sénégal</span>
+          <span className="text-white/20">Sénégal</span>
         </div>
       </div>
     </footer>

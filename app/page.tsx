@@ -7,7 +7,6 @@ import ExpertiseSphere from "@/components/ExpertiseSphere";
 import Sectors from "@/components/Sectors";
 import ROISimulator from "@/components/ROISimulator";
 import Faq from "@/components/Faq";
-import CtaFinal from "@/components/CtaFinal";
 import ContactChannels from "@/components/ContactChannels";
 import Footer from "@/components/Footer";
 import { OrganizationJsonLd, FaqJsonLd } from "@/components/JsonLd";
@@ -36,16 +35,13 @@ export default function HomePage() {
         {/* 6. Pour qui — secteurs d'activité */}
         <Sectors />
 
-        {/* 7. Outil de conversion — simulateur ROI (ici = plus de leads) */}
-        <ROISimulator />
-
-        {/* 8. Objections — FAQ */}
+        {/* 7. Objections — FAQ */}
         <Faq />
 
-        {/* 9. CTA final */}
-        <CtaFinal />
+        {/* 8. Outil de conversion — simulateur ROI */}
+        <ROISimulator />
 
-        {/* 10. Canaux de contact */}
+        {/* 9. Canaux de contact */}
         <ContactChannels />
       </main>
       <Footer />

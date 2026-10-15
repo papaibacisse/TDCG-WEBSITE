@@ -148,18 +148,18 @@ export default function DirectionPage() {
               <div className="grid md:grid-cols-[420px_1fr]">
 
                 {/* LEFT — large photo */}
-                <div className="relative bg-[#0a0f1e]">
+                <div className="relative bg-[#0a0f1e] flex">
                   <Image
                     src="/dg-photo-new.jpg"
                     alt="Papa Iba CISSE — Directeur Général TDCG"
                     width={900}
-                    height={900}
-                    className="w-full h-full object-cover object-top"
-                    style={{ minHeight: "520px", maxHeight: "640px" }}
+                    height={1200}
+                    className="w-full object-cover object-top"
+                    style={{ display: "block" }}
                     priority
                   />
                   {/* Bottom gradient overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(8,13,24,0.7) 0%, transparent 100%)" }} />
+                  <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(8,13,24,0.5) 0%, transparent 100%)" }} />
                 </div>
 
                 {/* RIGHT — identity + quote + letter */}

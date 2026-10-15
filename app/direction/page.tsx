@@ -148,13 +148,12 @@ export default function DirectionPage() {
               <div className="grid md:grid-cols-[420px_1fr]">
 
                 {/* LEFT — large photo */}
-                <div className="relative bg-[#0a0f1e] flex">
+                <div className="relative bg-[#0a0f1e]" style={{ minHeight: "600px" }}>
                   <Image
                     src="/dg-photo-new.jpg"
                     alt="Papa Iba CISSE — Directeur Général TDCG"
-                    width={900}
-                    height={1200}
-                    className="w-full object-cover object-top"
+                    fill
+                    className="object-cover object-top"
                     style={{ display: "block" }}
                     priority
                   />

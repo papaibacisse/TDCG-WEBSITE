@@ -351,13 +351,8 @@ export default function Header() {
       <nav className="flex items-center gap-8 max-w-[1240px] mx-auto px-8 py-4 relative">
 
         {/* Logo */}
-        <a href="/" className="flex items-center gap-3.5 font-display font-bold text-[20px] text-white tracking-wide shrink-0">
-          <Image src={logo} alt="TDCG - Teranga Digital Consulting Group" className="h-[46px] w-auto" priority />
-          <span className="w-px self-stretch bg-gold/40" />
-          <span className="flex flex-col leading-tight">
-            <span className="text-gold tracking-wider">TDCG</span>
-            <span className="font-body font-normal text-[11px] text-white/65">Conseil Digital & IA en Afrique</span>
-          </span>
+        <a href="/" className="flex items-center shrink-0">
+          <Image src={logo} alt="TDCG - Teranga Digital Consulting Group" className="h-[52px] w-auto" priority />
         </a>
 
         {/* Nav desktop */}

@@ -43,7 +43,7 @@ export default function Hero() {
     <section
       ref={heroRef}
       className="relative overflow-hidden bg-[#080D18] text-white"
-      style={{ minHeight: "100svh", paddingTop: "140px", paddingBottom: "0" }}
+      style={{ minHeight: "100svh", paddingTop: "110px", paddingBottom: "0" }}
     >
 
       {/* ── Background layer ───────────────────────────── */}
@@ -94,7 +94,7 @@ export default function Hero() {
       <div className="relative z-[2] max-w-[1240px] mx-auto px-8">
 
         {/* Institutional signature — top line, no pill */}
-        <div data-reveal="0" className="flex items-center gap-3 mb-12">
+        <div data-reveal="0" className="flex items-center gap-3 mb-6">
           <span className="w-5 h-px bg-[#D4AF5A]/60" />
           <span className="font-mono text-[10.5px] tracking-[3px] uppercase text-[#D4AF5A]/70 select-none">
             Cabinet de conseil&nbsp;&nbsp;·&nbsp;&nbsp;Sénégal&nbsp;&nbsp;·&nbsp;&nbsp;Afrique de l&apos;Ouest
@@ -107,14 +107,14 @@ export default function Hero() {
           {/* LEFT — headline + body + CTAs */}
           <div className="max-w-[720px]">
             {/* Editorial headline — full width, no word accent inside the line */}
-            <h1 data-reveal="80" className="font-display font-semibold leading-[1.04] mb-8"
-              style={{ fontSize: "clamp(42px, 5.6vw, 78px)" }}>
+            <h1 data-reveal="80" className="font-display font-semibold leading-[1.08] mb-5"
+              style={{ fontSize: "clamp(34px, 4.2vw, 58px)" }}>
               <span className="block text-white">Nous transformons</span>
               <span className="block text-white">les entreprises africaines</span>
               <span className="block" style={{ color: "#D4AF5A" }}>grâce au digital et à l&apos;IA.</span>
             </h1>
 
-            <p data-reveal="160" className="text-white/55 leading-[1.75] mb-10 max-w-[540px]"
+            <p data-reveal="160" className="text-white/55 leading-[1.7] mb-7 max-w-[540px]"
               style={{ fontSize: "clamp(15px, 1.4vw, 17px)" }}>
               Nous accompagnons les dirigeants, entreprises et institutions dans leur transformation
               digitale, l&apos;intégration de l&apos;intelligence artificielle et l&apos;amélioration de leur performance.

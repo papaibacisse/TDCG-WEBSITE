@@ -350,7 +350,7 @@ export default function Header() {
         </a>
 
         {/* Nav desktop */}
-        <ul className="hidden md:flex items-center gap-7">
+        <ul className="hidden md:flex items-center gap-7 flex-1 justify-center">
 
           {/* Expertises → Mega-menu */}
           <li
@@ -397,7 +397,7 @@ export default function Header() {
         </ul>
 
         {/* CTA desktop */}
-        <div className="hidden md:flex items-center gap-3 ml-auto shrink-0">
+        <div className="hidden md:flex items-center gap-3 shrink-0">
           <button
             onClick={() => openModal("contact")}
             className="bg-gold hover:bg-gold-hover text-black text-[14.5px] font-semibold rounded-full px-7 py-3.5 transition-colors"

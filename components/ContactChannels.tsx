@@ -131,7 +131,7 @@ export default function ContactChannels() {
               channel={ch}
               index={i}
               revealed={revealed}
-              onModalOpen={() => openModal(ch.cta!)}
+              onModalOpen={ch.cta ? () => openModal(ch.cta!) : () => {}}
             />
           ))}
         </div>

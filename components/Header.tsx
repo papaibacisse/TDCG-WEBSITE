@@ -299,12 +299,6 @@ function MobileMenu({
         >
           Nous contacter
         </button>
-        <button
-          onClick={() => { openModal("audit"); setMobileOpen(false); }}
-          className="border border-white/20 text-white rounded-full px-6 py-3.5 font-semibold text-[14px] text-center"
-        >
-          Demander un audit
-        </button>
       </div>
     </div>
   );
@@ -404,12 +398,6 @@ export default function Header() {
 
         {/* CTA desktop */}
         <div className="hidden md:flex items-center gap-3 ml-auto shrink-0">
-          <button
-            onClick={() => openModal("audit")}
-            className="text-white border border-white/28 hover:border-gold hover:bg-gold-soft text-[14.5px] font-semibold rounded-full px-7 py-3.5 transition-colors"
-          >
-            Demander un audit
-          </button>
           <button
             onClick={() => openModal("contact")}
             className="bg-gold hover:bg-gold-hover text-black text-[14.5px] font-semibold rounded-full px-7 py-3.5 transition-colors"

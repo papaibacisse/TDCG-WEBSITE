@@ -346,7 +346,7 @@ export default function Header() {
 
         {/* Logo */}
         <a href="/" className="flex items-center shrink-0">
-          <Image src={logo} alt="TDCG - Teranga Digital Consulting Group" className="h-[52px] w-auto" priority />
+          <Image src={logo} alt="TDCG - Teranga Digital Consulting Group" className="h-[64px] md:h-[80px] w-auto" priority />
         </a>
 
         {/* Nav desktop */}

@@ -3,6 +3,19 @@
 import { useModal } from "@/lib/ModalContext";
 import { useEffect, useRef } from "react";
 
+const SECTORS_PREVIEW = [
+  "Administration publique",
+  "Finance & Banque",
+  "Santé",
+  "Agriculture",
+  "Télécommunications",
+  "ONG & Institutions",
+  "Commerce & Distribution",
+  "Startups",
+  "Éducation",
+  "Industrie",
+];
+
 const EXPERTISE_LINKS = [
   { label: "Transformation Digitale",       slug: "strategie-digitale-transformation",   num: "01" },
   { label: "IA & Automatisation",            slug: "ia-automatisation",                   num: "02" },
@@ -190,16 +203,16 @@ export default function Hero() {
         {/* ── Metrics strip — full width, bottom of hero ── */}
         <div
           data-reveal="300"
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.08]"
+          className="mt-10 grid grid-cols-2 md:grid-cols-4 border-t border-white/[0.08]"
         >
           {METRICS.map(({ value, label }, i) => (
             <div
               key={label}
-              className={`py-7 px-2 ${i < METRICS.length - 1 ? "md:border-r border-white/[0.06]" : ""}`}
+              className={`py-5 px-2 ${i < METRICS.length - 1 ? "md:border-r border-white/[0.06]" : ""}`}
             >
               <div
                 className="font-display font-semibold leading-none mb-1.5"
-                style={{ fontSize: "clamp(26px, 3vw, 38px)", color: "#D4AF5A" }}
+                style={{ fontSize: "clamp(24px, 2.8vw, 36px)", color: "#D4AF5A" }}
               >
                 {value}
               </div>
@@ -207,15 +220,44 @@ export default function Hero() {
             </div>
           ))}
         </div>
+
+        {/* ── Secteurs accompagnés — marquee ── */}
+        <div
+          data-reveal="380"
+          className="border-t border-white/[0.06] py-4 -mx-8 px-8 overflow-hidden"
+        >
+          <div className="flex items-center gap-8">
+            <span className="font-mono text-[10px] uppercase tracking-[2.5px] text-white/30 shrink-0 whitespace-nowrap">
+              Secteurs accompagnés
+            </span>
+            <div className="flex-1 overflow-hidden">
+              <div className="flex gap-6 w-max" style={{ animation: "marquee 28s linear infinite" }}>
+                {[...SECTORS_PREVIEW, ...SECTORS_PREVIEW].map((s, i) => (
+                  <span
+                    key={i}
+                    className="text-[12.5px] font-medium text-white/40 whitespace-nowrap px-3 py-1 rounded-full border border-white/[0.07]"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <style>{`
         @media (prefers-reduced-motion: reduce) {
           [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+          .marquee-track { animation: none !important; }
         }
         .hero-cta-primary:hover { background: #E0BB3F !important; }
         .scrollbar-none::-webkit-scrollbar { display: none; }
         .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
       `}</style>
     </section>
   );

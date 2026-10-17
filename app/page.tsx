@@ -1,6 +1,5 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
 import ProblemsSection from "@/components/ProblemsSection";
 import PourquoiNousChoisir from "@/components/PourquoiNousChoisir";
 import ExpertiseSphere from "@/components/ExpertiseSphere";
@@ -19,9 +18,6 @@ export default function HomePage() {
       <main>
         {/* 1. Accroche — qui nous sommes, pour qui, pourquoi */}
         <Hero />
-
-        {/* 2. Preuve sociale légère — secteurs couverts */}
-        <TrustBar />
 
         {/* 3. Connexion émotionnelle — les défis que vit le prospect */}
         <ProblemsSection />

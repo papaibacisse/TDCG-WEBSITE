@@ -112,7 +112,7 @@ export default function DevisModal() {
         </div>
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
           Email professionnel*
-          <input name="email" type="email" required placeholder="papaiba@votre-entreprise.sn" className={inputClass} />
+          <input name="email" type="email" required placeholder="nom@entreprise.com" className={inputClass} />
         </label>
 
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">

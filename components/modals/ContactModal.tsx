@@ -89,7 +89,7 @@ export default function ContactModal() {
               name="nom"
               type="text"
               required
-              placeholder="Papa Iba Cisse"
+              placeholder="Prénom et Nom"
               className="bg-white/5 border border-white/15 rounded-sm px-4 py-3.5 text-white placeholder-white/35 text-[14.5px] focus:outline-none focus:border-gold focus:bg-white/[0.08]"
             />
           </label>

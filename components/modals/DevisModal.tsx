@@ -103,11 +103,11 @@ export default function DevisModal() {
         <div className="grid grid-cols-2 gap-4">
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Prénom*
-            <input name="prenom" required placeholder="Papa Iba" className={inputClass} />
+            <input name="prenom" required placeholder="Prénom" className={inputClass} />
           </label>
           <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">
             Nom*
-            <input name="nomfamille" required placeholder="Cisse" className={inputClass} />
+            <input name="nomfamille" required placeholder="Nom" className={inputClass} />
           </label>
         </div>
         <label className="flex flex-col gap-2 text-[13.5px] font-semibold text-white/85">

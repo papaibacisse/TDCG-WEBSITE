@@ -12,8 +12,35 @@ import type { ModalName } from "@/lib/ModalContext";
 const SIMPLE_NAV = [
   { href: "/notre-approche", label: "Notre Approche" },
   { href: "#faq", label: "FAQ" },
-  { href: "#roi-simulateur", label: "Simulateur de ROI" },
   { href: "#contact-canaux", label: "Contact" },
+];
+
+const OUTILS_NAV = [
+  {
+    href: "/outils-intelligents",
+    label: "Vue d'ensemble",
+    desc: "Les 4 outils intelligents TDCG",
+  },
+  {
+    href: "/outils-intelligents/diagnostic",
+    label: "Diagnostic digital",
+    desc: "Évaluez votre maturité en 16 questions",
+  },
+  {
+    href: "/outils-intelligents/simulateur-roi",
+    label: "Simulateur de ROI",
+    desc: "Calculez le ROI de vos projets digitaux",
+  },
+  {
+    href: "/outils-intelligents/radar-visibilite-ia",
+    label: "Radar Visibilité IA",
+    desc: "Votre présence dans ChatGPT, Gemini…",
+  },
+  {
+    href: "/outils-intelligents/growth-partner",
+    label: "Growth Partner",
+    desc: "Espace de pilotage clients accompagnés",
+  },
 ];
 
 // ── Données du mega-menu Expertises ─────────────────────────────────────────
@@ -187,6 +214,71 @@ function DropdownNav({
   );
 }
 
+// ── Dropdown Outils intelligents ─────────────────────────────────────────────
+function OutilsDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  return (
+    <li ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        onMouseEnter={() => setOpen(true)}
+        aria-expanded={open}
+        className="flex items-center gap-1.5 text-[14.5px] font-medium text-white/85 hover:text-white relative group"
+      >
+        Outils
+        <ChevronDown size={14} className={`text-gold/70 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+        <span className={`absolute left-0 -bottom-0.5 h-px bg-gold transition-all duration-300 ${open ? "w-full" : "w-0 group-hover:w-full"}`} />
+      </button>
+
+      {open && (
+        <div
+          className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-72 bg-[#0F1C2E] border border-gold/20 rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.5)] py-2 z-[1100]"
+          onMouseLeave={() => setOpen(false)}
+        >
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF5A]/30 to-transparent mb-2" />
+          <a
+            href={OUTILS_NAV[0].href}
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-3 px-4 py-2.5 text-[13px] text-[#D4AF5A] hover:bg-[#D4AF5A]/08 transition-colors font-semibold"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 shrink-0">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" />
+            </svg>
+            {OUTILS_NAV[0].label}
+          </a>
+          <div className="h-px mx-4 bg-white/[0.05] mb-1" />
+          {OUTILS_NAV.slice(1).map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className="flex flex-col px-4 py-2.5 hover:bg-[#D4AF5A]/06 transition-colors group/item"
+            >
+              <span className="text-[13px] font-medium text-white/85 group-hover/item:text-white transition-colors">
+                {item.label}
+              </span>
+              <span className="text-[11.5px] text-white/35 group-hover/item:text-white/50 transition-colors mt-0.5">
+                {item.desc}
+              </span>
+            </a>
+          ))}
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[#D4AF5A]/20 to-transparent mt-2" />
+        </div>
+      )}
+    </li>
+  );
+}
+
 // ── Menu mobile accordéon ────────────────────────────────────────────────────
 function MobileMenu({
   openModal,
@@ -197,9 +289,9 @@ function MobileMenu({
   setMobileOpen: (v: boolean) => void;
   handleSectorSelect: (idx: number) => void;
 }) {
-  const [openSection, setOpenSection] = useState<"expertises" | "secteurs" | null>(null);
+  const [openSection, setOpenSection] = useState<"expertises" | "secteurs" | "outils" | null>(null);
 
-  function toggle(section: "expertises" | "secteurs") {
+  function toggle(section: "expertises" | "secteurs" | "outils") {
     setOpenSection((prev) => (prev === section ? null : section));
   }
 
@@ -272,6 +364,37 @@ function MobileMenu({
               >
                 {s.name}
               </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ─ Outils intelligents accordéon ─ */}
+      <div className="border-b border-white/[0.07]">
+        <button
+          onClick={() => toggle("outils")}
+          className="w-full flex items-center justify-between py-4 text-left"
+        >
+          <span className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold">Outils intelligents</span>
+          <ChevronDown
+            size={14}
+            className={`text-[#D4AF5A]/60 transition-transform duration-200 ${openSection === "outils" ? "rotate-180" : ""}`}
+          />
+        </button>
+        {openSection === "outils" && (
+          <div className="pb-4 flex flex-col gap-1">
+            {OUTILS_NAV.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="flex flex-col py-2.5 group/item"
+              >
+                <span className="text-[14px] font-medium text-white/80 group-hover/item:text-white transition-colors">
+                  {item.label}
+                </span>
+                <span className="text-[11.5px] text-white/35 mt-0.5">{item.desc}</span>
+              </a>
             ))}
           </div>
         )}
@@ -385,6 +508,9 @@ export default function Header() {
             items={SECTORS.map((s) => ({ name: s.name }))}
             onSelect={handleSectorSelect}
           />
+
+          {/* Outils intelligents */}
+          <OutilsDropdown />
 
           {SIMPLE_NAV.map((l) => (
             <li key={l.href}>

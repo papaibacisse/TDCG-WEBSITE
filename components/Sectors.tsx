@@ -62,6 +62,12 @@ export default function Sectors() {
     return () => obs.disconnect();
   }, []);
 
+  // Abréviations pour les noms trop longs dans la roue
+  const LABEL_OVERRIDES: Record<string, string[]> = {
+    "Administration publique": ["Admin.", "Publique"],
+    "Télécommunications": ["Télécom-", "munications"],
+  };
+
   const N = SECTORS.length; // 12
   const GAP = 2; // degrés entre chaque segment
   const SLICE = 360 / N - GAP; // ~28°
@@ -244,26 +250,45 @@ export default function Sectors() {
                       fill="none"
                     />
 
-                    {/* Nom du secteur en arc — lisible depuis l'extérieur */}
-                    <text
-                      x={lp.x}
-                      y={lp.y}
-                      textAnchor="middle"
-                      dominantBaseline="middle"
-                      transform={`rotate(${textRotate}, ${lp.x}, ${lp.y})`}
-                      style={{
-                        fontSize: isMobile ? 7.5 : 9.5,
-                        fontFamily: "Inter, sans-serif",
-                        fontWeight: isHov ? 700 : 500,
-                        fill: isHov ? "#ffffff" : "rgba(255,255,255,0.55)",
-                        letterSpacing: "0.05em",
-                        textTransform: "uppercase",
-                        transition: "fill 0.25s ease",
-                        pointerEvents: "none",
-                      }}
-                    >
-                      {sector.name}
-                    </text>
+                    {/* Nom du secteur — 1 ou 2 lignes selon la longueur */}
+                    {(() => {
+                      const lines = LABEL_OVERRIDES[sector.name] ?? [sector.name];
+                      const isLong = lines.length > 1;
+                      const baseFontSize = isMobile ? 7 : 9;
+                      const fontSize = isLong ? baseFontSize * 0.85 : baseFontSize;
+                      const lineHeight = fontSize * 1.35;
+                      const offsetY = isLong ? -lineHeight / 2 : 0;
+
+                      return (
+                        <text
+                          x={lp.x}
+                          y={lp.y}
+                          textAnchor="middle"
+                          transform={`rotate(${textRotate}, ${lp.x}, ${lp.y})`}
+                          style={{
+                            fontSize,
+                            fontFamily: "Inter, sans-serif",
+                            fontWeight: isHov ? 700 : 500,
+                            fill: isHov ? "#ffffff" : "rgba(255,255,255,0.55)",
+                            letterSpacing: isLong ? "0.03em" : "0.05em",
+                            textTransform: "uppercase",
+                            transition: "fill 0.25s ease",
+                            pointerEvents: "none",
+                          }}
+                        >
+                          {lines.map((line, li) => (
+                            <tspan
+                              key={li}
+                              x={lp.x}
+                              dy={li === 0 ? offsetY : lineHeight}
+                              dominantBaseline="middle"
+                            >
+                              {line}
+                            </tspan>
+                          ))}
+                        </text>
+                      );
+                    })()}
                   </g>
                 );
               })}

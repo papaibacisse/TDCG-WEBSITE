@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Menu, ChevronDown, ArrowRight } from "lucide-react";
 import { useModal } from "@/lib/ModalContext";
@@ -92,9 +92,8 @@ function ExpertiseMegaMenu({
   return (
     <div
       className="absolute top-full left-0 right-0 mt-0 z-[1100] px-8"
-      onMouseLeave={onClose}
     >
-      {/* Petit pont invisible pour éviter la fermeture entre le bouton et le panel */}
+      {/* Espace invisible pour éviter un gap entre le bouton et le panel */}
       <div className="h-3 w-full" />
       <div
         className="
@@ -434,16 +433,6 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const expertiseRef = useRef<HTMLLIElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const openMega = useCallback(() => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setMegaOpen(true);
-  }, []);
-
-  const closeMega = useCallback(() => {
-    closeTimer.current = setTimeout(() => setMegaOpen(false), 120);
-  }, []);
 
   // Fermer si clic en dehors
   useEffect(() => {
@@ -479,8 +468,6 @@ export default function Header() {
           <li
             ref={expertiseRef}
             className="static"
-            onMouseEnter={openMega}
-            onMouseLeave={closeMega}
           >
             <button
               onClick={() => setMegaOpen((v) => !v)}

@@ -4,7 +4,6 @@ import ProblemsSection from "@/components/ProblemsSection";
 import PourquoiNousChoisir from "@/components/PourquoiNousChoisir";
 import ExpertiseSphere from "@/components/ExpertiseSphere";
 import Sectors from "@/components/Sectors";
-import ROISimulator from "@/components/ROISimulator";
 import Faq from "@/components/Faq";
 import ContactChannels from "@/components/ContactChannels";
 import Footer from "@/components/Footer";
@@ -33,9 +32,6 @@ export default function HomePage() {
 
         {/* 7. Objections — FAQ */}
         <Faq />
-
-        {/* 8. Outil de conversion — simulateur ROI */}
-        <ROISimulator />
 
         {/* 9. Canaux de contact */}
         <ContactChannels />

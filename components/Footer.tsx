@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useModal } from "@/lib/ModalContext";
 import { useCookieConsent } from "@/lib/CookieConsentContext";
 import { SITE } from "@/lib/constants";
@@ -17,8 +18,14 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <a href="/" className="font-display font-bold text-[18px] text-white">
-              TDCG<span className="text-gold">.</span>
+            <a href="/" className="inline-block">
+              <Image
+                src="/logo-tdcg.png"
+                alt="TDCG – Teranga Digital Consulting Group"
+                width={110}
+                height={44}
+                className="object-contain"
+              />
             </a>
             <p className="mt-3 text-[13px] max-w-[260px] text-white/45 leading-relaxed">
               Cabinet de conseil en transformation digitale et IA, basé au Sénégal, au service des entreprises d&apos;Afrique de l&apos;Ouest.

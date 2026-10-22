@@ -31,9 +31,9 @@ export default function MentionsLegalesModal() {
           <br />
           Forme juridique : Société Unipersonnelle à Responsabilité Limitée (SUARL)
           <br />
-          Numéro RCCM : <em className="text-navy/60">[à compléter]</em>
+          Numéro RCCM : <strong className="text-navy">SN.LGA.2026.A.1</strong>
           <br />
-          Numéro NINEA : <em className="text-navy/60">[à compléter]</em>
+          Numéro NINEA : <strong className="text-navy">013468039</strong>
           <br />
           Siège social : {SITE.address}
           <br />
@@ -66,10 +66,6 @@ export default function MentionsLegalesModal() {
           <strong className="text-navy">{SITE.email}</strong>.
         </Section>
 
-        <p className="text-[12.5px] text-navy/40 italic">
-          Note interne : les champs marqués « à compléter » doivent être renseignés avec les informations légales
-          exactes de la structure (forme juridique, RCCM, NINEA, dirigeant) avant publication définitive.
-        </p>
       </div>
     </Modal>
   );

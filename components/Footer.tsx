@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <footer className="bg-ink text-white/60 pt-12 pb-6">
       <div className="max-w-[1240px] mx-auto px-8">
-        <div className="grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr_1fr] gap-8 pb-10 border-b border-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] gap-8 pb-10 border-b border-white/10">
 
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
@@ -60,30 +60,6 @@ export default function Footer() {
               <li><a href="/expertises" className="text-[13px] text-white/50 hover:text-gold transition-colors">Nos expertises</a></li>
               <li><a href="/direction" className="text-[13px] text-white/50 hover:text-gold transition-colors">Mot du DG</a></li>
               <li><a href="#faq" className="text-[13px] text-white/50 hover:text-gold transition-colors">FAQ</a></li>
-            </ul>
-          </div>
-
-          {/* Outils */}
-          <div>
-            <h4 className="text-[11px] uppercase tracking-widest text-white/70 font-semibold mb-3">Outils</h4>
-            <ul className="flex flex-col gap-2">
-              <li><a href="#roi-simulateur" className="text-[13px] text-white/50 hover:text-gold transition-colors">Simulateur ROI</a></li>
-              <li>
-                <button
-                  onClick={() => openModal("audit")}
-                  className="text-[13px] text-white/50 hover:text-gold transition-colors text-left"
-                >
-                  Demander un audit
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => openModal("contact")}
-                  className="text-[13px] text-white/50 hover:text-gold transition-colors text-left"
-                >
-                  Nous contacter
-                </button>
-              </li>
             </ul>
           </div>
 

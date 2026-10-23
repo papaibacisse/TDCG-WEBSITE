@@ -24,115 +24,119 @@ export default function PrivacyModal() {
       </button>
 
       <div className="px-8 pb-9 pt-2 overflow-y-auto text-[14.5px] leading-relaxed text-grey space-y-3">
-        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : 29 juillet 2026</p>
+        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : octobre 2026</p>
+
         <p>
-          Chez Teranga Digital Consulting Group (TDCG), nous accordons une importance particulière à la protection de
-          votre vie privée et de vos données personnelles. En utilisant notre site internet{" "}
-          <strong className="text-navy">{SITE.domain}</strong>, vous acceptez les pratiques décrites dans cette
-          politique.
+          Teranga Digital Consulting Group (TDCG) attache une importance particulière à la protection des données
+          à caractère personnel. La présente politique est établie conformément à la{" "}
+          <strong className="text-navy">loi n° 2008-12 du 25 janvier 2008</strong> portant sur la protection des
+          données à caractère personnel au Sénégal et aux recommandations de la{" "}
+          <strong className="text-navy">Commission de Protection des Données Personnelles (CDP)</strong>.
         </p>
 
-        <Section n={1} title="Qui sommes-nous ?">
-          TDCG est un cabinet de conseil spécialisé dans le conseil stratégique, la transformation digitale, le
-          marketing digital, la communication, la gestion de projets et la digitalisation des entreprises.
+        <Section n={1} title="Responsable du traitement">
+          <strong className="text-navy">Teranga Digital Consulting Group (TDCG)</strong><br />
+          SUARL — RCCM : SN.LGA.2026.A.1 — NINEA : 013468039<br />
+          {SITE.address}<br />
+          E-mail : <strong className="text-navy">{SITE.email}</strong>
         </Section>
 
-        <Section n={2} title="Les données que nous collectons">
-          <p className="mb-2"><strong className="text-navy">Données d&apos;identification</strong> — nom, prénom, entreprise, fonction, e-mail, téléphone.</p>
-          <p className="mb-2"><strong className="text-navy">Données professionnelles</strong> — secteur d&apos;activité, taille de l&apos;entreprise, projet exprimé.</p>
-          <p><strong className="text-navy">Données techniques</strong> — adresse IP, navigateur, système d&apos;exploitation, pages consultées, cookies.</p>
+        <Section n={2} title="Données collectées">
+          <strong className="text-navy">a) Données fournies directement</strong><br />
+          Nom, prénom, dénomination sociale, fonction, adresse e-mail, numéro de téléphone, secteur
+          d&apos;activité, description du projet ou de la demande, via nos formulaires de contact, de devis ou
+          d&apos;audit.<br /><br />
+          <strong className="text-navy">b) Données collectées automatiquement</strong><br />
+          Adresse IP, type et version du navigateur, système d&apos;exploitation, pages consultées, durée de
+          visite, données de navigation (cookies techniques et analytiques avec votre consentement).
         </Section>
 
-        <Section n={3} title="Pourquoi collectons-nous vos données ?">
-          Pour répondre à vos demandes, établir un devis, organiser un rendez-vous, réaliser un audit digital,
-          améliorer nos services, assurer le suivi commercial, envoyer des informations avec votre consentement,
-          analyser les performances du site et renforcer la sécurité de nos systèmes.
+        <Section n={3} title="Finalités et bases légales du traitement">
+          Conformément à l&apos;article 18 de la loi n° 2008-12, tout traitement repose sur une base légale :<br /><br />
+          — <strong className="text-navy">Consentement (art. 18-1°)</strong> : envoi de communications commerciales, dépôt de cookies non essentiels ;<br />
+          — <strong className="text-navy">Exécution d&apos;un contrat ou mesures précontractuelles (art. 18-2°)</strong> : traitement des demandes de contact, de devis et d&apos;audit ;<br />
+          — <strong className="text-navy">Intérêt légitime (art. 18-5°)</strong> : amélioration de nos services, sécurité informatique, prévention des abus ;<br />
+          — <strong className="text-navy">Obligation légale (art. 18-3°)</strong> : conservation des données comptables et fiscales.
         </Section>
 
-        <Section n={4} title="Base légale du traitement">
-          Consentement, exécution de mesures précontractuelles ou contractuelles, obligations légales, ou intérêt
-          légitime à développer et sécuriser nos services.
+        <Section n={4} title="Durée de conservation">
+          — Demandes de contact et prospects : <strong className="text-navy">3 ans</strong> à compter du dernier échange ;<br />
+          — Relations contractuelles : durée de la relation, puis <strong className="text-navy">5 ans</strong> au titre des obligations légales comptables (COCC) ;<br />
+          — Données de navigation (cookies analytiques) : <strong className="text-navy">13 mois maximum</strong> ;<br />
+          — Données de facturation : <strong className="text-navy">10 ans</strong> conformément aux obligations fiscales sénégalaises.
         </Section>
 
-        <Section n={5} title="Partage des données">
-          Vos données ne sont ni vendues ni louées à des tiers. Elles peuvent être communiquées à nos prestataires de
-          confiance (hébergement, messagerie, analyse d&apos;audience, prise de rendez-vous, paiement, maintenance),
-          tous tenus de garantir un niveau de sécurité approprié.
+        <Section n={5} title="Destinataires des données">
+          Vos données ne sont ni vendues, ni louées à des tiers. Elles peuvent être communiquées à nos
+          sous-traitants techniques (hébergement, messagerie, analyse d&apos;audience, outils CRM), tous soumis à des
+          engagements contractuels de confidentialité et de sécurité. Ces tiers n&apos;agissent que sur instruction
+          de TDCG et ne peuvent utiliser vos données à d&apos;autres fins.
         </Section>
 
-        <Section n={6} title="Durée de conservation">
-          Demandes de contact : jusqu&apos;à 3 ans après le dernier échange. Prospects : jusqu&apos;à 3 ans sans
-          interaction. Clients : durée de la relation contractuelle, puis obligations légales. Données de navigation :
-          jusqu&apos;à 13 mois pour les cookies soumis à consentement.
+        <Section n={6} title="Transferts hors du Sénégal">
+          Certains de nos prestataires (Vercel Inc. — États-Unis, Infomaniak — Suisse) sont établis à
+          l&apos;étranger. Ces transferts sont encadrés par des garanties contractuelles appropriées, conformément
+          à l&apos;article 47 de la loi n° 2008-12, afin d&apos;assurer un niveau de protection équivalent à
+          celui garanti au Sénégal.
         </Section>
 
         <Section n={7} title="Sécurité des données">
-          Protocole HTTPS, chiffrement des données sensibles, sauvegardes régulières, contrôle des accès, surveillance
-          de la sécurité.
+          TDCG met en œuvre les mesures techniques et organisationnelles appropriées pour protéger vos données
+          contre toute perte, destruction, altération, accès ou divulgation non autorisés, conformément à
+          l&apos;article 37 de la loi n° 2008-12 :<br /><br />
+          — Chiffrement des communications (protocole HTTPS/TLS) ;<br />
+          — Contrôle strict des accès internes ;<br />
+          — Sauvegardes régulières et sécurisées ;<br />
+          — Surveillance continue de la sécurité des systèmes.
         </Section>
 
         <Section n={8} title="Vos droits">
-          Droit d&apos;accès, de rectification, d&apos;effacement, de limitation, d&apos;opposition, de portabilité, et
-          de retrait du consentement. Contact : <strong className="text-navy">{SITE.email}</strong>.
+          Conformément aux articles 39 à 44 de la loi n° 2008-12, vous disposez des droits suivants :<br /><br />
+          — <strong className="text-navy">Droit d&apos;information et d&apos;accès</strong> : connaître les données vous concernant ;<br />
+          — <strong className="text-navy">Droit de rectification</strong> : corriger des données inexactes ou incomplètes ;<br />
+          — <strong className="text-navy">Droit d&apos;effacement</strong> : demander la suppression de vos données ;<br />
+          — <strong className="text-navy">Droit d&apos;opposition</strong> : vous opposer à un traitement fondé sur l&apos;intérêt légitime ;<br />
+          — <strong className="text-navy">Droit à la limitation</strong> : restreindre temporairement un traitement ;<br />
+          — <strong className="text-navy">Droit au retrait du consentement</strong> : à tout moment, sans effet rétroactif.<br /><br />
+          Pour exercer ces droits, adressez votre demande à :{" "}
+          <strong className="text-navy">{SITE.email}</strong>. TDCG s&apos;engage à répondre dans un délai de{" "}
+          <strong className="text-navy">30 jours</strong> à compter de la réception de votre demande.
         </Section>
 
         <Section n={9} title="Cookies">
-          Garantir le bon fonctionnement du site, mémoriser vos préférences, mesurer l&apos;audience, améliorer votre
-          expérience, réaliser des statistiques anonymisées et optimiser nos campagnes de communication.
+          Le site utilise des cookies nécessaires au bon fonctionnement technique et, avec votre consentement
+          préalable, des cookies analytiques pour mesurer l&apos;audience. Vous pouvez gérer vos préférences à
+          tout moment via le bandeau de gestion des cookies accessible en bas de page.<br /><br />
+          Conformément à la recommandation de la CDP, aucun cookie non essentiel n&apos;est déposé sans votre
+          consentement exprès.
         </Section>
 
-        <Section n={10} title="Services tiers">
-          <strong className="text-navy">Google Maps</strong> : affichage de notre localisation dans le pied de page
-          (soumis au consentement « analytique » ou « marketing »).
-          <br />
-          <strong className="text-navy">Google Analytics / Google Tag Manager, Meta Pixel, LinkedIn Insight Tag</strong> :
-          uniquement activés si vous donnez votre consentement via le bandeau cookies, et si ces outils sont
-          effectivement configurés de notre côté. Tant qu&apos;aucun de ces outils n&apos;est activement configuré,
-          aucun script correspondant n&apos;est chargé, même en cas de consentement.
-          <br />
-          <strong className="text-navy">WhatsApp</strong> : simple lien vers l&apos;application, ne dépose aucun
-          cookie tant que vous n&apos;avez pas cliqué dessus pour nous contacter.
+        <Section n={10} title="Protection des mineurs">
+          Le site est exclusivement destiné aux professionnels, entreprises et organisations. TDCG ne collecte
+          sciemment aucune donnée concernant des personnes âgées de moins de 18 ans. Si de telles données nous
+          parvenaient à notre insu, elles seraient supprimées sans délai.
         </Section>
 
-        <Section n={11} title="Transfert des données">
-          Vos données peuvent être transférées ou hébergées en dehors du Sénégal, encadrées par des garanties
-          appropriées conformes aux exigences légales applicables.
+        <Section n={11} title="Réclamation auprès de la CDP">
+          Si vous estimez que vos droits ne sont pas respectés, vous disposez du droit d&apos;introduire une
+          réclamation auprès de la{" "}
+          <strong className="text-navy">Commission de Protection des Données Personnelles (CDP)</strong> du
+          Sénégal, autorité de contrôle compétente en vertu de la loi n° 2008-12.<br /><br />
+          CDP — 18, rue Parchappe × Vincens, Dakar, Sénégal — cdp.sn
         </Section>
 
-        <Section n={12} title="Protection des mineurs">
-          Notre site est destiné aux professionnels, entreprises et organisations. Nous ne collectons pas
-          volontairement de données concernant des personnes de moins de 18 ans.
+        <Section n={12} title="Évolution de la politique">
+          TDCG se réserve le droit de modifier la présente politique à tout moment pour l&apos;adapter aux
+          évolutions réglementaires ou technologiques. Toute modification substantielle sera portée à la
+          connaissance des utilisateurs via ce site.
         </Section>
 
-        <Section n={13} title="Évolution de cette politique">
-          Cette politique peut être modifiée pour tenir compte des évolutions réglementaires, technologiques ou des
-          nouveaux services proposés.
+        <Section n={13} title="Contact — Délégué à la protection des données">
+          Pour toute question relative à la protection de vos données personnelles :<br /><br />
+          Teranga Digital Consulting Group (TDCG)<br />
+          {SITE.address}<br />
+          E-mail : <strong className="text-navy">{SITE.email}</strong>
         </Section>
-
-        <Section n={14} title="Contact">
-          Teranga Digital Consulting Group (TDCG)
-          <br />
-          Site internet : {SITE.domain}
-          <br />
-          E-mail : {SITE.email}
-          <br />
-          Téléphone : {SITE.phones.join(" / ")}
-          <br />
-          Adresse : {SITE.address}
-        </Section>
-
-        <Section n={15} title="Réclamation">
-          Si vous estimez que vos droits ne sont pas respectés, vous pouvez introduire une réclamation auprès de
-          l&apos;autorité compétente chargée de la protection des données au Sénégal.
-        </Section>
-
-        <div>
-          <h4 className="text-navy font-semibold text-[15px] mt-5 mb-2">Notre engagement</h4>
-          <p>
-            Chez TDCG, la confidentialité, la transparence et la sécurité des données de nos clients et partenaires
-            sont au cœur de notre démarche.
-          </p>
-        </div>
       </div>
     </Modal>
   );

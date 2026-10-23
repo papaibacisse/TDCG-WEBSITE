@@ -30,12 +30,9 @@ export default function Footer() {
             <p className="mt-3 text-[13px] max-w-[260px] text-white/45 leading-relaxed">
               Cabinet de conseil en transformation digitale et IA, basé au Sénégal, au service des entreprises d&apos;Afrique de l&apos;Ouest.
             </p>
-            <div className="mt-4 flex flex-col gap-1.5">
+            <div className="mt-4">
               <a href={`mailto:${SITE.email}`} className="text-[12.5px] text-white/40 hover:text-gold transition-colors">
                 {SITE.email}
-              </a>
-              <a href={`tel:${SITE.phones[0]?.replace(/\s/g, "")}`} className="text-[12.5px] text-white/40 hover:text-gold transition-colors">
-                {SITE.phones[0]}
               </a>
             </div>
           </div>
@@ -77,7 +74,6 @@ export default function Footer() {
 
         <div className="flex flex-wrap justify-between items-center pt-5 gap-3 text-[12px] text-white/30">
           <span>© 2026 Teranga Digital Consulting Group — Tous droits réservés.</span>
-          <span className="text-white/20">Sénégal</span>
         </div>
       </div>
     </footer>

@@ -24,48 +24,72 @@ export default function MentionsLegalesModal() {
       </button>
 
       <div className="px-8 pb-9 pt-2 overflow-y-auto text-[14.5px] leading-relaxed text-grey space-y-3">
-        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : 8 août 2026</p>
+        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : octobre 2026</p>
 
-        <Section title="Éditeur du site">
-          Le site {SITE.domain} est édité par Teranga Digital Consulting Group (TDCG).
-          <br />
-          Forme juridique : Société Unipersonnelle à Responsabilité Limitée (SUARL)
-          <br />
-          Numéro RCCM : <strong className="text-navy">SN.LGA.2026.A.1</strong>
-          <br />
-          Numéro NINEA : <strong className="text-navy">013468039</strong>
-          <br />
-          Siège social : {SITE.address}
-          <br />
-          Chargé de la publication : Teranga Digital Consulting Group (TDCG)
-          <br />
-          Email : <strong className="text-navy">{SITE.email}</strong>
-          <br />
-          Téléphone : {SITE.phones.join(" / ")}
+        <Section title="1. Éditeur du site">
+          Le site <strong className="text-navy">{SITE.domain}</strong> est édité par :<br /><br />
+          <strong className="text-navy">Teranga Digital Consulting Group (TDCG)</strong><br />
+          Forme juridique : Société Unipersonnelle à Responsabilité Limitée (SUARL)<br />
+          Numéro RCCM : <strong className="text-navy">SN.LGA.2026.A.1</strong><br />
+          Numéro NINEA : <strong className="text-navy">013468039</strong><br />
+          Siège social : {SITE.address}<br />
+          Directeur de la publication : Représentant légal de TDCG<br />
+          E-mail : <strong className="text-navy">{SITE.email}</strong>
         </Section>
 
-        <Section title="Hébergement">
-          Le site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis.
-          <br />
-          La messagerie électronique du cabinet est hébergée par Infomaniak Network SA, rue Eugène-Marziano 25,
-          1227 Les Acacias, Genève, Suisse.
+        <Section title="2. Hébergement">
+          Le site est hébergé par :<br /><br />
+          <strong className="text-navy">Vercel Inc.</strong><br />
+          340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis<br />
+          Site : vercel.com<br /><br />
+          La messagerie électronique est hébergée par :<br />
+          <strong className="text-navy">Infomaniak Network SA</strong><br />
+          Rue Eugène-Marziano 25, 1227 Les Acacias, Genève, Suisse
         </Section>
 
-        <Section title="Propriété intellectuelle">
-          L&apos;ensemble du contenu de ce site (textes, logo, charte graphique, structure) est la propriété de TDCG,
-          sauf mention contraire, et ne peut être reproduit sans autorisation écrite préalable.
+        <Section title="3. Cadre juridique applicable">
+          Le présent site est soumis au droit sénégalais, notamment :<br /><br />
+          — <strong className="text-navy">Loi n° 2008-08 du 25 janvier 2008</strong> sur les transactions électroniques ;<br />
+          — <strong className="text-navy">Loi n° 2008-12 du 25 janvier 2008</strong> portant sur la protection des données à caractère personnel ;<br />
+          — <strong className="text-navy">Loi n° 2008-10 du 25 janvier 2008</strong> portant loi d&apos;orientation sur la société de l&apos;information ;<br />
+          — <strong className="text-navy">Loi n° 2008-11 du 25 janvier 2008</strong> portant sur la cybercriminalité ;<br />
+          — Les dispositions applicables du <strong className="text-navy">Code des Obligations Civiles et Commerciales (COCC)</strong> du Sénégal.
         </Section>
 
-        <Section title="Responsabilité">
-          TDCG s&apos;efforce d&apos;assurer l&apos;exactitude des informations diffusées sur ce site, sans pouvoir
-          garantir l&apos;absence totale d&apos;erreurs ou d&apos;omissions.
+        <Section title="4. Propriété intellectuelle">
+          L&apos;ensemble des éléments constituant ce site (logo, textes, charte graphique, structure, codes sources,
+          visuels) est la propriété exclusive de TDCG et est protégé par les dispositions du droit sénégalais
+          applicables à la propriété intellectuelle.<br /><br />
+          Toute reproduction, représentation, adaptation, diffusion ou réutilisation, totale ou partielle, par quelque
+          procédé que ce soit, sans autorisation écrite préalable de TDCG, est strictement interdite et constitutive
+          de contrefaçon au sens de la loi.
         </Section>
 
-        <Section title="Contact">
-          Pour toute question relative aux présentes mentions légales, vous pouvez nous écrire à{" "}
-          <strong className="text-navy">{SITE.email}</strong>.
+        <Section title="5. Responsabilité">
+          TDCG s&apos;efforce d&apos;assurer l&apos;exactitude et la mise à jour des informations diffusées sur ce site.
+          Toutefois, TDCG ne saurait être tenu responsable des omissions, inexactitudes, erreurs ou carences de mise à
+          jour, qu&apos;elles soient de son fait ou du fait de tiers partenaires qui lui fournissent ces informations.<br /><br />
+          TDCG ne saurait être tenu responsable de tout dommage, direct ou indirect, résultant de l&apos;accès au site
+          ou de l&apos;utilisation des informations qui y sont contenues, ni de tout préjudice résultant d&apos;une
+          indisponibilité du site.
         </Section>
 
+        <Section title="6. Liens hypertextes">
+          Le site peut contenir des liens vers des sites tiers. TDCG ne contrôle pas ces sites et décline toute
+          responsabilité quant à leur contenu, leur disponibilité ou leurs pratiques en matière de données personnelles.
+        </Section>
+
+        <Section title="7. Droit applicable et juridiction">
+          Les présentes mentions légales sont régies par le droit sénégalais. En cas de litige, et à défaut de
+          résolution amiable, les juridictions sénégalaises compétentes seront saisies.
+        </Section>
+
+        <Section title="8. Contact">
+          Pour toute question relative aux présentes mentions légales :<br /><br />
+          Teranga Digital Consulting Group (TDCG)<br />
+          {SITE.address}<br />
+          E-mail : <strong className="text-navy">{SITE.email}</strong>
+        </Section>
       </div>
     </Modal>
   );

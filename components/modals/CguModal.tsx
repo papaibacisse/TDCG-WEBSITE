@@ -12,7 +12,7 @@ export default function CguModal() {
     <Modal isOpen={isOpen} onClose={closeModal} labelledBy="cgu-modal-title">
       <div className="flex items-center justify-between px-8 py-6 border-b border-navy/10">
         <h3 id="cgu-modal-title" className="text-[22px] text-navy font-display">
-          Conditions Générales d&apos;Utilisation (CGU)
+          Conditions Générales d&apos;Utilisation
         </h3>
       </div>
       <button
@@ -24,102 +24,130 @@ export default function CguModal() {
       </button>
 
       <div className="px-8 pb-9 pt-2 overflow-y-auto text-[14.5px] leading-relaxed text-grey space-y-3">
-        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : 9 août 2026</p>
+        <p className="font-mono text-[12px] uppercase tracking-wider text-gold">Dernière mise à jour : octobre 2026</p>
+
         <p>
-          Bienvenue sur le site internet de Teranga Digital Consulting Group (TDCG), accessible à l&apos;adresse{" "}
-          <strong className="text-navy">{SITE.domain}</strong>. L&apos;utilisation du site implique l&apos;acceptation
-          pleine et entière des présentes Conditions Générales d&apos;Utilisation (CGU). Tout utilisateur accédant au
-          site déclare en avoir pris connaissance et les accepter sans réserve. TDCG ne dispose, à ce jour,
-          d&apos;aucune application mobile associée à ce site.
+          Les présentes Conditions Générales d&apos;Utilisation (CGU) régissent l&apos;accès et l&apos;utilisation du
+          site internet <strong className="text-navy">{SITE.domain}</strong>, édité par Teranga Digital Consulting
+          Group (TDCG). Elles sont établies conformément au droit sénégalais applicable, notamment la{" "}
+          <strong className="text-navy">loi n° 2008-08 du 25 janvier 2008</strong> sur les transactions
+          électroniques et la{" "}
+          <strong className="text-navy">loi n° 2008-12 du 25 janvier 2008</strong> sur la protection des données
+          à caractère personnel.<br /><br />
+          En accédant au site, l&apos;utilisateur reconnaît avoir pris connaissance des présentes CGU et
+          les accepter sans réserve.
         </p>
 
-        <Article n={1} title="Objet et acceptation">
-          Le site {SITE.domain} est édité par Teranga Digital Consulting Group (TDCG), cabinet de conseil en
-          stratégie, transformation digitale, communication et solutions numériques. Slogan : « {SITE.tagline} ». En
-          naviguant sur le site, l&apos;utilisateur s&apos;engage à respecter les présentes CGU et à faire un usage
-          strictement personnel du site.
+        <Article n={1} title="Objet">
+          Le site {SITE.domain} a pour objet de présenter les activités de TDCG — cabinet de conseil en
+          transformation digitale, intelligence artificielle, stratégie digitale et performance business — et de
+          permettre aux visiteurs de prendre contact, demander un devis ou solliciter un audit. Les informations
+          publiées sont fournies à titre indicatif et ne constituent pas une offre contractuelle ferme.
         </Article>
 
-        <Article n={2} title="Modification des CGU">
-          Ces conditions sont susceptibles d&apos;être modifiées ou complétées à tout moment, sans préavis. Les
-          utilisateurs sont invités à les consulter régulièrement. Les modifications entrent en vigueur dès leur mise
-          en ligne. En cas de désaccord avec les CGU modifiées, l&apos;utilisateur doit cesser toute utilisation du
-          site.
+        <Article n={2} title="Accès au site">
+          Le site est accessible gratuitement à tout utilisateur disposant d&apos;un accès à internet. Les frais
+          d&apos;accès (connexion, matériel) restent à la charge de l&apos;utilisateur. TDCG se réserve le droit
+          de suspendre, modifier ou interrompre l&apos;accès au site à tout moment, sans préavis ni indemnité,
+          pour des raisons techniques, de maintenance ou de sécurité.
         </Article>
 
-        <Article n={3} title="Description des services fournis">
-          Le site a pour objet de présenter les activités du cabinet (audit digital, conseil stratégique, stratégie
-          marketing, digitalisation, communication, gestion de projets), de permettre la prise de contact et la
-          demande de devis ou d&apos;audit. TDCG s&apos;efforce de fournir des informations aussi précises que
-          possible, sans pouvoir être tenu responsable des omissions, inexactitudes ou carences de mise à jour. Les
-          informations diffusées sont données à titre indicatif, non exhaustif, et susceptibles d&apos;évoluer.
+        <Article n={3} title="Conditions d'utilisation">
+          L&apos;utilisateur s&apos;engage à :<br /><br />
+          — Utiliser le site dans le strict respect des lois et règlements en vigueur au Sénégal ;<br />
+          — Ne pas porter atteinte à l&apos;ordre public, aux droits des tiers ni à la réputation de TDCG ;<br />
+          — Ne pas tenter d&apos;accéder sans autorisation aux systèmes informatiques du site ;<br />
+          — Ne pas diffuser de contenus illicites, malveillants ou frauduleux via les formulaires du site ;<br />
+          — Ne pas utiliser le site à des fins commerciales sans autorisation préalable écrite de TDCG.<br /><br />
+          Tout manquement à ces obligations peut engager la responsabilité civile et pénale de l&apos;utilisateur,
+          notamment au titre de la <strong className="text-navy">loi n° 2008-11 du 25 janvier 2008</strong>{" "}
+          portant sur la cybercriminalité.
         </Article>
 
-        <Article n={4} title="Limitations contractuelles sur les données techniques">
-          Le site est développé avec les technologies JavaScript/TypeScript, au moyen du framework Next.js (React).
-          TDCG ne pourra être tenu responsable de dommages matériels liés à l&apos;utilisation du site. L&apos;utilisateur
-          s&apos;engage à y accéder avec un matériel récent, exempt de virus, et un navigateur à jour.
+        <Article n={4} title="Propriété intellectuelle">
+          Conformément aux dispositions du droit sénégalais applicable à la propriété intellectuelle, l&apos;ensemble
+          des éléments du site (logo, dénomination, textes, charte graphique, structure, codes sources, visuels)
+          est la propriété exclusive de TDCG.<br /><br />
+          Toute reproduction, représentation, traduction, adaptation ou exploitation commerciale, totale ou
+          partielle, par quelque procédé que ce soit, sans autorisation écrite préalable de TDCG, est interdite
+          et constitutive de contrefaçon.
         </Article>
 
-        <Article n={5} title="Propriété intellectuelle et contrefaçons">
-          Toute reproduction, représentation, publication ou adaptation de tout ou partie des éléments du site
-          (logo, textes, illustrations, charte graphique, codes sources), par quelque procédé que ce soit, est
-          interdite sauf autorisation écrite préalable de TDCG. Toute exploitation non autorisée sera considérée
-          comme constitutive d&apos;une contrefaçon.
+        <Article n={5} title="Données personnelles">
+          Les données collectées via les formulaires du site font l&apos;objet d&apos;un traitement par TDCG en
+          qualité de responsable du traitement, conformément à la{" "}
+          <strong className="text-navy">loi n° 2008-12 du 25 janvier 2008</strong> sur la protection des données
+          à caractère personnel.<br /><br />
+          Elles sont utilisées aux seules fins de traitement des demandes, d&apos;établissement de devis et de suivi
+          commercial. L&apos;utilisateur dispose des droits d&apos;accès, de rectification, d&apos;effacement,
+          d&apos;opposition et de portabilité, exerçables à l&apos;adresse :{" "}
+          <strong className="text-navy">{SITE.email}</strong>.<br /><br />
+          Pour plus de détails, consultez notre{" "}
+          <strong className="text-navy">Politique de confidentialité</strong>.
         </Article>
 
         <Article n={6} title="Cookies">
-          La navigation sur le site est susceptible de provoquer l&apos;installation de cookies sur
-          l&apos;ordinateur de l&apos;utilisateur, destinés à faciliter la navigation et à mesurer la fréquentation
-          du site. Le refus d&apos;installation d&apos;un cookie peut entraîner l&apos;impossibilité d&apos;accéder à
-          certains services. L&apos;utilisateur peut gérer ses préférences à tout moment via les paramètres de son
-          navigateur.
+          Le site utilise des cookies nécessaires à son fonctionnement technique. Des cookies analytiques
+          peuvent également être déposés avec votre consentement préalable, conformément à la réglementation
+          en vigueur. L&apos;utilisateur peut gérer ses préférences à tout moment via le bandeau de gestion des
+          cookies accessible sur le site.
         </Article>
 
-        <Article n={7} title="Protection des données personnelles">
-          Les données collectées via les formulaires sont utilisées pour répondre aux demandes, établir des devis et
-          assurer le suivi commercial. L&apos;utilisateur dispose d&apos;un droit d&apos;accès, de rectification,
-          d&apos;effacement, d&apos;opposition, de limitation et de portabilité, conformément à la loi n° 2008-12 du
-          25 janvier 2008 portant sur la protection des données à caractère personnel. Toute demande peut être
-          adressée à : <strong className="text-navy">{SITE.email}</strong>.
+        <Article n={7} title="Responsabilité de TDCG">
+          TDCG met tout en œuvre pour assurer la disponibilité et l&apos;exactitude des informations du site.
+          Toutefois, sa responsabilité ne saurait être engagée pour :<br /><br />
+          — Des inexactitudes, omissions ou erreurs dans les informations publiées ;<br />
+          — Toute interruption ou indisponibilité du site liée à des raisons techniques ou de force majeure ;<br />
+          — Tout dommage indirect résultant de l&apos;utilisation du site ou de ses contenus ;<br />
+          — Les contenus des sites tiers vers lesquels des liens sont proposés.
         </Article>
 
-        <Article n={8} title="Principales lois concernées">
-          Loi n° 2008-08 du 25 janvier 2008 sur les transactions électroniques.
-          <br />
-          Loi n° 2008-12 du 25 janvier 2008 portant sur la protection des données à caractère personnel.
-          <br />
-          Ainsi que les dispositions applicables du Code des Obligations Civiles et Commerciales du Sénégal.
+        <Article n={8} title="Transactions électroniques">
+          Conformément à la <strong className="text-navy">loi n° 2008-08 du 25 janvier 2008</strong> sur les
+          transactions électroniques, toute demande de devis ou d&apos;audit soumise via le site constitue une
+          expression d&apos;intérêt commerciale et non un engagement contractuel ferme. Un contrat ne sera formé
+          qu&apos;après signature d&apos;une convention de prestation entre les parties. Les communications
+          électroniques échangées ont valeur de preuve dans les conditions prévues par ladite loi.
         </Article>
 
-        <Article n={9} title="Lexique">
-          <strong className="text-navy">Utilisateur</strong> : internaute se connectant et utilisant le site
-          susnommé.
-          <br />
-          <strong className="text-navy">Informations personnelles</strong> : informations qui permettent, sous
-          quelque forme que ce soit, directement ou non, l&apos;identification des personnes physiques auxquelles
-          elles s&apos;appliquent, au sens de la loi n° 2008-12 du 25 janvier 2008.
+        <Article n={9} title="Liens hypertextes">
+          Le site peut contenir des liens vers des sites internet tiers. TDCG n&apos;exerce aucun contrôle sur
+          ces sites et décline toute responsabilité quant à leur contenu, leur disponibilité ou leurs pratiques
+          en matière de données personnelles. La création de liens vers le site {SITE.domain} est soumise à
+          autorisation préalable écrite de TDCG.
         </Article>
 
-        <Article n={10} title="Droit applicable et juridiction compétente">
-          Les présentes CGU sont régies par le droit sénégalais. Tout différend relève de la compétence des
-          juridictions sénégalaises compétentes.
+        <Article n={10} title="Modification des CGU">
+          TDCG se réserve le droit de modifier les présentes CGU à tout moment, sans préavis. Les nouvelles
+          CGU entrent en vigueur dès leur mise en ligne. L&apos;utilisation continue du site après modification
+          vaut acceptation des nouvelles conditions. Il appartient à l&apos;utilisateur de les consulter
+          régulièrement.
         </Article>
 
-        <Article n={11} title="Contact">
-          Teranga Digital Consulting Group (TDCG)
-          <br />
-          Site web : {SITE.domain}
-          <br />
-          Email : {SITE.email}
-          <br />
-          Téléphone : {SITE.phones.join(" / ")}
-          <br />
-          Adresse : {SITE.address}
+        <Article n={11} title="Lois applicables">
+          Les présentes CGU sont régies par les textes sénégalais suivants :<br /><br />
+          — <strong className="text-navy">Loi n° 2008-08</strong> du 25 janvier 2008 sur les transactions électroniques ;<br />
+          — <strong className="text-navy">Loi n° 2008-10</strong> du 25 janvier 2008 portant loi d&apos;orientation sur la société de l&apos;information ;<br />
+          — <strong className="text-navy">Loi n° 2008-11</strong> du 25 janvier 2008 portant sur la cybercriminalité ;<br />
+          — <strong className="text-navy">Loi n° 2008-12</strong> du 25 janvier 2008 sur la protection des données à caractère personnel ;<br />
+          — Les dispositions pertinentes du <strong className="text-navy">Code des Obligations Civiles et Commerciales (COCC)</strong> du Sénégal.
         </Article>
 
-        <p>
-          En naviguant sur le site {SITE.domain}, l&apos;utilisateur reconnaît avoir pris connaissance des présentes
+        <Article n={12} title="Règlement des litiges et juridiction compétente">
+          En cas de différend relatif à l&apos;utilisation du site, les parties s&apos;engagent à rechercher une
+          solution amiable avant tout recours judiciaire. À défaut de résolution amiable dans un délai de
+          30 jours, tout litige sera soumis aux <strong className="text-navy">juridictions sénégalaises
+          compétentes</strong>, conformément au droit sénégalais.
+        </Article>
+
+        <Article n={13} title="Contact">
+          Teranga Digital Consulting Group (TDCG)<br />
+          {SITE.address}<br />
+          E-mail : <strong className="text-navy">{SITE.email}</strong>
+        </Article>
+
+        <p className="text-[13px] text-navy/50 italic border-t border-navy/10 pt-4 mt-4">
+          En naviguant sur {SITE.domain}, l&apos;utilisateur reconnaît avoir pris connaissance des présentes
           Conditions Générales d&apos;Utilisation et s&apos;engage à les respecter.
         </p>
       </div>

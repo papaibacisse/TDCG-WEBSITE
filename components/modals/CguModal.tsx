@@ -30,8 +30,6 @@ export default function CguModal() {
           Les présentes Conditions Générales d&apos;Utilisation (CGU) régissent l&apos;accès et l&apos;utilisation du
           site internet <strong className="text-navy">{SITE.domain}</strong>, édité par Teranga Digital Consulting
           Group (TDCG). Elles sont établies conformément au droit sénégalais applicable, notamment la{" "}
-          <strong className="text-navy">loi n° 2008-08 du 25 janvier 2008</strong> sur les transactions
-          électroniques et la{" "}
           <strong className="text-navy">loi n° 2008-12 du 25 janvier 2008</strong> sur la protection des données
           à caractère personnel.<br /><br />
           En accédant au site, l&apos;utilisateur reconnaît avoir pris connaissance des présentes CGU et
@@ -102,45 +100,36 @@ export default function CguModal() {
           — Les contenus des sites tiers vers lesquels des liens sont proposés.
         </Article>
 
-        <Article n={8} title="Transactions électroniques">
-          Conformément à la <strong className="text-navy">loi n° 2008-08 du 25 janvier 2008</strong> sur les
-          transactions électroniques, toute demande de devis ou d&apos;audit soumise via le site constitue une
-          expression d&apos;intérêt commerciale et non un engagement contractuel ferme. Un contrat ne sera formé
-          qu&apos;après signature d&apos;une convention de prestation entre les parties. Les communications
-          électroniques échangées ont valeur de preuve dans les conditions prévues par ladite loi.
-        </Article>
-
-        <Article n={9} title="Liens hypertextes">
+        <Article n={8} title="Liens hypertextes">
           Le site peut contenir des liens vers des sites internet tiers. TDCG n&apos;exerce aucun contrôle sur
           ces sites et décline toute responsabilité quant à leur contenu, leur disponibilité ou leurs pratiques
           en matière de données personnelles. La création de liens vers le site {SITE.domain} est soumise à
           autorisation préalable écrite de TDCG.
         </Article>
 
-        <Article n={10} title="Modification des CGU">
+        <Article n={9} title="Modification des CGU">
           TDCG se réserve le droit de modifier les présentes CGU à tout moment, sans préavis. Les nouvelles
           CGU entrent en vigueur dès leur mise en ligne. L&apos;utilisation continue du site après modification
           vaut acceptation des nouvelles conditions. Il appartient à l&apos;utilisateur de les consulter
           régulièrement.
         </Article>
 
-        <Article n={11} title="Lois applicables">
+        <Article n={10} title="Lois applicables">
           Les présentes CGU sont régies par les textes sénégalais suivants :<br /><br />
-          — <strong className="text-navy">Loi n° 2008-08</strong> du 25 janvier 2008 sur les transactions électroniques ;<br />
           — <strong className="text-navy">Loi n° 2008-10</strong> du 25 janvier 2008 portant loi d&apos;orientation sur la société de l&apos;information ;<br />
           — <strong className="text-navy">Loi n° 2008-11</strong> du 25 janvier 2008 portant sur la cybercriminalité ;<br />
           — <strong className="text-navy">Loi n° 2008-12</strong> du 25 janvier 2008 sur la protection des données à caractère personnel ;<br />
           — Les dispositions pertinentes du <strong className="text-navy">Code des Obligations Civiles et Commerciales (COCC)</strong> du Sénégal.
         </Article>
 
-        <Article n={12} title="Règlement des litiges et juridiction compétente">
+        <Article n={11} title="Règlement des litiges et juridiction compétente">
           En cas de différend relatif à l&apos;utilisation du site, les parties s&apos;engagent à rechercher une
           solution amiable avant tout recours judiciaire. À défaut de résolution amiable dans un délai de
           30 jours, tout litige sera soumis aux <strong className="text-navy">juridictions sénégalaises
           compétentes</strong>, conformément au droit sénégalais.
         </Article>
 
-        <Article n={13} title="Contact">
+        <Article n={12} title="Contact">
           Teranga Digital Consulting Group (TDCG)<br />
           {SITE.address}<br />
           E-mail : <strong className="text-navy">{SITE.email}</strong>

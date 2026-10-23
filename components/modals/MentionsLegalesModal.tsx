@@ -49,7 +49,6 @@ export default function MentionsLegalesModal() {
 
         <Section title="3. Cadre juridique applicable">
           Le présent site est soumis au droit sénégalais, notamment :<br /><br />
-          — <strong className="text-navy">Loi n° 2008-08 du 25 janvier 2008</strong> sur les transactions électroniques ;<br />
           — <strong className="text-navy">Loi n° 2008-12 du 25 janvier 2008</strong> portant sur la protection des données à caractère personnel ;<br />
           — <strong className="text-navy">Loi n° 2008-10 du 25 janvier 2008</strong> portant loi d&apos;orientation sur la société de l&apos;information ;<br />
           — <strong className="text-navy">Loi n° 2008-11 du 25 janvier 2008</strong> portant sur la cybercriminalité ;<br />

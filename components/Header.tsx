@@ -446,10 +446,21 @@ export default function Header() {
   }, []);
 
   function handleSectorSelect(idx: number) {
-    const id = sectorSlug(SECTORS[idx].name);
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    else document.getElementById("secteurs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const slug = sectorSlug(SECTORS[idx].name);
+    const isHomepage = window.location.pathname === "/";
+
+    if (isHomepage) {
+      // On est déjà sur la homepage → scroll vers la section + highlight
+      const section = document.getElementById("secteurs");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+      // Émet un événement custom pour que Sectors.tsx puisse highlighter le bon secteur
+      window.dispatchEvent(new CustomEvent("tdcg:sector-select", { detail: { idx } }));
+    } else {
+      // Sur une autre page → naviguer vers la homepage avec le paramètre secteur
+      window.location.href = `/?sector=${slug}#secteurs`;
+    }
   }
 
   return (

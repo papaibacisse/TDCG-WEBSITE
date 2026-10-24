@@ -42,6 +42,7 @@ export default function Sectors() {
   const sectionRef = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
+  const [highlighted, setHighlighted] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -60,6 +61,43 @@ export default function Sectors() {
     );
     obs.observe(el);
     return () => obs.disconnect();
+  }, []);
+
+  // Écoute l'événement custom émis par le Header (même page)
+  useEffect(() => {
+    function onSectorSelect(e: Event) {
+      const idx = (e as CustomEvent<{ idx: number }>).detail.idx;
+      setHighlighted(idx);
+      // Efface le highlight après 3 secondes
+      setTimeout(() => setHighlighted(null), 3000);
+    }
+    window.addEventListener("tdcg:sector-select", onSectorSelect);
+    return () => window.removeEventListener("tdcg:sector-select", onSectorSelect);
+  }, []);
+
+  // Lit le paramètre URL ?sector= à l'arrivée sur la page (navigation cross-page)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sectorParam = params.get("sector");
+    if (!sectorParam) return;
+
+    const idx = SECTORS.findIndex((s) => sectorSlug(s.name) === sectorParam);
+    if (idx === -1) return;
+
+    // Nettoie l'URL sans recharger
+    const url = new URL(window.location.href);
+    url.searchParams.delete("sector");
+    window.history.replaceState({}, "", url.toString());
+
+    // Attend que la page soit rendue puis scroll + highlight
+    const timer = setTimeout(() => {
+      const section = document.getElementById("secteurs");
+      if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      setHighlighted(idx);
+      setTimeout(() => setHighlighted(null), 3000);
+    }, 400);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Abréviations pour les noms trop longs dans la roue
@@ -194,7 +232,7 @@ export default function Sectors() {
               {SECTORS.map((sector, i) => {
                 const startAngle = i * (360 / N);
                 const endAngle = startAngle + SLICE;
-                const isHov = hovered === i;
+                const isHov = hovered === i || highlighted === i;
 
                 // Chemin de l'arc plein (anneau)
                 const outerR = isHov ? R_OUTER + 8 : R_OUTER;
@@ -419,49 +457,49 @@ export default function Sectors() {
               transition: "opacity 0.7s ease 0.35s, transform 0.7s ease 0.35s",
             }}
           >
-            {hovered !== null ? (
+            {(hovered !== null || highlighted !== null) ? (
               /* Carte secteur actif */
               <div
-                key={hovered}
+                key={hovered ?? highlighted}
                 className="rounded-2xl p-7 relative overflow-hidden"
                 style={{
                   background: "rgba(13,21,37,0.9)",
-                  border: `1px solid ${SECTOR_COLORS[hovered]}40`,
+                  border: `1px solid ${SECTOR_COLORS[hovered ?? highlighted!]}40`,
                   animation: "fadeSlide 0.25s ease forwards",
                 }}
               >
                 <div
                   className="absolute top-0 left-0 right-0 h-[2px]"
                   style={{
-                    background: `linear-gradient(90deg, transparent, ${SECTOR_COLORS[hovered]}, transparent)`,
+                    background: `linear-gradient(90deg, transparent, ${SECTOR_COLORS[hovered ?? highlighted!]}, transparent)`,
                   }}
                 />
                 <div
                   className="absolute top-0 right-0 w-40 h-40 pointer-events-none"
                   style={{
-                    background: `radial-gradient(circle at top right, ${SECTOR_COLORS[hovered]}12 0%, transparent 70%)`,
+                    background: `radial-gradient(circle at top right, ${SECTOR_COLORS[hovered ?? highlighted!]}12 0%, transparent 70%)`,
                   }}
                 />
 
                 {/* Icône */}
                 <div
                   className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
-                  style={{ background: `${SECTOR_COLORS[hovered]}18`, border: `1px solid ${SECTOR_COLORS[hovered]}30` }}
+                  style={{ background: `${SECTOR_COLORS[hovered ?? highlighted!]}18`, border: `1px solid ${SECTOR_COLORS[hovered ?? highlighted!]}30` }}
                 >
-                  {(() => { const Icon = ICONS[hovered]; return <Icon size={20} style={{ color: SECTOR_COLORS[hovered] }} />; })()}
+                  {(() => { const activeIdx = hovered ?? highlighted!; const Icon = ICONS[activeIdx]; return <Icon size={20} style={{ color: SECTOR_COLORS[activeIdx] }} />; })()}
                 </div>
 
                 <h3 className="font-semibold text-white text-[18px] mb-2">
-                  {SECTORS[hovered].name}
+                  {SECTORS[hovered ?? highlighted!].name}
                 </h3>
                 <p className="text-white/50 text-[13.5px] leading-relaxed mb-6">
-                  {SECTORS[hovered].description}
+                  {SECTORS[hovered ?? highlighted!].description}
                 </p>
 
                 <button
                   onClick={() => openModal("contact")}
                   className="inline-flex items-center gap-2 text-[12.5px] font-semibold uppercase tracking-wider transition-all duration-200"
-                  style={{ color: SECTOR_COLORS[hovered] }}
+                  style={{ color: SECTOR_COLORS[hovered ?? highlighted!] }}
                   onMouseEnter={(e) => {
                     (e.currentTarget as HTMLButtonElement).style.opacity = "0.7";
                   }}
@@ -489,7 +527,7 @@ export default function Sectors() {
                         onClick={() => openModal("contact")}
                         onMouseEnter={() => setHovered(i)}
                         onMouseLeave={() => setHovered(null)}
-                        className="flex items-center gap-3 w-full group"
+                        className={`flex items-center gap-3 w-full group${highlighted === i ? " opacity-100" : ""}`}
                       >
                         <span
                           className="w-1 h-4 rounded-full flex-shrink-0 transition-all duration-200"

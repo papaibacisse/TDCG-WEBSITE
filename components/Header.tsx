@@ -229,7 +229,6 @@ function OutilsDropdown() {
     <li ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        onMouseEnter={() => setOpen(true)}
         aria-expanded={open}
         className="flex items-center gap-1.5 text-[14.5px] font-medium text-white/85 hover:text-white relative group"
       >

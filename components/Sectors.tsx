@@ -3,23 +3,31 @@
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import {
-  Landmark, LineChart, GraduationCap, HeartPulse, Sprout, ShoppingBag,
-  Factory, HandHeart, Radio, Truck, Zap, Rocket,
+  Landmark, LineChart, GraduationCap, HeartPulse, Sprout,
+  ShoppingCart, Factory, HandHeart, Radio, Zap, Rocket,
 } from "lucide-react";
 import { useModal } from "@/lib/ModalContext";
 import { SECTORS, sectorSlug } from "@/lib/constants";
 
 const ICONS = [
-  Landmark, LineChart, GraduationCap, HeartPulse,
-  Sprout, ShoppingBag, Factory, HandHeart,
-  Radio, Truck, Zap, Rocket,
+  Landmark,    // Administration publique
+  LineChart,   // Finance
+  GraduationCap, // Éducation
+  HeartPulse,  // Santé
+  Sprout,      // Agriculture
+  ShoppingCart, // Commerce & Distribution
+  Factory,     // Industrie
+  HandHeart,   // ONG & Institutions
+  Radio,       // Télécommunications
+  Zap,         // Énergie
+  Rocket,      // Startups
 ];
 
-// Couleurs par segment de spirale
+// Couleurs par segment de spirale (11 secteurs)
 const SECTOR_COLORS = [
   "#D4AF5A", "#C8A84E", "#BCA042", "#B09836",
   "#A49030", "#B8A055", "#CCB06A", "#D4B870",
-  "#D4AF5A", "#C0A048", "#B09030", "#D4AF5A",
+  "#D4AF5A", "#C0A048", "#B09030",
 ];
 
 function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
@@ -103,12 +111,14 @@ export default function Sectors() {
   // Abréviations pour les noms trop longs dans la roue
   const LABEL_OVERRIDES: Record<string, string[]> = {
     "Administration publique": ["Admin.", "Publique"],
-    "Télécommunications": ["Télécom-", "munications"],
+    "Télécommunications": ["Télé-", "coms"],
+    "Commerce & Distribution": ["Commerce &", "Distribution"],
+    "ONG & Institutions": ["ONG &", "Institutions"],
   };
 
-  const N = SECTORS.length; // 12
+  const N = SECTORS.length; // 11
   const GAP = 2; // degrés entre chaque segment
-  const SLICE = 360 / N - GAP; // ~28°
+  const SLICE = 360 / N - GAP; // ~31° pour 11 secteurs
 
   // Taille SVG responsive
   const SIZE = isMobile ? 340 : 520;
@@ -166,7 +176,7 @@ export default function Sectors() {
             <span style={{ color: "#D4AF5A" }}>adaptée à chaque écosystème.</span>
           </h2>
           <p className="text-white/35 text-[14px] mt-4 max-w-[480px] mx-auto leading-relaxed">
-            Douze secteurs clés de l&apos;économie africaine — chacun avec ses enjeux propres et une méthode TDCG qui s&apos;y adapte.
+            Onze secteurs clés de l&apos;économie africaine — chacun avec ses enjeux propres et une méthode TDCG qui s&apos;y adapte.
           </p>
         </div>
 

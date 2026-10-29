@@ -10,8 +10,7 @@ import logo from "@/public/logo-tdcg.png";
 import type { ModalName } from "@/lib/ModalContext";
 
 const SIMPLE_NAV = [
-  { href: "/notre-approche", label: "Notre Approche" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/notre-approche", label: "À propos" },
   { href: "#contact-canaux", label: "Contact" },
 ];
 
@@ -234,7 +233,7 @@ function OutilsDropdown() {
         aria-expanded={open}
         className="flex items-center gap-1.5 text-[14.5px] font-medium text-white/85 hover:text-white relative group"
       >
-        Outils
+        Solutions
         <ChevronDown size={14} className={`text-gold/70 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         <span className={`absolute left-0 -bottom-0.5 h-px bg-gold transition-all duration-300 ${open ? "w-full" : "w-0 group-hover:w-full"}`} />
       </button>
@@ -288,9 +287,9 @@ function MobileMenu({
   setMobileOpen: (v: boolean) => void;
   handleSectorSelect: (idx: number) => void;
 }) {
-  const [openSection, setOpenSection] = useState<"expertises" | "secteurs" | "outils" | null>(null);
+  const [openSection, setOpenSection] = useState<"expertises" | "secteurs" | "solutions" | null>(null);
 
-  function toggle(section: "expertises" | "secteurs" | "outils") {
+  function toggle(section: "expertises" | "secteurs" | "solutions") {
     setOpenSection((prev) => (prev === section ? null : section));
   }
 
@@ -371,16 +370,16 @@ function MobileMenu({
       {/* ─ Outils intelligents accordéon ─ */}
       <div className="border-b border-white/[0.07]">
         <button
-          onClick={() => toggle("outils")}
+          onClick={() => toggle("solutions")}
           className="w-full flex items-center justify-between py-4 text-left"
         >
-          <span className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold">Outils intelligents</span>
+          <span className="text-[10px] uppercase tracking-[2px] text-[#D4AF5A]/70 font-semibold">Solutions</span>
           <ChevronDown
             size={14}
-            className={`text-[#D4AF5A]/60 transition-transform duration-200 ${openSection === "outils" ? "rotate-180" : ""}`}
+            className={`text-[#D4AF5A]/60 transition-transform duration-200 ${openSection === "solutions" ? "rotate-180" : ""}`}
           />
         </button>
-        {openSection === "outils" && (
+        {openSection === "solutions" && (
           <div className="pb-4 flex flex-col gap-1">
             {OUTILS_NAV.map((item) => (
               <a

@@ -35,24 +35,20 @@ export const SECTORS = [
     description: "Valorisation des filières agricoles par le numérique et l'accès facilité aux marchés.",
   },
   {
-    name: "Commerce",
-    description: "Stratégies omnicanales et expérience client pour les enseignes commerciales.",
+    name: "Commerce & Distribution",
+    description: "Stratégies omnicanales, digitalisation des réseaux de distribution et expérience client pour les enseignes et grossistes.",
   },
   {
     name: "Industrie",
     description: "Automatisation des processus et pilotage de la performance industrielle.",
   },
   {
-    name: "ONG",
-    description: "Structuration organisationnelle et mesure d'impact pour les projets sociaux.",
+    name: "ONG & Institutions",
+    description: "Structuration organisationnelle, mesure d'impact et transformation digitale pour les organisations sociales et institutionnelles.",
   },
   {
     name: "Télécommunications",
     description: "Accompagnement stratégique pour les opérateurs et acteurs du numérique.",
-  },
-  {
-    name: "Distribution",
-    description: "Optimisation logistique et digitalisation des réseaux de distribution.",
   },
   {
     name: "Énergie",
@@ -183,11 +179,10 @@ export const ROI_SECTOR_BASELINE: Record<string, number> = {
   Éducation: 25,
   Santé: 27,
   Agriculture: 22,
-  Commerce: 32,
+  "Commerce & Distribution": 32,
   Industrie: 24,
-  ONG: 20,
+  "ONG & Institutions": 20,
   Télécommunications: 30,
-  Distribution: 29,
   Énergie: 26,
   Startups: 35,
 };
@@ -241,7 +236,7 @@ export const CASE_STUDIES = [
     ],
   },
   {
-    tag: "Distribution",
+    tag: "Commerce & Distribution",
     title: "Refonte stratégie marketing",
     description:
       "Une enseigne de distribution régionale souhaitait renforcer sa présence digitale. Audit, repositionnement de marque et plan média intégré ont été déployés en 4 mois.",
@@ -251,7 +246,7 @@ export const CASE_STUDIES = [
     ],
   },
   {
-    tag: "ONG",
+    tag: "ONG & Institutions",
     title: "Structuration organisationnelle",
     description:
       "Une ONG en forte croissance manquait de processus internes clairs. TDCG a conçu une gouvernance de projet et des outils de suivi d'impact.",

@@ -55,7 +55,7 @@ export default function Hero() {
     <section
       ref={heroRef}
       className="relative overflow-hidden text-white"
-      style={{ minHeight: "100svh", paddingTop: "110px", paddingBottom: "0", background: "#07090F" }}
+      style={{ minHeight: "100svh", paddingTop: "clamp(110px, 12vw, 148px)", paddingBottom: "0", background: "#07090F" }}
     >
 
       {/* ── Background ───────────────────────────────── */}
@@ -111,7 +111,7 @@ export default function Hero() {
       <div className="relative z-[2] max-w-[1240px] mx-auto px-8">
 
         {/* ── Institutional signature — visible badge ── */}
-        <div data-reveal="0" className="flex items-center gap-3 mb-8 mt-6">
+        <div data-reveal="0" className="flex items-center gap-3 mb-8 mt-6 md:mt-10">
           {/* Gold accent bar */}
           <div className="w-8 h-[2px] rounded-full" style={{ background: "linear-gradient(90deg, #D4AF5A, #E8C96A)" }} />
           {/* Badge pill */}

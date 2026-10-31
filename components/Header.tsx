@@ -462,12 +462,23 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 inset-x-0 z-[1000] bg-[#0B0F1E] border-b border-gold/[0.18]">
+    <header className="fixed top-0 inset-x-0 z-[1000] bg-[#0B0F1E] border-b border-gold/[0.18] overflow-visible">
       <nav className="flex items-center gap-8 max-w-[1240px] mx-auto px-8 py-4 md:py-2 relative">
 
-        {/* Logo */}
-        <a href="/" className="flex items-center shrink-0">
-          <Image src={logo} alt="TDCG - Teranga Digital Consulting Group" className="h-[80px] md:h-[96px] w-auto object-contain" priority />
+        {/* Logo — déborde visuellement sans agrandir le header */}
+        <a href="/" className="flex items-center shrink-0" style={{ overflow: "visible" }}>
+          <Image
+            src={logo}
+            alt="TDCG - Teranga Digital Consulting Group"
+            className="w-auto object-contain"
+            style={{
+              height: "clamp(96px, 9vw, 130px)",
+              overflow: "visible",
+              position: "relative",
+              zIndex: 10,
+            }}
+            priority
+          />
         </a>
 
         {/* Nav desktop */}

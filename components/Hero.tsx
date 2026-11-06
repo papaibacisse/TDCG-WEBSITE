@@ -124,7 +124,7 @@ export default function Hero() {
       <div
         className="relative z-[2] flex-1 flex flex-col"
         style={{
-          paddingTop: "clamp(118px, 12vw, 156px)",
+          paddingTop: "clamp(90px, 10vw, 120px)",
           paddingBottom: "clamp(48px, 6vw, 80px)",
           maxWidth: "1360px",
           margin: "0 auto",

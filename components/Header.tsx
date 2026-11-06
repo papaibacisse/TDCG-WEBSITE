@@ -463,7 +463,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-[1000] bg-[#0B0F1E] border-b border-gold/[0.18] overflow-visible">
-      <nav className="flex items-center gap-8 max-w-[1240px] mx-auto px-8 py-4 md:py-2 relative">
+      <nav className="flex items-center gap-8 max-w-[1240px] mx-auto px-8 py-2 md:py-1 relative">
 
         {/* Logo — déborde visuellement sans agrandir le header */}
         <a href="/" className="flex items-center shrink-0" style={{ overflow: "visible" }}>
